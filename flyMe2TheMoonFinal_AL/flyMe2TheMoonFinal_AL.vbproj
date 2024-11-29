@@ -77,10 +77,112 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="frmAdminAddNewStaff.Designer.vb">
+      <DependentUpon>frmAdminAddNewStaff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminAddNewStaff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminAddStaffToFlight.Designer.vb">
+      <DependentUpon>frmAdminAddStaffToFlight.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminAddStaffToFlight.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminDeleteStaff.Designer.vb">
+      <DependentUpon>frmAdminDeleteStaff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminDeleteStaff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminManageStaff.Designer.vb">
+      <DependentUpon>frmAdminManageStaff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminManageStaff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminMenu.Designer.vb">
+      <DependentUpon>frmAdminMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminStatistics.Designer.vb">
+      <DependentUpon>frmAdminStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoading.Designer.vb">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPassengerAddNew.Designer.vb">
+      <DependentUpon>frmPassengerAddNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassengerAddNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPassengerEdit.Designer.vb">
+      <DependentUpon>frmPassengerEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassengerEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPassengerFlights.Designer.vb">
+      <DependentUpon>frmPassengerFlights.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassengerFlights.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPassengerMenu.Designer.vb">
+      <DependentUpon>frmPassengerMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassengerMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPassengerVerification.Designer.vb">
+      <DependentUpon>frmPassengerVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassengerVerification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPassenger_Book Flight.Designer.vb">
+      <DependentUpon>frmPassenger_Book Flight.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassenger_Book Flight.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStaffEdit.Designer.vb">
+      <DependentUpon>frmStaffEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmStaffEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStaffFlight.Designer.vb">
+      <DependentUpon>frmStaffFlight.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmStaffFlight.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStaffMenu.Designer.vb">
+      <DependentUpon>frmStaffMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmStaffMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStaffVerification.Designer.vb">
+      <DependentUpon>frmStaffVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmStaffVerification.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="modCurrentUser.vb" />
@@ -104,8 +206,59 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAdminAddNewStaff.resx">
+      <DependentUpon>frmAdminAddNewStaff.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminAddStaffToFlight.resx">
+      <DependentUpon>frmAdminAddStaffToFlight.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminDeleteStaff.resx">
+      <DependentUpon>frmAdminDeleteStaff.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminManageStaff.resx">
+      <DependentUpon>frmAdminManageStaff.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminMenu.resx">
+      <DependentUpon>frmAdminMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminStatistics.resx">
+      <DependentUpon>frmAdminStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoading.resx">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassengerAddNew.resx">
+      <DependentUpon>frmPassengerAddNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassengerEdit.resx">
+      <DependentUpon>frmPassengerEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassengerFlights.resx">
+      <DependentUpon>frmPassengerFlights.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassengerMenu.resx">
+      <DependentUpon>frmPassengerMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassengerVerification.resx">
+      <DependentUpon>frmPassengerVerification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassenger_Book Flight.resx">
+      <DependentUpon>frmPassenger_Book Flight.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStaffEdit.resx">
+      <DependentUpon>frmStaffEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStaffFlight.resx">
+      <DependentUpon>frmStaffFlight.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStaffMenu.resx">
+      <DependentUpon>frmStaffMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStaffVerification.resx">
+      <DependentUpon>frmStaffVerification.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

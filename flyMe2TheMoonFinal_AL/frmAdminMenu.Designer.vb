@@ -71,7 +71,7 @@ Partial Class frmAdminMenu
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.Project2_AL.My.Resources.Resources._2
+        Me.PictureBox1.Image = Global.flyMe2TheMoon_AL.My.Resources.Resources._2
         Me.PictureBox1.Location = New System.Drawing.Point(955, 43)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(348, 212)

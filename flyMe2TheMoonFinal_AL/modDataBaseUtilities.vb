@@ -11,10 +11,10 @@
 
     Public Function OpenDatabaseConnectionSQLServer() As Boolean
         Dim blnResult As Boolean = False
-        'Dim frmLoading As New frmLoading
+        Dim frmLoading As New frmLoading
 
 
-        'frmLoading.Show()
+        frmLoading.Show()
         Try
             m_conAdministrator = New OleDb.OleDbConnection
             m_conAdministrator.ConnectionString = m_strDatabaseConnectionStringSQLServer
@@ -24,7 +24,7 @@
         Catch ex As Exception
             MsgBox(ex.Message & vbNewLine & " Utils, openDb Func", vbCritical)
         End Try
-        'frmLoading.Close()
+        frmLoading.Close()
 
 
         Return blnResult
