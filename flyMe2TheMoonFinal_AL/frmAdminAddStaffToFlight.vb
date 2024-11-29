@@ -29,11 +29,6 @@
 
             End If
 
-            'cmbFlights.Items.Clear()
-
-
-
-
             'Selecting Future Flights
             strFlightsSelect = "SELECT TF.intFlightID, TF.dtmFlightDate,
 		                                FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
