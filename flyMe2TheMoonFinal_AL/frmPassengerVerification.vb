@@ -15,36 +15,60 @@
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         Dim frmPassengerMenu As New frmPassengerMenu
         Dim dtPassenger As DataTable = New DataTable
-        Try
+        Dim intID As Integer
+        Dim blnValid As Boolean = False
 
-            CheckOpenDBConnection(Me)
 
-            dtPassenger = ExecuteSelectProdcedure("uspFindPassengerByID", "@logInID", txtPassengerID.Text)
-            If dtPassenger.Rows.Count > 0 Then
-                If dtPassenger.Rows(0)("strPassengerPassword") = txtPassword.Text Then
-                    lblErrormessage.Text = ""
-                    intCurrentPassengerID = dtPassenger.Rows(0)("intPassengerID")
-                    strCurrentUserName = dtPassenger.Rows(0)("PassengerFullName")
+        If Integer.TryParse(txtPassengerID.Text, intID) Then
+            blnValid = True
+        Else
+            txtPassengerID.Focus()
+            lblErrormessage.Text = "Passenger ID Has To Be Numbers Only"
+        End If
 
-                    CloseDatabaseConnection()
 
-                    Me.Hide()
-                    frmPassengerMenu.ShowDialog()
+        If blnValid Then
 
+            Try
+                CheckOpenDBConnection(Me)
+
+                dtPassenger = ExecuteSelectProdcedure("uspFindPassengerByID", "@logInID", txtPassengerID.Text)
+                If dtPassenger.Rows.Count > 0 Then
+                    If dtPassenger.Rows(0)("strPassengerPassword") = txtPassword.Text Then
+                        lblErrormessage.Text = ""
+                        intCurrentPassengerID = dtPassenger.Rows(0)("intPassengerID")
+                        strCurrentUserName = dtPassenger.Rows(0)("PassengerFullName")
+
+                        CloseDatabaseConnection()
+                        Me.Hide()
+                        frmPassengerMenu.ShowDialog()
+                        'blnValid = True
+
+
+
+                    Else
+                        txtPassword.Focus()
+                        lblErrormessage.Text = "Invalid Password!"
+                        CloseDatabaseConnection()
+                        'blnValid = False
+                    End If
                 Else
-                    lblErrormessage.Text = "Invalid Password!"
+                    txtPassengerID.Focus()
+                    lblErrormessage.Text = "User Not Found!"
                     CloseDatabaseConnection()
+                    'blnValid = False
                 End If
-            Else
-                lblErrormessage.Text = "User Not Found!"
-                CloseDatabaseConnection()
+
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+
+            If blnValid Then
+
             End If
 
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
 
-
+        End If
 
 
 

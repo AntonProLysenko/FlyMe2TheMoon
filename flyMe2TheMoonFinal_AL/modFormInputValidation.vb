@@ -1,7 +1,8 @@
 ﻿Module modFormInputValidation
     Public Sub ValidatePassengerFormInput(ByRef blnValidInput As Boolean, ByRef strFirstName As String, ByRef strLastName As String, ByRef strAddress As String, ByRef strCity As String,
-                             ByRef strState As String, ByRef intStateID As Integer, ByRef strZip As String, ByRef strPhoneNum As String, ByRef strEmail As String,
-                             txtFirstName As Object, txtLastName As Object, txtAddress As Object, txtCity As Object, txtZip As Object, cboStates As Object, txtPhoneNumber As Object, txtEmail As Object)
+                             ByRef strState As String, ByRef intStateID As Integer, ByRef strZip As String, ByRef strPhoneNum As String, ByRef strEmail As String, ByRef intLoginID As Integer, ByRef strPassword As String,
+                             txtFirstName As Object, txtLastName As Object, txtAddress As Object, txtCity As Object, txtZip As Object, cboStates As Object, txtPhoneNumber As Object, txtEmail As Object,
+                              txtLoginID As Object, txtPassword As Object)
         Call ValidateName(blnValidInput, strFirstName, strLastName, txtFirstName, txtLastName)
 
         If blnValidInput Then
@@ -10,6 +11,10 @@
 
         If blnValidInput Then
             ValidateContactInfo(blnValidInput, strPhoneNum, strEmail, txtPhoneNumber, txtEmail)
+        End If
+
+        If blnValidInput Then
+            ValidateLoginCredentials(blnValidInput, intLoginID, strPassword, txtLoginID, txtPassword)
         End If
     End Sub
 
@@ -234,6 +239,33 @@
             MessageBox.Show("Employee ID Has To Be 5 Numbers Long")
             blnValid = False
             txtEmployeeID.Focus()
+        End If
+
+    End Sub
+
+
+
+
+    Private Sub ValidateLoginCredentials(ByRef blnValidInput As Boolean, ByRef intLoginID As Integer, ByRef strPassword As String, txtLoginID As Object, txtPassword As Object)
+        If Integer.TryParse(txtLoginID.Text, intLoginID) Then
+            blnValidInput = True
+        Else
+            MessageBox.Show("Login ID Has To Be Numeric only")
+            blnValidInput = False
+            txtLoginID.Focus()
+        End If
+
+        If blnValidInput Then
+            If txtPassword.Text.Length <= 5 Then
+                blnValidInput = False
+                MessageBox.Show("Password is too short")
+                txtPassword.Focus()
+            Else
+                strPassword = txtPassword.Text
+                blnValidInput = True
+
+            End If
+
         End If
 
     End Sub

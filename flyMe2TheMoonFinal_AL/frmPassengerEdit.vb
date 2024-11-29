@@ -1,8 +1,5 @@
 ﻿Public Class frmPassengerEdit
     Private Sub frmEditPassenger_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Dim strSelect As String
-        'Dim cmdSelect As OleDb.OleDbCommand
-        'Dim drSourceTable As OleDb.OleDbDataReader
         Dim dtState As DataTable = New DataTable
         Dim dtPassengerData As DataTable = New DataTable
 
@@ -18,12 +15,6 @@
 
                 Me.Close()
             End If
-
-            'Selecting States
-            'strSelect = "SELECT * FROM TStates"
-
-            'cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
-            'drSourceTable = cmdSelect.ExecuteReader
             dtState = ExecuteSelectProdcedure("uspStatesList")
 
             'Loadingg States results to a combobox
@@ -31,19 +22,6 @@
             cboStates.DisplayMember = "strState"
             cboStates.DataSource = dtState
 
-            ' Selecting passenger's info
-            'strSelect = "SELECT intPassengerID, strFirstName, strLastName, strAddress, strCity, TStates.intStateID, strState, strZip, strPhoneNumber, strEmail
-            '            FROM TPassengers 
-            '            Join TStates
-            '            ON TStates.intStateID = TPassengers.intStateID
-            '            Where intPassengerID = " & intCurrentPassengerID
-            'MessageBox.Show(strSelect)
-
-            ' Retrieve and poulate all the records 
-            'cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
-            'drSourceTable = cmdSelect.ExecuteReader
-
-            'drSourceTable.Read()
             dtPassengerData = ExecuteSelectProdcedure("uspPassengerDetails", "@Passanger_id", intCurrentPassengerID)
 
 
@@ -56,8 +34,10 @@
             txtZip.Text = dtPassengerData.Rows(0)("strZip")
             txtPhoneNumber.Text = dtPassengerData.Rows(0)("strPhoneNumber")
             txtEmail.Text = dtPassengerData.Rows(0)("strEmail")
+            txtPassword.Text = dtPassengerData.Rows(0)("strPassengerPassword")
+            txtLoginID.Text = dtPassengerData.Rows(0)("intPassengerLoginID")
 
-            'drSourceTable.Close()
+
             CloseDatabaseConnection()
 
         Catch ex As Exception
@@ -77,34 +57,34 @@
         Dim strZip As String
         Dim strPhoneNum As String
         Dim strEmail As String
+        Dim intLoginID As Integer
+        Dim strPassword As String
 
         'Called With Module Reference for easier find
-        Call modFormInputValidation.ValidatePassengerFormInput(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail,
-                                                  txtFirstName, txtLastName, txtAddress, txtCity, txtZip, cboStates, txtPhoneNumber, txtEmail)
+        Call modFormInputValidation.ValidatePassengerFormInput(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword,
+                                                  txtFirstName, txtLastName, txtAddress, txtCity, txtZip, cboStates, txtPhoneNumber, txtEmail, txtLoginID, txtPassword)
+
+
 
         If blnValidInput Then
-            UpdateRecord(strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail)
+            UpdateRecord(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword)
+        End If
+
+        If blnValidInput Then
             Me.Hide()
             frmPassengerMenu.ShowDialog()
-
         End If
+
 
     End Sub
 
-    Private Sub UpdateRecord(strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNumber, strEmail)
+    Private Sub UpdateRecord(ByRef blnSucess As Boolean, strFirstName As String, strLastName As String, strAddress As String, strCity As String, strState As String, intStateID As Integer, strZip As String, strPhoneNumber As String,
+                             strEmail As String, intLoginID As Integer, strPassword As String)
+
         Dim strUpdate As String
 
         Try
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
-
-
+            CheckOpenDBConnection(Me)
 
             'update query
             strUpdate = "UPDATE TPassengers SET " &
@@ -115,17 +95,25 @@
                     "intStateID = " & intStateID & ", " &
                     "strZip = '" & strZip & "', " &
                     "strPhoneNumber = '" & strPhoneNumber & "', " &
-                    "strEmail = '" & strEmail & "' " &
+                    "strEmail = '" & strEmail & "', " &
+                    "strPassengerPassword = '" & strPassword & "', " &
+                    "intPassengerLoginID = " & intLoginID & " " &
                     "WHERE intPassengerID = " & intCurrentPassengerID.ToString
-
+            'MessageBox.Show(strUpdate)
             UpdateData(strUpdate)
 
             strCurrentUserName = strFirstName & " " & strLastName
 
             CloseDatabaseConnection()
+            blnSucess = True
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            If ex.Message.Contains("UNIQUE") Then
+                MessageBox.Show("Login ID Already Exist")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
+            blnSucess = False
         End Try
     End Sub
 

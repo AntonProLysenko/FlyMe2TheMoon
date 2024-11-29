@@ -55,13 +55,15 @@
         Dim strZip As String
         Dim strPhoneNum As String
         Dim strEmail As String
+        Dim intLoginID As Integer
+        Dim strPassword As String
 
         Dim frmPassengerVerification As New frmPassengerVerification
 
 
         'Called With Module Reference for easier find
-        Call modFormInputValidation.ValidatePassengerFormInput(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail,
-                                                  txtFirstName, txtLastName, txtAddress, txtCity, txtZip, cboStates, txtPhoneNumber, txtEmail)
+        Call modFormInputValidation.ValidatePassengerFormInput(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword,
+                                                  txtFirstName, txtLastName, txtAddress, txtCity, txtZip, cboStates, txtPhoneNumber, txtEmail, txtLoginID, txtPassword)
 
         If blnValidInput Then
 
