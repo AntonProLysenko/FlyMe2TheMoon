@@ -48,7 +48,11 @@ CREATE TABLE TPassengers
 	,strZip					VARCHAR(255)	NOT NULL
 	,strPhoneNumber			VARCHAR(255)	NOT NULL
 	,strEmail				VARCHAR(255)	NOT NULL
+	,intPassengerLoginID	INTEGER			NOT NULL
+	,strPassengerPassword	VARCHAR(255)	NOT NULL
+	,dtmDateOfBrth			DATETIME		NOT NULL
 	,CONSTRAINT TPassengers_PK PRIMARY KEY ( intPassengerID )
+	,CONSTRAINT Tpassengers_LoginID UNIQUE (intPassengerLoginID)
 )
 
 
@@ -316,13 +320,13 @@ VALUES				(1, 'Cincinnati', 'CVG')
 				   ,(6, 'Orlando', 'MCO' )
 
 
-INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail)
-VALUES				  (1, 'Knelly', 'Nervious', '321 Elm St.', 'Cincinnati', 1, '45201', '5135553333', 'nnelly@gmail.com')
-					 ,(2, 'Orville', 'Waite', '987 Oak St.', 'Cleveland', 1, '45218', '5135556333', 'owright@gmail.com')
-					 ,(3, 'Eileen', 'Awnewe', '1569 Windisch Rd.', 'Dayton', 1, '45069', '5135555333', 'eonewe1@yahoo.com')
-					 ,(4, 'Bob', 'Eninocean', '44561 Oak Ave.', 'Florence', 2, '45246', '8596663333', 'bobenocean@gmail.com')
-					 ,(5, 'Ware', 'Hyjeked', '44881 Pine Ave.', 'Aurora', 3, '45546', '2825553333', 'Hyjekedohmy@gmail.com')
-					 ,(6, 'Kay', 'Oss', '4484 Bushfield Ave.', 'Lawrenceburg', 3, '45546', '2825553333', 'wehavekayoss@gmail.com')
+INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail, intPassengerLoginID, strPassengerPassword, dtmDateOfBrth)
+VALUES					(1, 'Knelly', 'Nervious', '321 Elm St.', 'Cincinnati', 1, '45201', '5135553333', 'nnelly@gmail.com', 100001, 'Knelly123', '1990-04-15') -- Adult
+					   ,(2, 'Orville', 'Waite', '987 Oak St.', 'Cleveland', 1, '45218', '5135556333', 'owright@gmail.com', 100002, 'Orville123', '2010-09-22') -- Kid 
+					   ,(3, 'Eileen', 'Awnewe', '1569 Windisch Rd.', 'Dayton', 1, '45069', '5135555333', 'eonewe1@yahoo.com', 100003, 'Eileen123', '1992-07-08') -- Adult
+					   ,(4, 'Bob', 'Eninocean', '44561 Oak Ave.', 'Florence', 2, '45246', '8596663333', 'bobenocean@gmail.com', 100004, 'Bob123', '2008-12-11') -- Kid
+					   ,(5, 'Ware', 'Hyjeked', '44881 Pine Ave.', 'Aurora', 3, '45546', '2825553333', 'Hyjekedohmy@gmail.com', 100005, 'Ware123', '2015-03-25') -- Kid 
+					   ,(6, 'Kay', 'Oss', '4484 Bushfield Ave.', 'Lawrenceburg', 3, '45546', '2825553333', 'wehavekayoss@gmail.com', 100006, 'Kay123', '1994-11-18') -- Adult
 
 
 INSERT INTO TPilots (intPilotID, strFirstName, strLastName, strEmployeeID, dtmDateofHire, dtmDateofTermination, dtmDateofLicense, intPilotRoleID)
@@ -445,154 +449,157 @@ VALUES				 ( 1, 2, 1, 2 )
 
 
  
- --Select All Passangers
+-- --Select All Passengers
+-- SELECT intPassengerID, strFirstName + ' ' + strLastName as PassengerFullName, strPassengerPassword 
+-- FROM TPassengers
+-- WHERE intPassengerLoginID = 100001
 
-SELECT intPassengerID, strFirstName + ' ' + strLastName as PassengerFullName FROM TPassengers
-
-
-
-SELECT intPassengerID, strFirstName, strLastName, strAddress, strCity, TStates.intStateID, strState, strZip, strPhoneNumber, strEmail
-                        FROM TPassengers 
-                        Join TStates
-                        ON TStates.intStateID = TPassengers.intStateID
-                        Where intPassengerID = 1 
+--SELECT intPassengerID, strFirstName + ' ' + strLastName as PassengerFullName FROM TPassengers
 
 
 
---All Flights
-SELECT 
-	TF.intFlightID, TF.dtmFlightDate,
-	FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
-		CONVERT(VARCHAR, TF.dtmFlightDate, 101) + ' at '+ CONVERT(VARCHAR, TF.dtmTimeofDeparture, 108) as strFlightName
-FROM TFlights as  TF
-JOIN TAirports as FromAirport 
-	ON TF.intFromAirportID = FromAirport.intAirportID
-JOIN TAirports as ToAirport 
-	ON TF.intToAirportID = ToAirport.intAirportID
-ORDER BY TF.dtmFlightDate
+--SELECT intPassengerID, strFirstName, strLastName, strAddress, strCity, TStates.intStateID, strState, strZip, strPhoneNumber, strEmail
+--                        FROM TPassengers 
+--                        Join TStates
+--                        ON TStates.intStateID = TPassengers.intStateID
+--                        Where intPassengerID = 1 
 
 
---Future Flights
-SELECT TF.intFlightID, TF.dtmFlightDate,
-		FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
-		CONVERT(VARCHAR, TF.dtmFlightDate, 101) + ' at '+ CONVERT(VARCHAR, TF.dtmTimeofDeparture, 108) as strFlightName
-FROM TFlights as  TF
-JOIN TAirports as FromAirport 
-	ON TF.intFromAirportID = FromAirport.intAirportID
-JOIN TAirports as ToAirport 
-	ON TF.intToAirportID = ToAirport.intAirportID
-WHERE GETDATE() <= TF.dtmFlightDate
-ORDER BY TF.dtmFlightDate
+
+----All Flights
+--SELECT 
+--	TF.intFlightID, TF.dtmFlightDate,
+--	FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
+--		CONVERT(VARCHAR, TF.dtmFlightDate, 101) + ' at '+ CONVERT(VARCHAR, TF.dtmTimeofDeparture, 108) as strFlightName
+--FROM TFlights as  TF
+--JOIN TAirports as FromAirport 
+--	ON TF.intFromAirportID = FromAirport.intAirportID
+--JOIN TAirports as ToAirport 
+--	ON TF.intToAirportID = ToAirport.intAirportID
+--ORDER BY TF.dtmFlightDate
 
 
---Next FlightPassenger index
-SELECT max(intFlightPassengerID)+1 AS NextPrimaryKey
-FROM TFlightPassengers
+----Future Flights
+--SELECT TF.intFlightID, TF.dtmFlightDate,
+--		FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
+--		CONVERT(VARCHAR, TF.dtmFlightDate, 101) + ' at '+ CONVERT(VARCHAR, TF.dtmTimeofDeparture, 108) as strFlightName
+--FROM TFlights as  TF
+--JOIN TAirports as FromAirport 
+--	ON TF.intFromAirportID = FromAirport.intAirportID
+--JOIN TAirports as ToAirport 
+--	ON TF.intToAirportID = ToAirport.intAirportID
+--WHERE GETDATE() <= TF.dtmFlightDate
+--ORDER BY TF.dtmFlightDate
 
 
---Flights of Specific Passenger
-SELECT *
-FROM TFlightPassengers as TFP
-WHERE TFP.intPassengerID = 1
+----Next FlightPassenger index
+--SELECT max(intFlightPassengerID)+1 AS NextPrimaryKey
+--FROM TFlightPassengers
 
 
---Future Flights Detailed Info of specific Passenger
-SELECT TF.intFlightID,TFP.strSeat, TF.intMilesFlown,
-    FromAirport.strAirportCity + '(' + FromAirport.strAirportCode + ')' AS strDepartureLocation,
-    ToAirport.strAirportCity + '(' + ToAirport.strAirportCode + ')' AS strArrivalLocation,
-    CONVERT(VARCHAR, TF.dtmFlightDate, 101) AS FlightDate, 
-    CONVERT(VARCHAR, TF.dtmTimeofDeparture, 100) AS DepartureTime,
-    CONVERT(VARCHAR, TF.dtmTimeOfLanding, 100) AS LandingTime
+----Flights of Specific Passenger
+--SELECT *
+--FROM TFlightPassengers as TFP
+--WHERE TFP.intPassengerID = 1
+
+
+----Future Flights Detailed Info of specific Passenger
+--SELECT TF.intFlightID,TFP.strSeat, TF.intMilesFlown,
+--    FromAirport.strAirportCity + '(' + FromAirport.strAirportCode + ')' AS strDepartureLocation,
+--    ToAirport.strAirportCity + '(' + ToAirport.strAirportCode + ')' AS strArrivalLocation,
+--    CONVERT(VARCHAR, TF.dtmFlightDate, 101) AS FlightDate, 
+--    CONVERT(VARCHAR, TF.dtmTimeofDeparture, 100) AS DepartureTime,
+--    CONVERT(VARCHAR, TF.dtmTimeOfLanding, 100) AS LandingTime
 	
-FROM TFlights AS  TF
-JOIN TAirports AS FromAirport 
-	ON TF.intFromAirportID = FromAirport.intAirportID
-JOIN TAirports AS ToAirport 
-	ON TF.intToAirportID = ToAirport.intAirportID
-JOIN TFlightPassengers as TFP
-	ON tfp.intFlightID = TF.intFlightID
-WHERE GETDATE() <= TF.dtmFlightDate AND TFP.intPassengerID = 1
-ORDER BY TF.dtmFlightDate
+--FROM TFlights AS  TF
+--JOIN TAirports AS FromAirport 
+--	ON TF.intFromAirportID = FromAirport.intAirportID
+--JOIN TAirports AS ToAirport 
+--	ON TF.intToAirportID = ToAirport.intAirportID
+--JOIN TFlightPassengers as TFP
+--	ON tfp.intFlightID = TF.intFlightID
+--WHERE GETDATE() <= TF.dtmFlightDate AND TFP.intPassengerID = 1
+--ORDER BY TF.dtmFlightDate
 
 
 
 
---TOTAL MILES OF FUTURE FLIGHTS FOR SPECIFIC PASSENGER
-SELECT SUM(intMilesFlown) as TotalMiles
-FROM TFlightPassengers as TFP
-JOIN TFlights as TF
-	ON TF.intFlightID = TFP.intFlightID
-WHERE TFP.intPassengerID = 1 AND GETDATE() <= TF.dtmFlightDate
+----TOTAL MILES OF FUTURE FLIGHTS FOR SPECIFIC PASSENGER
+--SELECT SUM(intMilesFlown) as TotalMiles
+--FROM TFlightPassengers as TFP
+--JOIN TFlights as TF
+--	ON TF.intFlightID = TFP.intFlightID
+--WHERE TFP.intPassengerID = 1 AND GETDATE() <= TF.dtmFlightDate
 
 
 
 
---All Pilots
-SELECT intPilotID, strFirstName + ' ' + strLastName as PilotFullName
-FROM TPilots
+----All Pilots
+--SELECT intPilotID, strFirstName + ' ' + strLastName as PilotFullName
+--FROM TPilots
 
 
-SELECT *
-FROM TPilots
-JOIN TPilotRoles
-ON TPilotRoles.intPilotRoleID = TPilots.intPilotRoleID
-
-
-
---All Attendances
-SELECT intAttendantID, strFirstName + ' ' + strLastName as AttendantFullName
-FROM TAttendants
+--SELECT *
+--FROM TPilots
+--JOIN TPilotRoles
+--ON TPilotRoles.intPilotRoleID = TPilots.intPilotRoleID
 
 
 
-
-
+----All Attendances
+--SELECT intAttendantID, strFirstName + ' ' + strLastName as AttendantFullName
+--FROM TAttendants
 
 
 
 
 
---Future Detailed FlightInfo Specific Pilot
-SELECT TF.intFlightID, strPilotRole, TF.intMilesFlown,
-    FromAirport.strAirportCity + '(' + FromAirport.strAirportCode + ')' AS strDepartureLocation,
-    ToAirport.strAirportCity + '(' + ToAirport.strAirportCode + ')' AS strArrivalLocation,
-    CONVERT(VARCHAR, TF.dtmFlightDate, 101) AS FlightDate, 
-    CONVERT(VARCHAR, TF.dtmTimeofDeparture, 100) AS DepartureTime,
-    CONVERT(VARCHAR, TF.dtmTimeOfLanding, 100) AS LandingTime
+
+
+
+
+
+----Future Detailed FlightInfo Specific Pilot
+--SELECT TF.intFlightID, strPilotRole, TF.intMilesFlown,
+--    FromAirport.strAirportCity + '(' + FromAirport.strAirportCode + ')' AS strDepartureLocation,
+--    ToAirport.strAirportCity + '(' + ToAirport.strAirportCode + ')' AS strArrivalLocation,
+--    CONVERT(VARCHAR, TF.dtmFlightDate, 101) AS FlightDate, 
+--    CONVERT(VARCHAR, TF.dtmTimeofDeparture, 100) AS DepartureTime,
+--    CONVERT(VARCHAR, TF.dtmTimeOfLanding, 100) AS LandingTime
 	
-FROM TFlights AS  TF
-JOIN TAirports AS FromAirport 
-	ON TF.intFromAirportID = FromAirport.intAirportID
-JOIN TAirports AS ToAirport 
-	ON TF.intToAirportID = ToAirport.intAirportID
-JOIN TPilotFlights
-	ON TPilotFlights.intFlightID = TF.intFlightID
-JOIN TPilots
-	ON TPilots.intPilotID = TPilotFlights.intPilotID
-JOIN TPilotRoles
-	ON TPilots.intPilotRoleID = TPilotRoles.intPilotRoleID
-WHERE GETDATE() <= TF.dtmFlightDate AND TPilotFlights.intPilotID = 1
-ORDER BY TF.dtmFlightDate
+--FROM TFlights AS  TF
+--JOIN TAirports AS FromAirport 
+--	ON TF.intFromAirportID = FromAirport.intAirportID
+--JOIN TAirports AS ToAirport 
+--	ON TF.intToAirportID = ToAirport.intAirportID
+--JOIN TPilotFlights
+--	ON TPilotFlights.intFlightID = TF.intFlightID
+--JOIN TPilots
+--	ON TPilots.intPilotID = TPilotFlights.intPilotID
+--JOIN TPilotRoles
+--	ON TPilots.intPilotRoleID = TPilotRoles.intPilotRoleID
+--WHERE GETDATE() <= TF.dtmFlightDate AND TPilotFlights.intPilotID = 1
+--ORDER BY TF.dtmFlightDate
 
 
 
---Future Detailed FlightInfo Specific Attendant
-SELECT TF.intFlightID, strRole = 'Flight Attendant', TF.intMilesFlown,
-    FromAirport.strAirportCity + '(' + FromAirport.strAirportCode + ')' AS strDepartureLocation,
-    ToAirport.strAirportCity + '(' + ToAirport.strAirportCode + ')' AS strArrivalLocation,
-    CONVERT(VARCHAR, TF.dtmFlightDate, 101) AS FlightDate, 
-    CONVERT(VARCHAR, TF.dtmTimeofDeparture, 100) AS DepartureTime,
-    CONVERT(VARCHAR, TF.dtmTimeOfLanding, 100) AS LandingTime
+----Future Detailed FlightInfo Specific Attendant
+--SELECT TF.intFlightID, strRole = 'Flight Attendant', TF.intMilesFlown,
+--    FromAirport.strAirportCity + '(' + FromAirport.strAirportCode + ')' AS strDepartureLocation,
+--    ToAirport.strAirportCity + '(' + ToAirport.strAirportCode + ')' AS strArrivalLocation,
+--    CONVERT(VARCHAR, TF.dtmFlightDate, 101) AS FlightDate, 
+--    CONVERT(VARCHAR, TF.dtmTimeofDeparture, 100) AS DepartureTime,
+--    CONVERT(VARCHAR, TF.dtmTimeOfLanding, 100) AS LandingTime
 	
-FROM TFlights AS  TF
-JOIN TAirports AS FromAirport 
-	ON TF.intFromAirportID = FromAirport.intAirportID
-JOIN TAirports AS ToAirport 
-	ON TF.intToAirportID = ToAirport.intAirportID
-JOIN TAttendantFlights
-	ON TAttendantFlights.intFlightID = TF.intFlightID
-WHERE GETDATE() <= TF.dtmFlightDate AND TAttendantFlights.intAttendantID = 1
-ORDER BY TF.dtmFlightDate
+--FROM TFlights AS  TF
+--JOIN TAirports AS FromAirport 
+--	ON TF.intFromAirportID = FromAirport.intAirportID
+--JOIN TAirports AS ToAirport 
+--	ON TF.intToAirportID = ToAirport.intAirportID
+--JOIN TAttendantFlights
+--	ON TAttendantFlights.intFlightID = TF.intFlightID
+--WHERE GETDATE() <= TF.dtmFlightDate AND TAttendantFlights.intAttendantID = 1
+--ORDER BY TF.dtmFlightDate
 
 
 
@@ -600,81 +607,84 @@ ORDER BY TF.dtmFlightDate
 
 
 
---DELETING PILOT
+----DELETING PILOT
 
-DELETE FROM TPilotFlights
-WHERE intFlightID IN( SELECT TPilotFlights.intFlightID 
-						FROM TPilotFlights
-						JOIN TFlights
-							ON TPilotFlights.intFlightID = TFlights.intFlightID
-						WHERE intPilotID = 1 
-						--AND TFlights.dtmFlightDate < GETDATE()
-)
-
-
-DELETE FROM TPilots
-WHERE intPilotID = 1
+--DELETE FROM TPilotFlights
+--WHERE intFlightID IN( SELECT TPilotFlights.intFlightID 
+--						FROM TPilotFlights
+--						JOIN TFlights
+--							ON TPilotFlights.intFlightID = TFlights.intFlightID
+--						WHERE intPilotID = 1 
+--						--AND TFlights.dtmFlightDate < GETDATE()
+--)
 
 
---DELETING Attendant
-
-DELETE FROM TAttendantFlights
-WHERE intFlightID IN( SELECT TAttendantFlights.intFlightID 
-						FROM TAttendantFlights
-						JOIN TFlights
-							ON TAttendantFlights.intFlightID = TFlights.intFlightID
-						WHERE intAttendantID = 1 
-						--AND TFlights.dtmFlightDate < GETDATE()
-)
+--DELETE FROM TPilots
+--WHERE intPilotID = 1
 
 
-DELETE FROM TAttendants
-WHERE intAttendantID = 1
+----DELETING Attendant
+
+--DELETE FROM TAttendantFlights
+--WHERE intFlightID IN( SELECT TAttendantFlights.intFlightID 
+--						FROM TAttendantFlights
+--						JOIN TFlights
+--							ON TAttendantFlights.intFlightID = TFlights.intFlightID
+--						WHERE intAttendantID = 1 
+--						--AND TFlights.dtmFlightDate < GETDATE()
+--)
 
 
+--DELETE FROM TAttendants
+--WHERE intAttendantID = 1
 
 
 
 
 
 
-SELECT max(intAttendantFlightID)+1 AS intNextPrimaryKey FROM TAttendantFlights
-
-SELECT max(intPilotFlightID)+1 AS intNextPrimaryKey FROM TPilotFlights
 
 
+--SELECT max(intAttendantFlightID)+1 AS intNextPrimaryKey FROM TAttendantFlights
+
+--SELECT max(intPilotFlightID)+1 AS intNextPrimaryKey FROM TPilotFlights
 
 
---STATISTICS
---Total Num OF Customers
-SELECT COUNT(intPassengerID) as TotalPassangers
-FROM TPassengers
 
---Total Flights Taken By Customers
-SELECT Count(intFlightID) as TotalFlightsTaken
-FROM TFlightPassengers
 
---Average miles flown for all customer
-SELECT AVG(intMilesFlown) as AverageMilesFlown
-FROM TFlights
-JOIN TFlightPassengers
-ON TFlightPassengers.intFlightID = TFlights.intFlightID
+----STATISTICS
+----Total Num OF Customers
+--SELECT COUNT(intPassengerID) as TotalPassangers
+--FROM TPassengers
 
---List each Pilot and his/her total miles flown. 
-SELECT TPilots.intPilotID, strFirstName + ' ' + strLastName as PilotFullName, ISNULL( SUM(intMilesFlown), 0)  as TotalMiles
-FROM TPilots
-LEFT JOIN TPilotFlights
-On TPilotFlights.intPilotID = TPilots.intPilotID
-LEFT JOIN TFlights
-ON TFlights.intFlightID = TPilotFlights.intFlightID
-GROUP BY TPilots.intPilotID, strFirstName, strLastName
+----Total Flights Taken By Customers
+--SELECT Count(intFlightID) as TotalFlightsTaken
+--FROM TFlightPassengers
 
---List each attendant and his/her total miles flown. 
-SELECT * FROM TAttendants
-SELECT TAttendants.intAttendantID, strFirstName + ' ' + strLastName as PilotFullName, ISNULL( SUM(intMilesFlown), 0)  as TotalMiles
-FROM TAttendants
-LEFT JOIN TAttendantFlights
-On TAttendantFlights.intAttendantID = TAttendants.intAttendantID
-LEFT JOIN TFlights
-ON TFlights.intFlightID = TAttendantFlights.intFlightID
-GROUP BY TAttendants.intAttendantID, strFirstName, strLastName
+----Average miles flown for all customer
+--SELECT AVG(intMilesFlown) as AverageMilesFlown
+--FROM TFlights
+--JOIN TFlightPassengers
+--ON TFlightPassengers.intFlightID = TFlights.intFlightID
+
+----List each Pilot and his/her total miles flown. 
+--SELECT TPilots.intPilotID, strFirstName + ' ' + strLastName as PilotFullName, ISNULL( SUM(intMilesFlown), 0)  as TotalMiles
+--FROM TPilots
+--LEFT JOIN TPilotFlights
+--On TPilotFlights.intPilotID = TPilots.intPilotID
+--LEFT JOIN TFlights
+--ON TFlights.intFlightID = TPilotFlights.intFlightID
+--GROUP BY TPilots.intPilotID, strFirstName, strLastName
+
+----List each attendant and his/her total miles flown. 
+--SELECT * FROM TAttendants
+--SELECT TAttendants.intAttendantID, strFirstName + ' ' + strLastName as PilotFullName, ISNULL( SUM(intMilesFlown), 0)  as TotalMiles
+--FROM TAttendants
+--LEFT JOIN TAttendantFlights
+--On TAttendantFlights.intAttendantID = TAttendants.intAttendantID
+--LEFT JOIN TFlights
+--ON TFlights.intFlightID = TAttendantFlights.intFlightID
+--GROUP BY TAttendants.intAttendantID, strFirstName, strLastName
+
+
+

@@ -1,64 +1,8 @@
 ﻿Public Class frmPassengerVerification
-    Private Sub frmPassengerVerification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        PopulateDropdown()
-    End Sub
-
-    'Private Sub frmPassengerVerification_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-    '    PopulateDropdown()
-    'End Sub
-
-
-    Public Sub PopulateDropdown()
-        Dim strSelect As String = ""
-        Dim cmdSelect As OleDb.OleDbCommand
-        Dim drSourceTable As OleDb.OleDbDataReader
-        Dim dtPassengers As DataTable = New DataTable
-
-        Try
-
-            If OpenDatabaseConnectionSQLServer() = False Then
-
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-            Else
-
-            End If
-
-            'cmbPassengers.Items.Clear()
-
-            'Selecting Passengers
-            'strSelect = "SELECT intPassengerID, strFirstName + ' ' + strLastName as PassengerFullName FROM TPassengers"
-
-
-            'Lockal Procedure Execution
-            'cmdSelect = New OleDb.OleDbCommand("uspListOfPassengersID", m_conAdministrator)
-            'cmdSelect.CommandType = CommandType.StoredProcedure
-            'drSourceTable = cmdSelect.ExecuteReader
-            'dtPassengers.Load(drSourceTable)
-
-            dtPassengers = ExecuteSelectProdcedure("uspListOfPassengersID")
-
-            cmbPassengers.ValueMember = "intPassengerID"
-            cmbPassengers.DisplayMember = "PassengerFullName"
-            cmbPassengers.DataSource = dtPassengers
 
 
 
-            ' Selecting firs Passenger by default
-            If cmbPassengers.Items.Count > 0 Then
-                cmbPassengers.SelectedIndex = 0
-            End If
 
-            'drSourceTable.Close()
-            CloseDatabaseConnection()
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Me.Hide()
@@ -66,18 +10,75 @@
         frmAddNewPassenger.ShowDialog()
     End Sub
 
-    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Close()
-    End Sub
+
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         Dim frmPassengerMenu As New frmPassengerMenu
+        Dim dtPassenger As DataTable = New DataTable
+        Try
 
-        intCurrentPassengerID = cmbPassengers.SelectedValue
-        strCurrentUserName = cmbPassengers.Text
-        Me.Hide()
-        frmPassengerMenu.ShowDialog()
+            CheckOpenDBConnection(Me)
+
+            dtPassenger = ExecuteSelectProdcedure("uspFindPassengerByID", "@logInID", txtPassengerID.Text)
+            If dtPassenger.Rows.Count > 0 Then
+                If dtPassenger.Rows(0)("strPassengerPassword") = txtPassword.Text Then
+                    lblErrormessage.Text = ""
+                    intCurrentPassengerID = dtPassenger.Rows(0)("intPassengerID")
+                    strCurrentUserName = dtPassenger.Rows(0)("PassengerFullName")
+
+                    CloseDatabaseConnection()
+
+                    Me.Hide()
+                    frmPassengerMenu.ShowDialog()
+
+                Else
+                    lblErrormessage.Text = "Invalid Password!"
+                    CloseDatabaseConnection()
+                End If
+            Else
+                lblErrormessage.Text = "User Not Found!"
+                CloseDatabaseConnection()
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+
+
+
+
     End Sub
+
+    Private Sub frmPassengerVerification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtPassword.PasswordChar = "*"
+    End Sub
+
+
+
+
+
+
+    'TIMER
+    Private countdown As Integer = 1
+    Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
+        countdown = 1
+
+        Timer1.Interval = 1000
+        Timer1.Start() ' Start the timer
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If countdown > 0 Then
+            txtPassword.PasswordChar = Nothing
+            countdown -= 1
+        Else
+            txtPassword.PasswordChar = "*"
+            Timer1.Stop() ' Stop the timer when countdown is complete
+        End If
+    End Sub
+
+
 
 
 End Class

@@ -153,3 +153,13 @@
 --        ON TFlights.intFlightID = TAttendantFlights.intFlightID
 --        GROUP BY TAttendants.intAttendantID, strFirstName, strLastName
 --END
+
+
+
+--CREATE PROCEDURE uspFindPassengerByID(@logInID as INTEGER)
+--AS BEGIN
+--	SELECT intPassengerID, strFirstName + ' ' + strLastName as PassengerFullName, strPassengerPassword 
+--	FROM TPassengers
+--	WHERE intPassengerLoginID = @logInID
+--END
+

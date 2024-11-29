@@ -39,7 +39,7 @@ Partial Class frmMain
         '
         Me.lblWelcome.AutoSize = True
         Me.lblWelcome.Font = New System.Drawing.Font("Mongolian Baiti", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWelcome.Location = New System.Drawing.Point(290, 103)
+        Me.lblWelcome.Location = New System.Drawing.Point(302, 165)
         Me.lblWelcome.Name = "lblWelcome"
         Me.lblWelcome.Size = New System.Drawing.Size(742, 58)
         Me.lblWelcome.TabIndex = 0
@@ -48,7 +48,7 @@ Partial Class frmMain
         'btnExit
         '
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExit.Location = New System.Drawing.Point(1091, 444)
+        Me.btnExit.Location = New System.Drawing.Point(1103, 506)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(247, 90)
         Me.btnExit.TabIndex = 7
@@ -62,7 +62,7 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.rdbPilot)
         Me.GroupBox1.Controls.Add(Me.rdbPassenger)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(317, 182)
+        Me.GroupBox1.Location = New System.Drawing.Point(329, 244)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(716, 349)
         Me.GroupBox1.TabIndex = 8
@@ -116,7 +116,7 @@ Partial Class frmMain
         'btnSubmit
         '
         Me.btnSubmit.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(1091, 298)
+        Me.btnSubmit.Location = New System.Drawing.Point(1103, 360)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(247, 90)
         Me.btnSubmit.TabIndex = 9
@@ -126,7 +126,7 @@ Partial Class frmMain
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.flyMe2TheMoon_AL.My.Resources.Resources._2
-        Me.PictureBox1.Location = New System.Drawing.Point(1060, 50)
+        Me.PictureBox1.Location = New System.Drawing.Point(1072, 112)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(328, 194)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage

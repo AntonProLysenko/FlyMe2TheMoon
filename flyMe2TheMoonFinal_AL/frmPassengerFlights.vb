@@ -21,13 +21,13 @@
             lblMilesTotal.Text = "Upcoming Flights Total Miles:"
             Me.Text = strCurrentUserName & " Upcoming Flights"
             strTitleState = "Upcoming Flights"
-            strDateSelect = "GETDATE() <= TF.dtmFlightDate"
+            ' strDateSelect = "GETDATE() <= TF.dtmFlightDate"
             strProdcedureName = "uspUsersFutureFlight"
         ElseIf strFlightsFormState = "Past" Then
             lblMilesTotal.Text = "Past Flights Total Miles:"
             Me.Text = strCurrentUserName & " Past Flights"
             strTitleState = "Past Flights"
-            strDateSelect = "GETDATE() > TF.dtmFlightDate"
+            'strDateSelect = "GETDATE() > TF.dtmFlightDate"
             strProdcedureName = "uspUsersPastFlight"
         End If
 

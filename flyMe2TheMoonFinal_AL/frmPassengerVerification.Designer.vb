@@ -22,86 +22,140 @@ Partial Class frmPassengerVerification
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnExit = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
         Me.btnNext = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
-        Me.cmbPassengers = New System.Windows.Forms.ComboBox()
-        Me.lblMsg = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblErrormessage = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.txtPassengerID = New System.Windows.Forms.TextBox()
+        Me.btmShowPass = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnExit
-        '
-        Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExit.Location = New System.Drawing.Point(961, 414)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(358, 59)
-        Me.btnExit.TabIndex = 0
-        Me.btnExit.Text = "Close"
-        Me.btnExit.UseVisualStyleBackColor = True
         '
         'btnNext
         '
-        Me.btnNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNext.Location = New System.Drawing.Point(176, 414)
+        Me.btnNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNext.Location = New System.Drawing.Point(187, 378)
         Me.btnNext.Name = "btnNext"
-        Me.btnNext.Size = New System.Drawing.Size(358, 59)
+        Me.btnNext.Size = New System.Drawing.Size(418, 88)
         Me.btnNext.TabIndex = 1
-        Me.btnNext.Text = "Next"
+        Me.btnNext.Text = "Sign in"
         Me.btnNext.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
-        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(564, 414)
+        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Location = New System.Drawing.Point(187, 495)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(358, 59)
+        Me.btnAdd.Size = New System.Drawing.Size(418, 88)
         Me.btnAdd.TabIndex = 2
-        Me.btnAdd.Text = "Add New Passenger"
+        Me.btnAdd.Text = "Sign up"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'cmbPassengers
+        'GroupBox1
         '
-        Me.cmbPassengers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbPassengers.FormattingEnabled = True
-        Me.cmbPassengers.Location = New System.Drawing.Point(460, 289)
-        Me.cmbPassengers.Name = "cmbPassengers"
-        Me.cmbPassengers.Size = New System.Drawing.Size(582, 45)
-        Me.cmbPassengers.TabIndex = 3
+        Me.GroupBox1.Controls.Add(Me.btmShowPass)
+        Me.GroupBox1.Controls.Add(Me.lblErrormessage)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.btnAdd)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.txtPassword)
+        Me.GroupBox1.Controls.Add(Me.txtPassengerID)
+        Me.GroupBox1.Controls.Add(Me.btnNext)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(413, 33)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(940, 602)
+        Me.GroupBox1.TabIndex = 5
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Sign in"
         '
-        'lblMsg
+        'lblErrormessage
         '
-        Me.lblMsg.AutoSize = True
-        Me.lblMsg.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMsg.Location = New System.Drawing.Point(451, 107)
-        Me.lblMsg.Name = "lblMsg"
-        Me.lblMsg.Size = New System.Drawing.Size(591, 102)
-        Me.lblMsg.TabIndex = 4
-        Me.lblMsg.Text = "Please, Find Yourself in a List" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Or Create New"
+        Me.lblErrormessage.AutoSize = True
+        Me.lblErrormessage.ForeColor = System.Drawing.Color.OrangeRed
+        Me.lblErrormessage.Location = New System.Drawing.Point(264, 310)
+        Me.lblErrormessage.Name = "lblErrormessage"
+        Me.lblErrormessage.Size = New System.Drawing.Size(0, 48)
+        Me.lblErrormessage.TabIndex = 6
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(84, 252)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(203, 48)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Password"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(25, 128)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(272, 48)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Passenger ID"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(377, 249)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(345, 55)
+        Me.txtPassword.TabIndex = 3
+        '
+        'txtPassengerID
+        '
+        Me.txtPassengerID.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassengerID.Location = New System.Drawing.Point(377, 125)
+        Me.txtPassengerID.Name = "txtPassengerID"
+        Me.txtPassengerID.Size = New System.Drawing.Size(345, 55)
+        Me.txtPassengerID.TabIndex = 2
+        '
+        'btmShowPass
+        '
+        Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
+        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btmShowPass.Location = New System.Drawing.Point(749, 249)
+        Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
+        Me.btmShowPass.Name = "btmShowPass"
+        Me.btmShowPass.Size = New System.Drawing.Size(83, 58)
+        Me.btmShowPass.TabIndex = 7
+        Me.btmShowPass.Text = "👀"
+        Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btmShowPass.UseVisualStyleBackColor = False
         '
         'frmPassengerVerification
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(14.0!, 29.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1491, 583)
-        Me.ControlBox = False
-        Me.Controls.Add(Me.lblMsg)
-        Me.Controls.Add(Me.cmbPassengers)
-        Me.Controls.Add(Me.btnAdd)
-        Me.Controls.Add(Me.btnNext)
-        Me.Controls.Add(Me.btnExit)
-        Me.MinimumSize = New System.Drawing.Size(1517, 654)
+        Me.ClientSize = New System.Drawing.Size(1737, 667)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.MinimumSize = New System.Drawing.Size(1765, 746)
         Me.Name = "frmPassengerVerification"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pilot Verification"
+        Me.Text = "Passenger Login"
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnExit As Button
     Friend WithEvents btnNext As Button
     Friend WithEvents btnAdd As Button
-    Friend WithEvents cmbPassengers As ComboBox
-    Friend WithEvents lblMsg As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents txtPassengerID As TextBox
+    Friend WithEvents lblErrormessage As Label
+    Friend WithEvents btmShowPass As Button
+    Friend WithEvents Timer1 As Timer
 End Class

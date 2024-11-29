@@ -58,6 +58,20 @@
     End Function
 
 
+    Public Function CheckOpenDBConnection(form As Object)
+        If OpenDatabaseConnectionSQLServer() = False Then
+
+            MessageBox.Show(form, "Database connection error." & vbNewLine &
+                                "The application will now close.",
+                                form.Text + " Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+            form.Close()
+        Else
+
+        End If
+    End Function
+
+
 
 
 
