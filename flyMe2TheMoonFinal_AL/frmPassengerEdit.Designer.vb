@@ -62,10 +62,10 @@ Partial Class frmPassengerEdit
         'txtEmail
         '
         Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Location = New System.Drawing.Point(425, 731)
+        Me.txtEmail.Location = New System.Drawing.Point(500, 739)
         Me.txtEmail.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(571, 48)
+        Me.txtEmail.Size = New System.Drawing.Size(733, 48)
         Me.txtEmail.TabIndex = 7
         '
         'Label12
@@ -82,19 +82,19 @@ Partial Class frmPassengerEdit
         'txtPhoneNumber
         '
         Me.txtPhoneNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(425, 635)
+        Me.txtPhoneNumber.Location = New System.Drawing.Point(500, 643)
         Me.txtPhoneNumber.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtPhoneNumber.Name = "txtPhoneNumber"
-        Me.txtPhoneNumber.Size = New System.Drawing.Size(571, 48)
+        Me.txtPhoneNumber.Size = New System.Drawing.Size(733, 48)
         Me.txtPhoneNumber.TabIndex = 6
         '
         'txtCity
         '
         Me.txtCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCity.Location = New System.Drawing.Point(425, 346)
+        Me.txtCity.Location = New System.Drawing.Point(500, 354)
         Me.txtCity.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(571, 48)
+        Me.txtCity.Size = New System.Drawing.Size(733, 48)
         Me.txtCity.TabIndex = 3
         '
         'Label6
@@ -167,37 +167,37 @@ Partial Class frmPassengerEdit
         '
         Me.cboStates.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStates.FormattingEnabled = True
-        Me.cboStates.Location = New System.Drawing.Point(425, 433)
+        Me.cboStates.Location = New System.Drawing.Point(500, 441)
         Me.cboStates.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.cboStates.Name = "cboStates"
-        Me.cboStates.Size = New System.Drawing.Size(571, 48)
+        Me.cboStates.Size = New System.Drawing.Size(733, 48)
         Me.cboStates.TabIndex = 4
         '
         'txtZip
         '
         Me.txtZip.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtZip.Location = New System.Drawing.Point(425, 538)
+        Me.txtZip.Location = New System.Drawing.Point(500, 546)
         Me.txtZip.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtZip.Name = "txtZip"
-        Me.txtZip.Size = New System.Drawing.Size(571, 48)
+        Me.txtZip.Size = New System.Drawing.Size(733, 48)
         Me.txtZip.TabIndex = 5
         '
         'txtLastName
         '
         Me.txtLastName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLastName.Location = New System.Drawing.Point(425, 153)
+        Me.txtLastName.Location = New System.Drawing.Point(500, 161)
         Me.txtLastName.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(571, 48)
+        Me.txtLastName.Size = New System.Drawing.Size(733, 48)
         Me.txtLastName.TabIndex = 1
         '
         'txtFirstName
         '
         Me.txtFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(425, 60)
+        Me.txtFirstName.Location = New System.Drawing.Point(500, 68)
         Me.txtFirstName.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(571, 48)
+        Me.txtFirstName.Size = New System.Drawing.Size(733, 48)
         Me.txtFirstName.TabIndex = 0
         '
         'btnClose
@@ -225,10 +225,10 @@ Partial Class frmPassengerEdit
         'txtAddress
         '
         Me.txtAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddress.Location = New System.Drawing.Point(425, 248)
+        Me.txtAddress.Location = New System.Drawing.Point(500, 256)
         Me.txtAddress.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(571, 48)
+        Me.txtAddress.Size = New System.Drawing.Size(733, 48)
         Me.txtAddress.TabIndex = 2
         '
         'GroupBox1
@@ -254,11 +254,11 @@ Partial Class frmPassengerEdit
         Me.GroupBox1.Controls.Add(Me.txtLastName)
         Me.GroupBox1.Controls.Add(Me.txtFirstName)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(278, 3)
+        Me.GroupBox1.Location = New System.Drawing.Point(149, 16)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(7, 7, 7, 7)
-        Me.GroupBox1.Size = New System.Drawing.Size(1109, 985)
+        Me.GroupBox1.Size = New System.Drawing.Size(1304, 985)
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         '
@@ -276,10 +276,10 @@ Partial Class frmPassengerEdit
         'txtLoginID
         '
         Me.txtLoginID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoginID.Location = New System.Drawing.Point(425, 813)
+        Me.txtLoginID.Location = New System.Drawing.Point(500, 821)
         Me.txtLoginID.Margin = New System.Windows.Forms.Padding(7)
         Me.txtLoginID.Name = "txtLoginID"
-        Me.txtLoginID.Size = New System.Drawing.Size(571, 48)
+        Me.txtLoginID.Size = New System.Drawing.Size(733, 48)
         Me.txtLoginID.TabIndex = 24
         '
         'Label7
@@ -296,10 +296,10 @@ Partial Class frmPassengerEdit
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(425, 896)
+        Me.txtPassword.Location = New System.Drawing.Point(500, 904)
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(7)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(571, 48)
+        Me.txtPassword.Size = New System.Drawing.Size(733, 48)
         Me.txtPassword.TabIndex = 26
         '
         'frmPassengerEdit

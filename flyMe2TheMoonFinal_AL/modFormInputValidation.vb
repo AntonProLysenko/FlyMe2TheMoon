@@ -200,6 +200,20 @@
         End If
     End Sub
 
+    Public Sub ValidateDateOfBirth(ByRef blnValid As Boolean, ByRef dtmDate As DateTime, dtpDatePicker As Object)
+
+        If dtpDatePicker.Value.Date <= DateTime.Now.Date Then
+
+            dtmDate = dtpDatePicker.Value
+            blnValid = True
+        Else
+            MessageBox.Show("Date of Birth Cannot be in a Future!")
+            blnValid = False
+            dtpDatePicker.Focus()
+            Exit Sub
+        End If
+    End Sub
+
     Public Sub ValidateLicenseExpDate(ByRef blnValid As Boolean, ByRef dtmDate As DateTime, dtpDatePicker As Object)
         Dim dtmSelectedDate As DateTime = dtpDatePicker.Value.Date
         Dim dtmToday As DateTime = DateTime.Now.Date

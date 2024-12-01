@@ -99,3 +99,5 @@ ON TPilotRoles.intPilotRoleID = TPilots.intPilotRoleID
 --All Attendances
 SELECT intAttendantID, strFirstName + ' ' + strLastName as AttendantFullName
 FROM TAttendants
+
+SELECT * FROm TPASSENGERS

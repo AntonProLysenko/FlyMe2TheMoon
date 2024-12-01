@@ -1,30 +1,13 @@
 ﻿Public Class frmPassengerAddNew
 
     Private Sub frmAdd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Dim strSelectStates As String = ""
-        'Dim cmdSelectStates As OleDb.OleDbCommand
-        'Dim drSourceTable As OleDb.OleDbDataReader
         Dim dtState As DataTable = New DataTable
 
+        txtPassword.PasswordChar = "*"
 
         Try
 
-
-
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
-
-            'Selecting States
-            'strSelectStates = "SELECT * FROM TStates"
-
-            'cmdSelectStates = New OleDb.OleDbCommand(strSelectStates, m_conAdministrator)
-            'drSourceTable = cmdSelectStates.ExecuteReader
+            CheckOpenDBConnection(Me)
             dtState = ExecuteSelectProdcedure("uspStatesList")
 
             'Loadingg States results to a combobox
@@ -32,15 +15,10 @@
             cboStates.DisplayMember = "strState"
             cboStates.DataSource = dtState
 
-            'drSourceTable.Close()
-
             CloseDatabaseConnection()
 
         Catch ex As Exception
-
-
             MessageBox.Show(ex.Message)
-
         End Try
     End Sub
 
@@ -57,6 +35,7 @@
         Dim strEmail As String
         Dim intLoginID As Integer
         Dim strPassword As String
+        Dim dtmDateOfBirth As DateTime
 
         Dim frmPassengerVerification As New frmPassengerVerification
 
@@ -66,33 +45,45 @@
                                                   txtFirstName, txtLastName, txtAddress, txtCity, txtZip, cboStates, txtPhoneNumber, txtEmail, txtLoginID, txtPassword)
 
         If blnValidInput Then
+            ValidateDateOfBirth(blnValidInput, dtmDateOfBirth, dtpDateOfBirth)
+        End If
 
-            PushToDB(strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNum, strEmail)
+        If blnValidInput Then
+            If PushToDB(strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword, dtmDateOfBirth) Then
+                Me.Hide()
+                frmPassengerVerification.ShowDialog()
+            End If
             'frmPassengerVerification.PopulateDropdown()
-            Me.Hide()
-            frmPassengerVerification.ShowDialog()
         End If
 
     End Sub
 
 
-    Private Function PushToDB(strFirstName As String, strLastName As String, strAddress As String, strCity As String, intStateID As Integer, strZip As String, strPhoneNum As String, strEmail As String)
+    Private Function PushToDB(strFirstName As String, strLastName As String, strAddress As String, strCity As String, intStateID As Integer, strZip As String, strPhoneNum As String, strEmail As String, intLoginID As Integer, strPassword As String, dtmDateOfBirth As DateTime)
         Try
             Dim intNextPrimaryKey As Integer
             Dim strInsert As String
 
             intNextPrimaryKey = DetectNextPK()
 
-            strInsert = "INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail)" &
-                " VALUES (" & intNextPrimaryKey & ", '" & strFirstName & "', '" & strLastName & "', '" & strAddress & "', '" & strCity & "', " & intStateID & ", '" & strZip & "', '" & strPhoneNum & "', '" & strEmail & "')"
+
+            strInsert = "INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail, intPassengerLoginID, strPassengerPassword, dtmDateOfBrth)" &
+                " VALUES (" & intNextPrimaryKey & ", '" & strFirstName & "', '" & strLastName & "', '" & strAddress & "', '" & strCity & "', " & intStateID & ", '" & strZip & "', '" & strPhoneNum & "', '" & strEmail & "', " & intLoginID & ",'" & strPassword & "', '" & dtmDateOfBirth & "')"
 
             'MessageBox.Show(strInsert)
 
             InsertData(strInsert)
             CloseDatabaseConnection()
 
+            Return True
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            If ex.Message.Contains("UNIQUE") Then
+                MessageBox.Show("Login ID Already Exist")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
+            Return False
         End Try
 
     End Function
@@ -103,25 +94,9 @@
         Dim intNextPrimaryKey As Integer
         Dim dtNextPK As New DataTable
 
-        If OpenDatabaseConnectionSQLServer() = False Then
-            MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                            "The application will now close.",
-                            Me.Text + " Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Close()
-
-        End If
-
-        'strSelectNextPK = "SELECT MAX(intPassengerID) + 1 AS intNextPrimaryKey FROM TPassengers"
-
-        'cmdSelectNextPk = New OleDb.OleDbCommand(strSelectNextPK, m_conAdministrator)
-        'drNextPk = cmdSelectNextPk.ExecuteReader
-
-        'drNextPk.Read()
-
+        CheckOpenDBConnection(Me)
 
         dtNextPK = ExecuteSelectNextPK("TPassengers", "intPassengerID")
-
 
         If dtNextPK.Rows(0)("intNextPrimaryKey") = Nothing Then
             intNextPrimaryKey = 1
@@ -129,14 +104,9 @@
             intNextPrimaryKey = dtNextPK.Rows(0)("intNextPrimaryKey")
         End If
 
-        'If drNextPk.IsDBNull(0) = True Then
-        '    intNextPrimaryKey = 1
-        'Else
-        '    intNextPrimaryKey = CInt(drNextPk("intNextPrimaryKey"))
-        'End If
-
         Return intNextPrimaryKey
     End Function
+
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Dim frmPassengerVerification As New frmPassengerVerification
         Me.Hide()
