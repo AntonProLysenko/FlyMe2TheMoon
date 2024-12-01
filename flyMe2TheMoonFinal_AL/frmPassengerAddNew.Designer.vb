@@ -22,6 +22,7 @@ Partial Class frmPassengerAddNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnAddPassenger = New System.Windows.Forms.Button()
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -47,6 +48,8 @@ Partial Class frmPassengerAddNew
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtLoginID = New System.Windows.Forms.TextBox()
+        Me.btmShowPass = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -235,6 +238,7 @@ Partial Class frmPassengerAddNew
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btmShowPass)
         Me.GroupBox1.Controls.Add(Me.dtpDateOfBirth)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Label9)
@@ -327,6 +331,19 @@ Partial Class frmPassengerAddNew
         Me.txtLoginID.Size = New System.Drawing.Size(457, 39)
         Me.txtLoginID.TabIndex = 28
         '
+        'btmShowPass
+        '
+        Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
+        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btmShowPass.Location = New System.Drawing.Point(940, 734)
+        Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
+        Me.btmShowPass.Name = "btmShowPass"
+        Me.btmShowPass.Size = New System.Drawing.Size(65, 42)
+        Me.btmShowPass.TabIndex = 34
+        Me.btmShowPass.Text = "👀"
+        Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btmShowPass.UseVisualStyleBackColor = False
+        '
         'frmPassengerAddNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
@@ -375,4 +392,6 @@ Partial Class frmPassengerAddNew
     Friend WithEvents txtLoginID As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents dtpDateOfBirth As DateTimePicker
+    Friend WithEvents btmShowPass As Button
+    Friend WithEvents Timer1 As Timer
 End Class

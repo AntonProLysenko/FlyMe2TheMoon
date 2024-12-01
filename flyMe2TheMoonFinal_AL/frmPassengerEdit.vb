@@ -3,6 +3,7 @@
         Dim dtState As DataTable = New DataTable
         Dim dtPassengerData As DataTable = New DataTable
 
+        txtPassword.PasswordChar = "*"
         Me.Text = "Edit " & strCurrentUserName
         Try
             If OpenDatabaseConnectionSQLServer() = False Then
@@ -121,5 +122,9 @@
         Dim frmPassengerMenu As New frmPassengerMenu
         Me.Hide()
         frmPassengerMenu.ShowDialog()
+    End Sub
+
+    Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
+        revealPassword(Timer1, 1, txtPassword)
     End Sub
 End Class

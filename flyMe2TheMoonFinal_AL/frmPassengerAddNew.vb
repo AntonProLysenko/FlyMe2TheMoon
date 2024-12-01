@@ -113,4 +113,7 @@
         frmPassengerVerification.ShowDialog()
     End Sub
 
+    Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
+        revealPassword(Timer1, 1, txtPassword)
+    End Sub
 End Class
