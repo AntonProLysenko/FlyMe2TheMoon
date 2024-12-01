@@ -188,6 +188,7 @@
     <Compile Include="modCurrentUser.vb" />
     <Compile Include="modDataBaseUtilities.vb" />
     <Compile Include="modFormInputValidation.vb" />
+    <Compile Include="modInterfaceUtilities.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

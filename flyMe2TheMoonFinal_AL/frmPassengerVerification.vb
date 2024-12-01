@@ -79,30 +79,8 @@
     End Sub
 
 
-
-
-
-
-    'TIMER
-    Private countdown As Integer = 1
     Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
-        countdown = 1
-
-        Timer1.Interval = 1000
-        Timer1.Start() ' Start the timer
+        revealPassword(Timer1, 1, txtPassword)
     End Sub
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        If countdown > 0 Then
-            txtPassword.PasswordChar = Nothing
-            countdown -= 1
-        Else
-            txtPassword.PasswordChar = "*"
-            Timer1.Stop() ' Stop the timer when countdown is complete
-        End If
-    End Sub
-
-
-
 
 End Class
