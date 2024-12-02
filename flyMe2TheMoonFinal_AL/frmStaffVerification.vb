@@ -1,74 +1,107 @@
 ﻿Public Class frmStaffVerification
 
     Private Sub frmPilotVerification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        PopulateDropdown()
+        txtPassword.PasswordChar = "*"
     End Sub
 
-    Public Sub PopulateDropdown()
-        Dim dtStaffMembers As DataTable
-        'Dim strSelect As String
-        Dim strProdcedureName As String
 
-        If strStaffRole = "Pilot" Then
-            Me.Text = "Pilot Verification"
-            'strSelect = "SELECT intPilotID as intID, strFirstName + ' ' + strLastName as strFullName FROM TPilots"
-            strProdcedureName = "uspPilotsList"
-        ElseIf strStaffRole = "Attendant" Then
-            Me.Text = "Attendant Verification"
-            'strSelect = "SELECT intAttendantID as intID, strFirstName + ' ' + strLastName as strFullName FROM TAttendants"
-            strProdcedureName = "uspAttendantsList"
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim frmAttendantMenu As New frmStaffMenu
+
+
+
+
+
+
+
+
+        Dim frmStaffMenu As New frmStaffMenu
+        Dim frmAdminMenu As New frmAdminMenu
+
+
+        Dim dtEmployee As DataTable = New DataTable
+        Dim intID As Integer
+        Dim blnValid As Boolean = False
+
+
+        If Integer.TryParse(txtEmployeeID.Text, intID) Then
+            blnValid = True
+        Else
+            txtEmployeeID.Focus()
+            lblErrormessage.Text = "Employee ID Has To Be Numbers Only"
         End If
 
-        Try
-
-            If OpenDatabaseConnectionSQLServer() = False Then
-
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-            Else
-
-            End If
+        If txtPassword.Text.Length > 0 Then
+            blnValid = True
+        Else
+            txtPassword.Focus()
+            lblErrormessage.Text = "Enter your Password!"
+        End If
 
 
+        If blnValid Then
 
-            'Populating Attendants Dropdown
-            'dtStaffMembers = GetDataTable(strSelect)
-            dtStaffMembers = ExecuteSelectProdcedure(strProdcedureName)
+            Try
+                CheckOpenDBConnection(Me)
 
+                dtEmployee = ExecuteSelectProdcedure("uspFindEmployeeByID", "@logInID", txtEmployeeID.Text)
 
-            cmbStaff.ValueMember = "intID"
-
-            cmbStaff.DisplayMember = "strFullName"
-            cmbStaff.DataSource = dtStaffMembers
+                If dtEmployee.Rows.Count > 0 Then
+                    If dtEmployee.Rows(0)("strEmployeePassword") = txtPassword.Text Then
+                        lblErrormessage.Text = ""
 
 
 
-            ' Selecting firs Pilot by default
-            If cmbStaff.Items.Count > 0 Then
-                cmbStaff.SelectedIndex = 0
-            End If
+                        If dtEmployee.Rows(0)("strRole") = "Admin" Then
+                            CloseDatabaseConnection()
+                            Me.Hide()
+                            frmAdminMenu.ShowDialog()
+                        Else
+                            Select Case dtEmployee.Rows(0)("strRole")
+                                Case "Pilot"
+                                    strStaffRole = "Pilot"
+                                    dtEmployee = ExecuteSelectProdcedure("uspFindPilotByEmployeeID", "@@employeeID", dtEmployee.Rows(0)("strEmployeeID"))
+                                Case "Attendant"
+                                    strStaffRole = "Attendant"
+                                    dtEmployee = ExecuteSelectProdcedure("uspFindAttendantByEmployeeID", "@@employeeID", dtEmployee.Rows(0)("strEmployeeID"))
+                            End Select
+                            intCurrentStaffMemberID = dtEmployee.Rows(0)("intID")
+                            strCurrentUserName = dtEmployee.Rows(0)("strFullName")
 
+                            CloseDatabaseConnection()
+                            Me.Hide()
+                            frmStaffMenu.ShowDialog()
+                        End If
+                    Else
+                        txtPassword.Focus()
+                        lblErrormessage.Text = "Invalid Password!"
+                        CloseDatabaseConnection()
+                        'blnValid = False
+                    End If
+                Else
+                    txtEmployeeID.Focus()
+                    lblErrormessage.Text = "User Not Found!"
+                    CloseDatabaseConnection()
+                    'blnValid = False
+                End If
 
-            CloseDatabaseConnection()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
 
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
+        End If
+
     End Sub
 
-    Private Sub btnNext_Click(sender As Object, e As EventArgs) 
-        Dim frmAttendantMenu As New frmStaffMenu
-        intCurrentStaffMemberID = cmbStaff.SelectedValue
-        strCurrentUserName = cmbStaff.Text
-        Me.Hide()
-        frmAttendantMenu.ShowDialog()
-    End Sub
+
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) 
         Close()
+    End Sub
+
+    Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
+        revealPassword(Timer1, 1, txtPassword)
     End Sub
 
 End Class

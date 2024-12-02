@@ -26,6 +26,14 @@
             lblErrormessage.Text = "Passenger ID Has To Be Numbers Only"
         End If
 
+        If txtPassword.Text.Length > 0 Then
+            blnValid = True
+        Else
+            txtPassword.Focus()
+            lblErrormessage.Text = "Enter your Password!"
+        End If
+
+
 
         If blnValid Then
 

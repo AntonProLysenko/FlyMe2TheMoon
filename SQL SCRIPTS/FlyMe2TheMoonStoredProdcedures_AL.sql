@@ -163,3 +163,18 @@
 --	WHERE intPassengerLoginID = @logInID
 --END
 
+--CREATE PROCEDURE uspFindEmployeeByID(@loginID as INTEGER)
+--AS BEGIN
+--	SELECT TE.strEmployeeID, TE.strEmployeePassword, TE.strRole, TE.strEmployeeID
+--	FROM TEmployeeCredentials AS TE
+--	WHERE intEmployeeLoginID = @loginID
+--END
+
+--EXECUTE uspFindEmployeeByID 10001 16666
+
+CREATE PROCEDURE uspFindPilotByEmployeeID(@employeeID as VARCHAR(255))
+AS BEGIN
+	SELECT  intPilotID as intID, strFirstName + ' ' + strLastName as strFullName
+	FROM  TPilots
+	WHERE strEmployeeID = @employeeID
+END
