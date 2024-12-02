@@ -40,7 +40,7 @@ Partial Class frmPassengerVerification
         '
         Me.btnNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNext.Location = New System.Drawing.Point(147, 313)
-        Me.btnNext.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnNext.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(328, 73)
         Me.btnNext.TabIndex = 1
@@ -51,7 +51,7 @@ Partial Class frmPassengerVerification
         '
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.Location = New System.Drawing.Point(147, 410)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(328, 73)
         Me.btnAdd.TabIndex = 2
@@ -70,9 +70,9 @@ Partial Class frmPassengerVerification
         Me.GroupBox1.Controls.Add(Me.btnNext)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(324, 27)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(739, 498)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
@@ -95,7 +95,7 @@ Partial Class frmPassengerVerification
         '
         Me.lblErrormessage.AutoSize = True
         Me.lblErrormessage.ForeColor = System.Drawing.Color.OrangeRed
-        Me.lblErrormessage.Location = New System.Drawing.Point(207, 257)
+        Me.lblErrormessage.Location = New System.Drawing.Point(4, 264)
         Me.lblErrormessage.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblErrormessage.Name = "lblErrormessage"
         Me.lblErrormessage.Size = New System.Drawing.Size(0, 38)
@@ -127,7 +127,7 @@ Partial Class frmPassengerVerification
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(296, 206)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(272, 44)
         Me.txtPassword.TabIndex = 3
@@ -136,7 +136,7 @@ Partial Class frmPassengerVerification
         '
         Me.txtPassengerID.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassengerID.Location = New System.Drawing.Point(296, 103)
-        Me.txtPassengerID.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtPassengerID.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassengerID.Name = "txtPassengerID"
         Me.txtPassengerID.Size = New System.Drawing.Size(272, 44)
         Me.txtPassengerID.TabIndex = 2
@@ -148,7 +148,7 @@ Partial Class frmPassengerVerification
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1368, 564)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(1392, 628)
         Me.Name = "frmPassengerVerification"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

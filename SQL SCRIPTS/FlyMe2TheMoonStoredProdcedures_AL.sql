@@ -170,11 +170,21 @@
 --	WHERE intEmployeeLoginID = @loginID
 --END
 
---EXECUTE uspFindEmployeeByID 10001 16666
+--EXECUTE uspFindEmployeeByID 10002 10001 16666
 
-CREATE PROCEDURE uspFindPilotByEmployeeID(@employeeID as VARCHAR(255))
-AS BEGIN
-	SELECT  intPilotID as intID, strFirstName + ' ' + strLastName as strFullName
-	FROM  TPilots
-	WHERE strEmployeeID = @employeeID
-END
+--CREATE PROCEDURE uspFindPilotByEmployeeID(@employeeID as VARCHAR(255))
+--AS BEGIN
+--	SELECT  intPilotID as intID, strFirstName + ' ' + strLastName as strFullName
+--	FROM  TPilots
+--	WHERE strEmployeeID = @employeeID
+--END
+
+--EXECUTE uspFindPilotByEmployeeID 16666
+
+
+--CREATE PROCEDURE uspFindAttendantByEmployeeID(@employeeID as VARCHAR(255))
+--AS BEGIN
+--	SELECT  intAttendantID as intID, strFirstName + ' ' + strLastName as strFullName
+--	FROM  TAttendants
+--	WHERE strEmployeeID = @employeeID
+--END

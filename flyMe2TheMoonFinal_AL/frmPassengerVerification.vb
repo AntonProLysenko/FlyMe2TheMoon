@@ -1,9 +1,4 @@
 ﻿Public Class frmPassengerVerification
-
-
-
-
-
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Me.Hide()
         Dim frmAddNewPassenger As New frmPassengerAddNew
@@ -18,23 +13,42 @@
         Dim intID As Integer
         Dim blnValid As Boolean = False
 
-
-        If Integer.TryParse(txtPassengerID.Text, intID) Then
-            blnValid = True
-        Else
+        'Validation
+        If txtPassengerID.Text.Length <= 0 Then
             txtPassengerID.Focus()
-            lblErrormessage.Text = "Passenger ID Has To Be Numbers Only"
-        End If
-
-        If txtPassword.Text.Length > 0 Then
-            blnValid = True
+            lblErrormessage.Left = 100
+            lblErrormessage.Text = "Enter Employee ID"
+            blnValid = False
         Else
-            txtPassword.Focus()
-            lblErrormessage.Text = "Enter your Password!"
+            blnValid = True
+        End If
+
+        If blnValid Then
+
+            If txtPassword.Text.Length > 0 Then
+                blnValid = True
+            Else
+                blnValid = False
+                txtPassword.Focus()
+                lblErrormessage.Left = 100
+                lblErrormessage.Text = "Enter your Password!"
+            End If
+        End If
+
+        If blnValid Then
+
+            If Integer.TryParse(txtPassengerID.Text, intID) Then
+                blnValid = True
+            Else
+                blnValid = False
+                txtPassengerID.Focus()
+                lblErrormessage.Left = 20
+                lblErrormessage.Text = "Passenger ID Has To Be Numbers Only"
+            End If
         End If
 
 
-
+        'Pass verification
         If blnValid Then
 
             Try
@@ -50,21 +64,20 @@
                         CloseDatabaseConnection()
                         Me.Hide()
                         frmPassengerMenu.ShowDialog()
-                        'blnValid = True
-
-
 
                     Else
                         txtPassword.Focus()
+                        lblErrormessage.Left = 100
                         lblErrormessage.Text = "Invalid Password!"
                         CloseDatabaseConnection()
                         'blnValid = False
                     End If
                 Else
                     txtPassengerID.Focus()
+                    lblErrormessage.Left = 100
                     lblErrormessage.Text = "User Not Found!"
                     CloseDatabaseConnection()
-                    'blnValid = False
+
                 End If
 
             Catch ex As Exception

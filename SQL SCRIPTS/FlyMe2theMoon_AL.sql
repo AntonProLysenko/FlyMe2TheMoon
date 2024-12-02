@@ -306,7 +306,8 @@ ALTER TABLE TFlightPassengers	 ADD CONSTRAINT TFlightPassengers_TFlights_FK
 FOREIGN KEY ( intFlightID ) REFERENCES TFlights (intFlightID ) 
 
 --16 
---ALTER TABLE TEmployeeCredentials ADD CON
+ALTER TABLE TEmployeeCredentials ADD CONSTRAINT TEmployeeCredentials_TEmployees_FK
+FOREIGN KEY(strEmployeeID) REFERENCES TPilo
 
 -- --------------------------------------------------------------------------------
 --	Step #3 : Add Data - INSERTS
@@ -380,7 +381,7 @@ VALUES							 (1, 12345, 'Seenow123', 'Pilot', '12121')
 								,(5, 10004, 'Ennair123', 'Pilot', '19909')
 								,(6, 10008, 'Tyme123', 'Attendant','22121')
 								,(7, 10002, 'Ujest123', 'Attendant','23322')
-								,(8, 54321, 'Biy123', 'Attendant','26666')
+								,(8, 54322, 'Biy123', 'Attendant','26666')
 								,(9, 21038, 'Amanie123', 'Attendant', '27676')
 								,(10, 21039, 'Toexet123', 'Attendant', '29909')
 								,(11, 21031, 'Anton123', 'Admin', '')

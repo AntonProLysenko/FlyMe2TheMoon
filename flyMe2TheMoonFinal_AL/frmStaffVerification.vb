@@ -7,15 +7,6 @@
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim frmAttendantMenu As New frmStaffMenu
-
-
-
-
-
-
-
-
         Dim frmStaffMenu As New frmStaffMenu
         Dim frmAdminMenu As New frmAdminMenu
 
@@ -24,22 +15,41 @@
         Dim intID As Integer
         Dim blnValid As Boolean = False
 
-
-        If Integer.TryParse(txtEmployeeID.Text, intID) Then
-            blnValid = True
-        Else
+        'Form Validation
+        If txtEmployeeID.Text.Length <= 0 Then
             txtEmployeeID.Focus()
-            lblErrormessage.Text = "Employee ID Has To Be Numbers Only"
-        End If
-
-        If txtPassword.Text.Length > 0 Then
-            blnValid = True
+            lblErrormessage.Left = 100
+            lblErrormessage.Text = "Enter Employee ID"
+            blnValid = False
         Else
-            txtPassword.Focus()
-            lblErrormessage.Text = "Enter your Password!"
+            blnValid = True
         End If
 
+        If blnValid Then
 
+            If txtPassword.Text.Length > 0 Then
+                blnValid = True
+            Else
+                blnValid = False
+                txtPassword.Focus()
+                lblErrormessage.Left = 100
+                lblErrormessage.Text = "Enter your Password!"
+            End If
+        End If
+
+        If blnValid Then
+
+            If Integer.TryParse(txtEmployeeID.Text, intID) Then
+                blnValid = True
+            Else
+                blnValid = False
+                txtEmployeeID.Focus()
+                lblErrormessage.Left = 20
+                lblErrormessage.Text = "Employee ID Has To Be Numbers Only"
+            End If
+        End If
+
+        'Pass verification
         If blnValid Then
 
             Try
@@ -50,8 +60,6 @@
                 If dtEmployee.Rows.Count > 0 Then
                     If dtEmployee.Rows(0)("strEmployeePassword") = txtPassword.Text Then
                         lblErrormessage.Text = ""
-
-
 
                         If dtEmployee.Rows(0)("strRole") = "Admin" Then
                             CloseDatabaseConnection()
@@ -75,12 +83,14 @@
                         End If
                     Else
                         txtPassword.Focus()
+                        lblErrormessage.Left = 100
                         lblErrormessage.Text = "Invalid Password!"
                         CloseDatabaseConnection()
                         'blnValid = False
                     End If
                 Else
                     txtEmployeeID.Focus()
+                    lblErrormessage.Left = 100
                     lblErrormessage.Text = "User Not Found!"
                     CloseDatabaseConnection()
                     'blnValid = False
@@ -93,8 +103,6 @@
         End If
 
     End Sub
-
-
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) 
         Close()
