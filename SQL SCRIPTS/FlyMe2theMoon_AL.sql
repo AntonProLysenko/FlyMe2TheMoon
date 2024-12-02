@@ -52,7 +52,7 @@ CREATE TABLE TPassengers
 	,strEmail				VARCHAR(255)	NOT NULL
 	,intPassengerLoginID	INTEGER			NOT NULL
 	,strPassengerPassword	VARCHAR(255)	NOT NULL
-	,dtmDateOfBrth			DATETIME		NOT NULL
+	,dtmDateOfBirth			DATETIME		NOT NULL
 	,CONSTRAINT TPassengers_PK PRIMARY KEY ( intPassengerID )
 	,CONSTRAINT Tpassengers_LoginID UNIQUE (intPassengerLoginID)
 )
@@ -305,9 +305,6 @@ FOREIGN KEY ( intMaintenanceWorkerID ) REFERENCES TMaintenanceWorkers (intMainte
 ALTER TABLE TFlightPassengers	 ADD CONSTRAINT TFlightPassengers_TFlights_FK 
 FOREIGN KEY ( intFlightID ) REFERENCES TFlights (intFlightID ) 
 
---16 
-ALTER TABLE TEmployeeCredentials ADD CONSTRAINT TEmployeeCredentials_TEmployees_FK
-FOREIGN KEY(strEmployeeID) REFERENCES TPilo
 
 -- --------------------------------------------------------------------------------
 --	Step #3 : Add Data - INSERTS
@@ -347,7 +344,7 @@ VALUES				(1, 'Cincinnati', 'CVG')
 				   ,(6, 'Orlando', 'MCO' )
 
 
-INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail, intPassengerLoginID, strPassengerPassword, dtmDateOfBrth)
+INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail, intPassengerLoginID, strPassengerPassword, dtmDateOfBirth)
 VALUES					(1, 'Knelly', 'Nervious', '321 Elm St.', 'Cincinnati', 1, '45201', '5135553333', 'nnelly@gmail.com', 100001, 'Knelly123', '1990-04-15') -- Adult
 					   ,(2, 'Orville', 'Waite', '987 Oak St.', 'Cleveland', 1, '45218', '5135556333', 'owright@gmail.com', 100002, 'Orville123', '2010-09-22') -- Kid 
 					   ,(3, 'Eileen', 'Awnewe', '1569 Windisch Rd.', 'Dayton', 1, '45069', '5135555333', 'eonewe1@yahoo.com', 100003, 'Eileen123', '1992-07-08') -- Adult

@@ -42,12 +42,14 @@ Partial Class frmPassengerEdit
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btmShowPass = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtLoginID = New System.Windows.Forms.TextBox()
-        Me.btmShowPass = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.dtpDateOfBirth = New System.Windows.Forms.DateTimePicker()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,7 +57,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(62, 605)
+        Me.Label11.Location = New System.Drawing.Point(62, 587)
         Me.Label11.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(95, 32)
@@ -65,7 +67,7 @@ Partial Class frmPassengerEdit
         'txtEmail
         '
         Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Location = New System.Drawing.Point(349, 610)
+        Me.txtEmail.Location = New System.Drawing.Point(349, 592)
         Me.txtEmail.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(577, 39)
@@ -75,7 +77,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(62, 526)
+        Me.Label12.Location = New System.Drawing.Point(62, 525)
         Me.Label12.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(213, 32)
@@ -85,7 +87,7 @@ Partial Class frmPassengerEdit
         'txtPhoneNumber
         '
         Me.txtPhoneNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(349, 530)
+        Me.txtPhoneNumber.Location = New System.Drawing.Point(349, 529)
         Me.txtPhoneNumber.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtPhoneNumber.Name = "txtPhoneNumber"
         Me.txtPhoneNumber.Size = New System.Drawing.Size(577, 39)
@@ -94,7 +96,7 @@ Partial Class frmPassengerEdit
         'txtCity
         '
         Me.txtCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCity.Location = New System.Drawing.Point(349, 291)
+        Me.txtCity.Location = New System.Drawing.Point(349, 323)
         Me.txtCity.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtCity.Name = "txtCity"
         Me.txtCity.Size = New System.Drawing.Size(577, 39)
@@ -104,7 +106,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(62, 445)
+        Me.Label6.Location = New System.Drawing.Point(62, 459)
         Me.Label6.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(63, 32)
@@ -115,7 +117,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(62, 364)
+        Me.Label5.Location = New System.Drawing.Point(62, 396)
         Me.Label5.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(90, 32)
@@ -126,7 +128,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(62, 292)
+        Me.Label4.Location = New System.Drawing.Point(62, 324)
         Me.Label4.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(72, 32)
@@ -137,7 +139,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(62, 218)
+        Me.Label3.Location = New System.Drawing.Point(62, 263)
         Me.Label3.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(127, 32)
@@ -170,7 +172,7 @@ Partial Class frmPassengerEdit
         '
         Me.cboStates.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStates.FormattingEnabled = True
-        Me.cboStates.Location = New System.Drawing.Point(349, 363)
+        Me.cboStates.Location = New System.Drawing.Point(349, 395)
         Me.cboStates.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.cboStates.Name = "cboStates"
         Me.cboStates.Size = New System.Drawing.Size(577, 40)
@@ -179,7 +181,7 @@ Partial Class frmPassengerEdit
         'txtZip
         '
         Me.txtZip.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtZip.Location = New System.Drawing.Point(349, 450)
+        Me.txtZip.Location = New System.Drawing.Point(349, 464)
         Me.txtZip.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtZip.Name = "txtZip"
         Me.txtZip.Size = New System.Drawing.Size(577, 39)
@@ -206,10 +208,10 @@ Partial Class frmPassengerEdit
         'btnClose
         '
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(805, 840)
+        Me.btnClose.Location = New System.Drawing.Point(809, 840)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(2)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(225, 83)
+        Me.btnClose.Size = New System.Drawing.Size(225, 74)
         Me.btnClose.TabIndex = 14
         Me.btnClose.Text = "Exit"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -217,10 +219,10 @@ Partial Class frmPassengerEdit
         'btnUpdate
         '
         Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(262, 840)
+        Me.btnUpdate.Location = New System.Drawing.Point(266, 840)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(225, 83)
+        Me.btnUpdate.Size = New System.Drawing.Size(225, 74)
         Me.btnUpdate.TabIndex = 13
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -228,7 +230,7 @@ Partial Class frmPassengerEdit
         'txtAddress
         '
         Me.txtAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddress.Location = New System.Drawing.Point(349, 210)
+        Me.txtAddress.Location = New System.Drawing.Point(349, 255)
         Me.txtAddress.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(577, 39)
@@ -236,6 +238,8 @@ Partial Class frmPassengerEdit
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.dtpDateOfBirth)
+        Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.btmShowPass)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.txtPassword)
@@ -262,15 +266,28 @@ Partial Class frmPassengerEdit
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(5, 6, 5, 6)
-        Me.GroupBox1.Size = New System.Drawing.Size(1025, 815)
+        Me.GroupBox1.Size = New System.Drawing.Size(1025, 800)
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
+        '
+        'btmShowPass
+        '
+        Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
+        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btmShowPass.Location = New System.Drawing.Point(943, 730)
+        Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
+        Me.btmShowPass.Name = "btmShowPass"
+        Me.btmShowPass.Size = New System.Drawing.Size(65, 42)
+        Me.btmShowPass.TabIndex = 28
+        Me.btmShowPass.Text = "👀"
+        Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btmShowPass.UseVisualStyleBackColor = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(62, 748)
+        Me.Label7.Location = New System.Drawing.Point(62, 730)
         Me.Label7.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(147, 32)
@@ -280,7 +297,7 @@ Partial Class frmPassengerEdit
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(349, 746)
+        Me.txtPassword.Location = New System.Drawing.Point(349, 728)
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(577, 39)
@@ -290,7 +307,7 @@ Partial Class frmPassengerEdit
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(62, 675)
+        Me.Label1.Location = New System.Drawing.Point(62, 657)
         Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(271, 32)
@@ -300,37 +317,44 @@ Partial Class frmPassengerEdit
         'txtLoginID
         '
         Me.txtLoginID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoginID.Location = New System.Drawing.Point(349, 677)
+        Me.txtLoginID.Location = New System.Drawing.Point(349, 659)
         Me.txtLoginID.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.txtLoginID.Name = "txtLoginID"
         Me.txtLoginID.Size = New System.Drawing.Size(577, 39)
         Me.txtLoginID.TabIndex = 24
         '
-        'btmShowPass
+        'dtpDateOfBirth
         '
-        Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
-        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btmShowPass.Location = New System.Drawing.Point(944, 746)
-        Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
-        Me.btmShowPass.Name = "btmShowPass"
-        Me.btmShowPass.Size = New System.Drawing.Size(65, 42)
-        Me.btmShowPass.TabIndex = 28
-        Me.btmShowPass.Text = "👀"
-        Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btmShowPass.UseVisualStyleBackColor = False
+        Me.dtpDateOfBirth.Location = New System.Drawing.Point(351, 190)
+        Me.dtpDateOfBirth.Margin = New System.Windows.Forms.Padding(2)
+        Me.dtpDateOfBirth.Name = "dtpDateOfBirth"
+        Me.dtpDateOfBirth.Size = New System.Drawing.Size(575, 39)
+        Me.dtpDateOfBirth.TabIndex = 35
+        Me.dtpDateOfBirth.Value = New Date(2001, 1, 1, 0, 0, 0, 0)
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(62, 190)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(186, 32)
+        Me.Label8.TabIndex = 34
+        Me.Label8.Text = "Date Of Birth:"
         '
         'frmPassengerEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1391, 953)
+        Me.ClientSize = New System.Drawing.Size(1393, 954)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(1395, 956)
         Me.Name = "frmPassengerEdit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -366,4 +390,6 @@ Partial Class frmPassengerEdit
     Friend WithEvents txtLoginID As TextBox
     Friend WithEvents btmShowPass As Button
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents dtpDateOfBirth As DateTimePicker
+    Friend WithEvents Label8 As Label
 End Class

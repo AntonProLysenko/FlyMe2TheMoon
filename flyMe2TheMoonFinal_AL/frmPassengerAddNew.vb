@@ -67,7 +67,7 @@
             intNextPrimaryKey = DetectNextPK()
 
 
-            strInsert = "INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail, intPassengerLoginID, strPassengerPassword, dtmDateOfBrth)" &
+            strInsert = "INSERT INTO TPassengers (intPassengerID, strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNumber, strEmail, intPassengerLoginID, strPassengerPassword, dtmDateOfBirth)" &
                 " VALUES (" & intNextPrimaryKey & ", '" & strFirstName & "', '" & strLastName & "', '" & strAddress & "', '" & strCity & "', " & intStateID & ", '" & strZip & "', '" & strPhoneNum & "', '" & strEmail & "', " & intLoginID & ",'" & strPassword & "', '" & dtmDateOfBirth & "')"
 
             'MessageBox.Show(strInsert)

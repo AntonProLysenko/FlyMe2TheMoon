@@ -29,6 +29,7 @@
 
             txtFirstName.Text = dtPassengerData.Rows(0)("strFirstName")
             txtLastName.Text = dtPassengerData.Rows(0)("strLastName")
+            dtpDateOfBirth.Value = dtPassengerData.Rows(0)("dtmDateOfBirth")
             txtAddress.Text = dtPassengerData.Rows(0)("strAddress")
             txtCity.Text = dtPassengerData.Rows(0)("strCity")
             cboStates.SelectedValue = dtPassengerData.Rows(0)("intStateID")
@@ -60,15 +61,17 @@
         Dim strEmail As String
         Dim intLoginID As Integer
         Dim strPassword As String
+        Dim dtmDateOfBirth As DateTime
 
         'Called With Module Reference for easier find
         Call modFormInputValidation.ValidatePassengerFormInput(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword,
                                                   txtFirstName, txtLastName, txtAddress, txtCity, txtZip, cboStates, txtPhoneNumber, txtEmail, txtLoginID, txtPassword)
-
-
+        If blnValidInput Then
+            ValidateDateOfBirth(blnValidInput, dtmDateOfBirth, dtpDateOfBirth)
+        End If
 
         If blnValidInput Then
-            UpdateRecord(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword)
+            UpdateRecord(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword, dtmDateOfBirth)
         End If
 
         If blnValidInput Then
@@ -80,7 +83,7 @@
     End Sub
 
     Private Sub UpdateRecord(ByRef blnSucess As Boolean, strFirstName As String, strLastName As String, strAddress As String, strCity As String, strState As String, intStateID As Integer, strZip As String, strPhoneNumber As String,
-                             strEmail As String, intLoginID As Integer, strPassword As String)
+                             strEmail As String, intLoginID As Integer, strPassword As String, dtmDateOfBirth As DateTime)
 
         Dim strUpdate As String
 
@@ -98,8 +101,9 @@
                     "strPhoneNumber = '" & strPhoneNumber & "', " &
                     "strEmail = '" & strEmail & "', " &
                     "strPassengerPassword = '" & strPassword & "', " &
-                    "intPassengerLoginID = " & intLoginID & " " &
-                    "WHERE intPassengerID = " & intCurrentPassengerID.ToString
+                    "intPassengerLoginID = " & intLoginID & ", " &
+                    "dtmDateOfBirth = '" & dtmDateOfBirth.Date & "' " &
+                    " WHERE intPassengerID = " & intCurrentPassengerID.ToString
             'MessageBox.Show(strUpdate)
             UpdateData(strUpdate)
 
