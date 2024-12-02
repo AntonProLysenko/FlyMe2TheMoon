@@ -59,7 +59,7 @@
         End Try
     End Sub
 
-    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) 
         Dim frmAttendantMenu As New frmStaffMenu
         intCurrentStaffMemberID = cmbStaff.SelectedValue
         strCurrentUserName = cmbStaff.Text
@@ -67,7 +67,7 @@
         frmAttendantMenu.ShowDialog()
     End Sub
 
-    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) 
         Close()
     End Sub
 

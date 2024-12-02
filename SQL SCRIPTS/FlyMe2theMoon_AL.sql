@@ -15,10 +15,12 @@ SET NOCOUNT ON;
 -- --------------------------------------------------------------------------------
 
 -- Drop Table Statements
-IF OBJECT_ID ('TPilotFlights')			IS NOT NULL DROP TABLE TPilotFlights
-IF OBJECT_ID ('TAttendantFlights')		IS NOT NULL DROP TABLE TAttendantFlights
-IF OBJECT_ID ('TFlightPassengers')		IS NOT NULL DROP TABLE TFlightPassengers
-IF OBJECT_ID ('TMaintenanceMaintenanceWorkers')			IS NOT NULL DROP TABLE TMaintenanceMaintenanceWorkers
+IF OBJECT_ID ('TPilotFlights')						IS NOT NULL DROP TABLE TPilotFlights
+IF OBJECT_ID ('TAttendantFlights')					IS NOT NULL DROP TABLE TAttendantFlights
+IF OBJECT_ID ('TFlightPassengers')					IS NOT NULL DROP TABLE TFlightPassengers
+IF OBJECT_ID ('TMaintenanceMaintenanceWorkers')		IS NOT NULL DROP TABLE TMaintenanceMaintenanceWorkers
+
+IF OBJECT_ID('TEmployeeCredentials')	IS NOT NULL DROP TABLE TEmployeeCredentials
 
 IF OBJECT_ID ('TPassengers')			IS NOT NULL DROP TABLE TPassengers
 IF OBJECT_ID ('TPilots')				IS NOT NULL DROP TABLE TPilots
@@ -81,6 +83,27 @@ CREATE TABLE TAttendants
 	,dtmDateOfTermination	DATETIME		NOT NULL
 	,CONSTRAINT TAttendants_PK PRIMARY KEY ( intAttendantID )
 )
+
+
+--Here needs Forieng key and inserts
+CREATE TABLE TEmployeeCredentials
+(
+	 intEmployeeCredentialsID	INTEGER			NOT NULL
+	,intEmployeeLoginID			INTEGER			NOT NULL
+	,strEmployeePassword		VARCHAR(255)	NOT NULL
+	,strRole					VARCHAR(255)	NOT NULL
+	,strEmployeeID				VARCHAR(255)	NOT NULL
+	,CONSTRAINT TEmployeeCredentials_PK PRIMARY KEY (intEmployeeCredentialsID)
+	,CONSTRAINT TEmployeeLogin_ID UNIQUE (intEmployeeLoginID)
+)
+
+--CREATE TABLE TEmployeeRole
+--(
+--     intEmployeeRoleID          INTEGER         NOT NULL 
+--    ,strEmployeeID				VARCHAR(255)    NOT NULL -- Matches TEmployeeCredentials.strEmployeeID
+--    ,strSourceTable				VARCHAR(50)     NOT NULL -- 'TPilots' or 'TAttendants'
+--    ,strForeignEmployeeID		VARCHAR(255)    NOT NULL  -- Matches TPilots.strEmployeeID or TAttendants.strEmployeeID
+--);
 
 
 CREATE TABLE TMaintenanceWorkers
@@ -282,6 +305,9 @@ FOREIGN KEY ( intMaintenanceWorkerID ) REFERENCES TMaintenanceWorkers (intMainte
 ALTER TABLE TFlightPassengers	 ADD CONSTRAINT TFlightPassengers_TFlights_FK 
 FOREIGN KEY ( intFlightID ) REFERENCES TFlights (intFlightID ) 
 
+--16 
+--ALTER TABLE TEmployeeCredentials ADD CON
+
 -- --------------------------------------------------------------------------------
 --	Step #3 : Add Data - INSERTS
 -- --------------------------------------------------------------------------------
@@ -343,6 +369,23 @@ VALUES				  (1, 'Miller', 'Tyme', '22121', '1/1/2015', '1/1/2099')
 					 ,(3, 'Buhh', 'Biy', '26666', '1/1/2017', '1/1/2099')
 					 ,(4, 'Myles', 'Amanie', '27676', '1/1/2014', '1/1/2015')
 					 ,(5, 'Walker', 'Toexet', '29909', '1/1/2012', '1/1/2099')
+
+
+
+INSERT INTO TEmployeeCredentials (intEmployeeCredentialsID, intEmployeeLoginID, strEmployeePassword, strRole, strEmployeeID)
+VALUES							 (1, 12345, 'Seenow123', 'Pilot', '12121')
+								,(2, 54321, 'Soring123', 'Pilot', '13322')
+								,(3, 10001, 'Encharge123', 'Pilot', '16666')
+								,(4, 19876, 'Knapp123', 'Pilot', '17676')
+								,(5, 10004, 'Ennair123', 'Pilot', '19909')
+								,(6, 10008, 'Tyme123', 'Attendant','22121')
+								,(7, 10002, 'Ujest123', 'Attendant','23322')
+								,(8, 54321, 'Biy123', 'Attendant','26666')
+								,(9, 21038, 'Amanie123', 'Attendant', '27676')
+								,(10, 21039, 'Toexet123', 'Attendant', '29909')
+								,(11, 21031, 'Anton123', 'Admin', '')
+								,(12, 10003, 'Admin123', 'Admin', '')
+
 
 
 INSERT INTO TMaintenanceWorkers (intMaintenanceWorkerID, strFirstName, strLastName, strEmployeeID, dtmDateofHire, dtmDateofTermination, dtmDateOfCertification)
@@ -454,7 +497,8 @@ VALUES				 ( 1, 2, 1, 2 )
 
 
 
-
+ SELECT * FROM TPilots
+ SELECT * FROM TAttendants
 
 
 
