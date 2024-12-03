@@ -60,6 +60,12 @@
                 strSelect = "SELECT *
                         FROM TAttendants 
                         Where intAttendantID = " & intCurrentStaffMemberID
+
+                strCredentialsSelect = "SELECT *
+                                        FROM TEmployeeCredentials
+                                        WHERE strEmployeeID in(" & "SELECT strEmployeeID
+                                                                    FROM TAttendants
+                                                                    WHERE intAttendantID = " & intCurrentStaffMemberID & ")"
             End If
 
             ' Retrieve and poulate all the records 
@@ -150,8 +156,7 @@
 
             ElseIf strStaffRole = "Attendant" Then
                 strUpdateExecute = "EXECUTE uspUpdateAttendant '" & intCurrentStaffMemberID.ToString & "', '" & strFirstName & "', '" & strLastName & "', '" & dtmDateOFTermination &
-                                                            "', '" & strEmployeeID & "'"
-
+                                                            "', '" & strEmployeeID & "', '" & intLoginID & "', '" & strPassword & "'"
             End If
             'MessageBox.Show(strUpdate)
             'UpdateData(strUpdate)

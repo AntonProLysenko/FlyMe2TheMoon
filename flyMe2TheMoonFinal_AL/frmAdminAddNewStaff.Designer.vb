@@ -74,10 +74,10 @@ Partial Class frmAdminAddNewStaff
         Me.GroupBox1.Controls.Add(Me.btmShowPass)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtPassword)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.txtLoginID)
         Me.GroupBox1.Controls.Add(Me.dtpLicenseExparationDate)
+        Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.lblLicenceExp)
+        Me.GroupBox1.Controls.Add(Me.txtLoginID)
         Me.GroupBox1.Controls.Add(Me.cboRole)
         Me.GroupBox1.Controls.Add(Me.lblRole)
         Me.GroupBox1.Controls.Add(Me.dtpHireDate)
@@ -101,7 +101,7 @@ Partial Class frmAdminAddNewStaff
         '
         Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
         Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btmShowPass.Location = New System.Drawing.Point(884, 495)
+        Me.btmShowPass.Location = New System.Drawing.Point(884, 422)
         Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
         Me.btmShowPass.Name = "btmShowPass"
         Me.btmShowPass.Size = New System.Drawing.Size(65, 39)
@@ -112,7 +112,7 @@ Partial Class frmAdminAddNewStaff
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(50, 482)
+        Me.Label5.Location = New System.Drawing.Point(50, 425)
         Me.Label5.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(201, 42)
@@ -122,7 +122,7 @@ Partial Class frmAdminAddNewStaff
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(404, 495)
+        Me.txtPassword.Location = New System.Drawing.Point(404, 422)
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(6)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(450, 39)
@@ -131,17 +131,17 @@ Partial Class frmAdminAddNewStaff
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(50, 433)
+        Me.Label1.Location = New System.Drawing.Point(50, 365)
         Me.Label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(201, 42)
+        Me.Label1.Size = New System.Drawing.Size(201, 36)
         Me.Label1.TabIndex = 31
         Me.Label1.Text = "Login ID:"
         '
         'txtLoginID
         '
         Me.txtLoginID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoginID.Location = New System.Drawing.Point(404, 435)
+        Me.txtLoginID.Location = New System.Drawing.Point(404, 362)
         Me.txtLoginID.Margin = New System.Windows.Forms.Padding(6)
         Me.txtLoginID.Name = "txtLoginID"
         Me.txtLoginID.Size = New System.Drawing.Size(450, 39)
@@ -149,7 +149,7 @@ Partial Class frmAdminAddNewStaff
         '
         'dtpLicenseExparationDate
         '
-        Me.dtpLicenseExparationDate.Location = New System.Drawing.Point(404, 373)
+        Me.dtpLicenseExparationDate.Location = New System.Drawing.Point(404, 552)
         Me.dtpLicenseExparationDate.Name = "dtpLicenseExparationDate"
         Me.dtpLicenseExparationDate.Size = New System.Drawing.Size(450, 39)
         Me.dtpLicenseExparationDate.TabIndex = 29
@@ -157,7 +157,7 @@ Partial Class frmAdminAddNewStaff
         'lblLicenceExp
         '
         Me.lblLicenceExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLicenceExp.Location = New System.Drawing.Point(50, 379)
+        Me.lblLicenceExp.Location = New System.Drawing.Point(50, 558)
         Me.lblLicenceExp.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lblLicenceExp.Name = "lblLicenceExp"
         Me.lblLicenceExp.Size = New System.Drawing.Size(352, 32)
@@ -167,7 +167,7 @@ Partial Class frmAdminAddNewStaff
         'cboRole
         '
         Me.cboRole.FormattingEnabled = True
-        Me.cboRole.Location = New System.Drawing.Point(404, 557)
+        Me.cboRole.Location = New System.Drawing.Point(404, 484)
         Me.cboRole.Name = "cboRole"
         Me.cboRole.Size = New System.Drawing.Size(450, 40)
         Me.cboRole.TabIndex = 27
@@ -175,7 +175,7 @@ Partial Class frmAdminAddNewStaff
         'lblRole
         '
         Me.lblRole.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRole.Location = New System.Drawing.Point(50, 548)
+        Me.lblRole.Location = New System.Drawing.Point(50, 482)
         Me.lblRole.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lblRole.Name = "lblRole"
         Me.lblRole.Size = New System.Drawing.Size(89, 42)
