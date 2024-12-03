@@ -92,19 +92,15 @@ CREATE TABLE TEmployeeCredentials
 	,intEmployeeLoginID			INTEGER			NOT NULL
 	,strEmployeePassword		VARCHAR(255)	NOT NULL
 	,strRole					VARCHAR(255)	NOT NULL
-	,strEmployeeID				VARCHAR(255)	NOT NULL
+	,strEmployeeID				VARCHAR(255)	
 	,CONSTRAINT TEmployeeCredentials_PK PRIMARY KEY (intEmployeeCredentialsID)
 	,CONSTRAINT TEmployeeLogin_ID UNIQUE (intEmployeeLoginID)
 )
 
---CREATE TABLE TEmployeeRole
---(
---     intEmployeeRoleID          INTEGER         NOT NULL 
---    ,strEmployeeID				VARCHAR(255)    NOT NULL -- Matches TEmployeeCredentials.strEmployeeID
---    ,strSourceTable				VARCHAR(50)     NOT NULL -- 'TPilots' or 'TAttendants'
---    ,strForeignEmployeeID		VARCHAR(255)    NOT NULL  -- Matches TPilots.strEmployeeID or TAttendants.strEmployeeID
---);
-
+-- filtered unique index if value is not null, because MSql Server treats null values as unique too
+CREATE UNIQUE INDEX strEmployeeID_NotNull
+ON TEmployeeCredentials (strEmployeeID)
+WHERE strEmployeeID IS NOT NULL;
 
 CREATE TABLE TMaintenanceWorkers
 (
@@ -381,8 +377,8 @@ VALUES							 (1, 12345, 'Seenow123', 'Pilot', '12121')
 								,(8, 54322, 'Biy123', 'Attendant','26666')
 								,(9, 21038, 'Amanie123', 'Attendant', '27676')
 								,(10, 21039, 'Toexet123', 'Attendant', '29909')
-								,(11, 21031, 'Anton123', 'Admin', '')
-								,(12, 10003, 'Admin123', 'Admin', '')
+								,(11, 21031, 'Anton123', 'Admin', NULL)
+								,(12, 10003, 'Admin123', 'Admin', NULL)
 
 
 

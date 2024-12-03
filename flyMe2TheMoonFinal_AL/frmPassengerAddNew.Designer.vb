@@ -42,13 +42,13 @@ Partial Class frmPassengerAddNew
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btmShowPass = New System.Windows.Forms.Button()
         Me.dtpDateOfBirth = New System.Windows.Forms.DateTimePicker()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtLoginID = New System.Windows.Forms.TextBox()
-        Me.btmShowPass = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -271,10 +271,23 @@ Partial Class frmPassengerAddNew
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Passenger Info"
         '
+        'btmShowPass
+        '
+        Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
+        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btmShowPass.Location = New System.Drawing.Point(940, 734)
+        Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
+        Me.btmShowPass.Name = "btmShowPass"
+        Me.btmShowPass.Size = New System.Drawing.Size(65, 42)
+        Me.btmShowPass.TabIndex = 34
+        Me.btmShowPass.Text = "👀"
+        Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btmShowPass.UseVisualStyleBackColor = False
+        '
         'dtpDateOfBirth
         '
         Me.dtpDateOfBirth.Location = New System.Drawing.Point(462, 210)
-        Me.dtpDateOfBirth.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpDateOfBirth.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpDateOfBirth.Name = "dtpDateOfBirth"
         Me.dtpDateOfBirth.Size = New System.Drawing.Size(457, 39)
         Me.dtpDateOfBirth.TabIndex = 33
@@ -331,31 +344,18 @@ Partial Class frmPassengerAddNew
         Me.txtLoginID.Size = New System.Drawing.Size(457, 39)
         Me.txtLoginID.TabIndex = 28
         '
-        'btmShowPass
-        '
-        Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
-        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btmShowPass.Location = New System.Drawing.Point(940, 734)
-        Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
-        Me.btmShowPass.Name = "btmShowPass"
-        Me.btmShowPass.Size = New System.Drawing.Size(65, 42)
-        Me.btmShowPass.TabIndex = 34
-        Me.btmShowPass.Text = "👀"
-        Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btmShowPass.UseVisualStyleBackColor = False
-        '
         'frmPassengerAddNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1408, 960)
+        Me.ClientSize = New System.Drawing.Size(1410, 961)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnAddPassenger)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(1412, 963)
         Me.Name = "frmPassengerAddNew"

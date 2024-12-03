@@ -2,6 +2,7 @@
     Private Sub frmAdminAddNewStaff_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strSelect As String
         Dim dtRoles As DataTable = New DataTable
+        txtPassword.PasswordChar = "* "
         Try
             If strManageRole = "Pilot" Then
                 If OpenDatabaseConnectionSQLServer() = False Then
@@ -61,6 +62,9 @@
         Dim dtmDateOfHire As DateTime
         Dim dtmDateOFLicenseExparation As DateTime
 
+        Dim intLoginID As Integer
+        Dim strPassword As String
+
 
 
         If strManageRole = "Pilot" Then
@@ -75,13 +79,17 @@
         End If
 
         If blnValidInput Then
-            PushToDB(strFirstName, strLastName, strEmployeeID, dtmDateOfHire, dtmDateOFLicenseExparation)
+            ValidateLoginCredentials(blnValidInput, intLoginID, strPassword, txtLoginID, txtPassword)
+        End If
+
+        If blnValidInput Then
+            PushToDB(strFirstName, strLastName, strEmployeeID, dtmDateOfHire, dtmDateOFLicenseExparation, intLoginID, strPassword)
         End If
     End Sub
 
 
 
-    Private Function PushToDB(strFirstName As String, strLastName As String, strEmployeeID As String, dtmDateOfHire As DateTime, dtmDateOFLicenseExparation As DateTime)
+    Private Function PushToDB(strFirstName As String, strLastName As String, strEmployeeID As String, dtmDateOfHire As DateTime, dtmDateOFLicenseExparation As DateTime, intLoginID As Integer, strPassword As String)
         Dim intNextPrimaryKey As Integer
         Dim strExecuteInsert As String
 
@@ -89,7 +97,6 @@
 
             'Dim strInsert As String
             'intNextPrimaryKey = DetectNextPK()
-
 
             If OpenDatabaseConnectionSQLServer() = False Then
                 MessageBox.Show(Me, "Database connection error." & vbNewLine &
@@ -103,18 +110,9 @@
             intNextPrimaryKey = 1
 
             If strManageRole = "Pilot" Then
-
-                'strInsert = "INSERT INTO TPilots (intPilotID, strFirstName, strLastName, strEmployeeID, dtmDateofHire, dtmDateofTermination, dtmDateofLicense, intPilotRoleID)
-                '                       VALUES(" & intNextPrimaryKey & ", '" & strFirstName & "', '" & strLastName & "', '" & strEmployeeID & "', '" & dtmDateOfHire.Date & "', '1/1/2099', '" & dtmDateOFLicenseExparation.Date & "'," & cboRole.SelectedValue & " )"
-
-                strExecuteInsert = "EXECUTE uspAddPilot '" & intNextPrimaryKey & "','" & strFirstName & "','" & strLastName & "','" & strEmployeeID & "','" & dtmDateOfHire.Date & "','" & "1 / 1 / 2099" & "','" & dtmDateOFLicenseExparation.Date & "','" & cboRole.SelectedValue & "'"
-
+                strExecuteInsert = "EXECUTE uspAddPilot '" & intNextPrimaryKey & "','" & strFirstName & "','" & strLastName & "','" & strEmployeeID & "','" & dtmDateOfHire.Date & "','" & "1 / 1 / 2099" & "','" & dtmDateOFLicenseExparation.Date & "','" & cboRole.SelectedValue & "', '" &
+                                    intNextPrimaryKey & "', '" & intLoginID & "', '" & strPassword & "'"
             ElseIf strManageRole = "Attendant" Then
-
-                'strInsert = "INSERT INTO TAttendants (intAttendantID, strFirstName, strLastName, strEmployeeID, dtmDateofHire, dtmDateofTermination)
-                '                      VALUES(" & intNextPrimaryKey & ", '" & strFirstName & "', '" & strLastName & "', '" & strEmployeeID & "', '" & dtmDateOfHire.Date & "', '1/1/2099' )"
-
-
                 strExecuteInsert = "EXECUTE uspAddAttendant '" & intNextPrimaryKey & "','" & strFirstName & "','" & strLastName & "','" & strEmployeeID & "','" & dtmDateOfHire.Date & "','" & "1 / 1 / 2099" & "'"
             End If
 
@@ -126,14 +124,18 @@
             ExecuteUltimateTransaction(strExecuteInsert, strManageRole, strFirstName & " " & strLastName, "Insert")
             CloseDatabaseConnection()
 
-                Dim frmManageStaff As New frmAdminManageStaff
-                Me.Hide()
-                frmManageStaff.ShowDialog()
+            Dim frmManageStaff As New frmAdminManageStaff
+            Me.Hide()
+            frmManageStaff.ShowDialog()
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
     End Function
+
+    Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
+        revealPassword(Timer1, 1, txtPassword)
+    End Sub
 
 
 
@@ -189,6 +191,4 @@
         Me.Hide()
         frmManageStaff.ShowDialog()
     End Sub
-
-
 End Class

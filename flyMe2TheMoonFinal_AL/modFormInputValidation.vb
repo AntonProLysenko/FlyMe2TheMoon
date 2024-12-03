@@ -260,19 +260,28 @@
 
 
 
-    Private Sub ValidateLoginCredentials(ByRef blnValidInput As Boolean, ByRef intLoginID As Integer, ByRef strPassword As String, txtLoginID As Object, txtPassword As Object)
+    Public Sub ValidateLoginCredentials(ByRef blnValidInput As Boolean, ByRef intLoginID As Integer, ByRef strPassword As String, txtLoginID As Object, txtPassword As Object)
         If Integer.TryParse(txtLoginID.Text, intLoginID) Then
             blnValidInput = True
+        ElseIf txtLoginID.Text.length < 5 Then
+            MessageBox.Show("Login ID Has To Be  at least 5 digits long")
+            blnValidInput = False
+            txtLoginID.Focus()
         Else
             MessageBox.Show("Login ID Has To Be Numeric only")
             blnValidInput = False
             txtLoginID.Focus()
         End If
 
+
         If blnValidInput Then
             If txtPassword.Text.Length <= 5 Then
                 blnValidInput = False
                 MessageBox.Show("Password is too short")
+                txtPassword.Focus()
+            ElseIf ContainsNumber(txtPassword.Text) = False Then
+                blnValidInput = False
+                MessageBox.Show("Password has to include at least one digit")
                 txtPassword.Focus()
             Else
                 strPassword = txtPassword.Text
