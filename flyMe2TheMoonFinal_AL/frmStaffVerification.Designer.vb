@@ -68,7 +68,7 @@ Partial Class frmStaffVerification
         'btmShowPass
         '
         Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
-        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btmShowPass.Location = New System.Drawing.Point(588, 206)
         Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
         Me.btmShowPass.Name = "btmShowPass"

@@ -5,7 +5,10 @@
         Dim strSelect As String
         Dim dtRoles As DataTable = New DataTable
         Dim dtStaffData As DataTable = New DataTable
+        Dim dtEmploeeCredentials As DataTable = New DataTable
+        Dim strCredentialsSelect As String
 
+        txtPassword.PasswordChar = "*"
         Try
             If OpenDatabaseConnectionSQLServer() = False Then
 
@@ -46,6 +49,13 @@
                 strSelect = "SELECT *
                         FROM TPilots 
                         Where intPilotID = " & intCurrentStaffMemberID
+
+                strCredentialsSelect = "SELECT *
+                                        FROM TEmployeeCredentials
+                                        WHERE strEmployeeID in(" & "SELECT strEmployeeID
+                                                                    FROM TPilots
+                                                                    WHERE intPilotID = " & intCurrentStaffMemberID & ")"
+
             Else
                 strSelect = "SELECT *
                         FROM TAttendants 
@@ -54,11 +64,14 @@
 
             ' Retrieve and poulate all the records 
             dtStaffData = GetDataTable(strSelect)
+            dtEmploeeCredentials = GetDataTable(strCredentialsSelect)
 
             txtFirstName.Text = dtStaffData.Rows(0)("strFirstName")
             txtLastName.Text = dtStaffData.Rows(0)("strLastName")
             txtEmployeeID.Text = dtStaffData.Rows(0)("strEmployeeID")
             dtpTerminationDate.Value = dtStaffData.Rows(0)("dtmDateOfTermination")
+            txtPassword.Text = dtEmploeeCredentials.Rows(0)("strEmployeePassword")
+            txtLoginID.Text = dtEmploeeCredentials.Rows(0)("intEmployeeLoginID")
 
             If strStaffRole = "Pilot" Then
                 cboRole.SelectedValue = dtStaffData.Rows(0)("intPilotRoleID")
@@ -90,13 +103,21 @@
         Dim intPilotRoleID As Integer
         Dim dtmDateOfTermination As DateTime
 
+        Dim strPassword As String
+        Dim intLoginID As Integer
+
         Dim frmStaffMenu As New frmStaffMenu
 
         ValidateEmployeeEditFormInput(blnValidInput, strFirstName, strLastName, dtmDateOfTermination, strEmployeeID,
                                       txtFirstName, txtLastName, dtpTerminationDate, txtEmployeeID)
 
         If blnValidInput Then
-            UpdateRecord(strFirstName, strLastName, dtmDateOfTermination, strEmployeeID)
+            ValidateLoginCredentials(blnValidInput, intLoginID, strPassword, txtLoginID, txtPassword)
+        End If
+
+
+        If blnValidInput Then
+            UpdateRecord(strFirstName, strLastName, dtmDateOfTermination, strEmployeeID, intLoginID, strPassword)
             Me.Hide()
             frmStaffMenu.ShowDialog()
 
@@ -105,7 +126,8 @@
     End Sub
 
 
-    Private Sub UpdateRecord(strFirstName, strLastName, dtmDateOFTermination, strEmployeeID)
+    Private Sub UpdateRecord(strFirstName As String, strLastName As String, dtmDateOFTermination As DateTime, strEmployeeID As String, intLoginID As Integer, strPassword As String)
+
         Dim strUpdate As String
         Dim strUpdateExecute As String
 
@@ -124,18 +146,7 @@
             'update query
             If strStaffRole = "Pilot" Then
                 strUpdateExecute = "EXECUTE uspUpdatePilot '" & intCurrentStaffMemberID.ToString & "', '" & strFirstName & "', '" & strLastName & "', '" & dtmDateOFTermination &
-                                                            "', '" & strEmployeeID & "', '" & cboRole.SelectedValue & "'"
-
-                'strUpdate = "UPDATE TPilots SET " &
-                '    "strFirstName = '" & strFirstName & "', " &
-                '    "strLastName = '" & strLastName & "', " &
-                '    "dtmDateOfTermination = '" & dtmDateOFTermination & "', " &
-                '    "strEmployeeID = '" & strEmployeeID & "' , " &
-                '    "intPilotRoleID = " & cboRole.SelectedValue &
-                '    " WHERE intPilotID = " & intCurrentStaffMemberID.ToString
-
-
-
+                                                            "', '" & strEmployeeID & "', '" & cboRole.SelectedValue & "', '" & intLoginID & "', '" & strPassword & "'"
 
             ElseIf strStaffRole = "Attendant" Then
                 strUpdateExecute = "EXECUTE uspUpdateAttendant '" & intCurrentStaffMemberID.ToString & "', '" & strFirstName & "', '" & strLastName & "', '" & dtmDateOFTermination &
@@ -166,6 +177,10 @@
 
 
 
+    End Sub
+
+    Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click
+        revealPassword(Timer1, 1, txtPassword)
     End Sub
 
 
