@@ -152,12 +152,6 @@
                 strUpdateExecute = "EXECUTE uspUpdateAttendant '" & intCurrentStaffMemberID.ToString & "', '" & strFirstName & "', '" & strLastName & "', '" & dtmDateOFTermination &
                                                             "', '" & strEmployeeID & "'"
 
-                'strUpdate = "UPDATE TAttendants SET " &
-                '    "strFirstName = '" & strFirstName & "', " &
-                '    "strLastName = '" & strLastName & "', " &
-                '    "dtmDateOfTermination = '" & dtmDateOFTermination & "', " &
-                '    "strEmployeeID = '" & strEmployeeID & "' " &
-                '    "WHERE intAttendantID = " & intCurrentStaffMemberID.ToString
             End If
             'MessageBox.Show(strUpdate)
             'UpdateData(strUpdate)

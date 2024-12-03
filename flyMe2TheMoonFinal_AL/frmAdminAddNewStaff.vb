@@ -113,13 +113,13 @@
                 strExecuteInsert = "EXECUTE uspAddPilot '" & intNextPrimaryKey & "','" & strFirstName & "','" & strLastName & "','" & strEmployeeID & "','" & dtmDateOfHire.Date & "','" & "1 / 1 / 2099" & "','" & dtmDateOFLicenseExparation.Date & "','" & cboRole.SelectedValue & "', '" &
                                     intNextPrimaryKey & "', '" & intLoginID & "', '" & strPassword & "'"
             ElseIf strManageRole = "Attendant" Then
-                strExecuteInsert = "EXECUTE uspAddAttendant '" & intNextPrimaryKey & "','" & strFirstName & "','" & strLastName & "','" & strEmployeeID & "','" & dtmDateOfHire.Date & "','" & "1 / 1 / 2099" & "'"
+                strExecuteInsert = "EXECUTE uspAddAttendant '" & intNextPrimaryKey & "','" & strFirstName & "','" & strLastName & "','" & strEmployeeID & "','" & dtmDateOfHire.Date & "','" & "1 / 1 / 2099" & "', '" & intNextPrimaryKey & "', '" & intLoginID & "', '" & strPassword & "'"
             End If
 
             'MessageBox.Show(strInsert)
             'InsertData(strInsert)
 
-            MessageBox.Show(strExecuteInsert)
+            'MessageBox.Show(strExecuteInsert)
 
             ExecuteUltimateTransaction(strExecuteInsert, strManageRole, strFirstName & " " & strLastName, "Insert")
             CloseDatabaseConnection()
