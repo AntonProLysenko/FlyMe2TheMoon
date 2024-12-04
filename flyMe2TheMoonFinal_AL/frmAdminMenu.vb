@@ -19,4 +19,10 @@
         Me.Hide()
         frmManagePilot.ShowDialog()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim frmAddFutureFlight As New frmAdminAddFutureFlight
+        Me.Hide()
+        frmAddFutureFlight.ShowDialog()
+    End Sub
 End Class

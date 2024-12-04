@@ -188,3 +188,21 @@
 --	FROM  TAttendants
 --	WHERE strEmployeeID = @employeeID
 --END
+
+--CREATE PROCEDURE uspFindAllAirports
+--AS
+--BEGIN
+--	SELECT intAirportID, '('+strAirportCode+') '+strAirportCity as airportName
+--	FROM TAirports
+	
+--END
+--SELECT * FROM TPlaneTypes
+
+CREATE PROCEDURE uspFinAllPlanes
+AS 
+BEGIN
+	SELECT intPlaneID, strPlaneType +'('+ strPlaneNumber +')' as planeName
+	FROM TPlanes
+	JOIN TPlaneTypes
+	ON TPlanes.intPlaneTypeID = TPlaneTypes.intPlaneTypeID
+END

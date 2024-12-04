@@ -77,6 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="frmAdminAddFutureFlight.Designer.vb">
+      <DependentUpon>frmAdminAddFutureFlight.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminAddFutureFlight.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAdminAddNewStaff.Designer.vb">
       <DependentUpon>frmAdminAddNewStaff.vb</DependentUpon>
     </Compile>
@@ -207,6 +213,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAdminAddFutureFlight.resx">
+      <DependentUpon>frmAdminAddFutureFlight.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAdminAddNewStaff.resx">
       <DependentUpon>frmAdminAddNewStaff.vb</DependentUpon>
     </EmbeddedResource>

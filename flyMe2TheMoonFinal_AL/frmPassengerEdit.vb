@@ -6,16 +6,8 @@
         txtPassword.PasswordChar = "*"
         Me.Text = "Edit " & strCurrentUserName
         Try
-            If OpenDatabaseConnectionSQLServer() = False Then
+            CheckOpenDBConnection(Me)
 
-
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                Me.Close()
-            End If
             dtState = ExecuteSelectProdcedure("uspStatesList")
 
             'Loadingg States results to a combobox

@@ -42,14 +42,14 @@ Partial Class frmPassengerEdit
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.dtpDateOfBirth = New System.Windows.Forms.DateTimePicker()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.btmShowPass = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtLoginID = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.dtpDateOfBirth = New System.Windows.Forms.DateTimePicker()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -270,6 +270,26 @@ Partial Class frmPassengerEdit
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         '
+        'dtpDateOfBirth
+        '
+        Me.dtpDateOfBirth.Location = New System.Drawing.Point(351, 190)
+        Me.dtpDateOfBirth.Margin = New System.Windows.Forms.Padding(2)
+        Me.dtpDateOfBirth.Name = "dtpDateOfBirth"
+        Me.dtpDateOfBirth.Size = New System.Drawing.Size(575, 39)
+        Me.dtpDateOfBirth.TabIndex = 35
+        Me.dtpDateOfBirth.Value = New Date(2001, 1, 1, 0, 0, 0, 0)
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(62, 190)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(186, 32)
+        Me.Label8.TabIndex = 34
+        Me.Label8.Text = "Date Of Birth:"
+        '
         'btmShowPass
         '
         Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
@@ -323,26 +343,6 @@ Partial Class frmPassengerEdit
         Me.txtLoginID.Size = New System.Drawing.Size(577, 39)
         Me.txtLoginID.TabIndex = 24
         '
-        'dtpDateOfBirth
-        '
-        Me.dtpDateOfBirth.Location = New System.Drawing.Point(351, 190)
-        Me.dtpDateOfBirth.Margin = New System.Windows.Forms.Padding(2)
-        Me.dtpDateOfBirth.Name = "dtpDateOfBirth"
-        Me.dtpDateOfBirth.Size = New System.Drawing.Size(575, 39)
-        Me.dtpDateOfBirth.TabIndex = 35
-        Me.dtpDateOfBirth.Value = New Date(2001, 1, 1, 0, 0, 0, 0)
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(62, 190)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(186, 32)
-        Me.Label8.TabIndex = 34
-        Me.Label8.Text = "Date Of Birth:"
-        '
         'frmPassengerEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
@@ -355,7 +355,7 @@ Partial Class frmPassengerEdit
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.MinimumSize = New System.Drawing.Size(1395, 956)
+        Me.MinimumSize = New System.Drawing.Size(1417, 1018)
         Me.Name = "frmPassengerEdit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Edit Passenger"
