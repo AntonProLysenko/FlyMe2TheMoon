@@ -102,6 +102,7 @@ CREATE UNIQUE INDEX strEmployeeID_NotNull
 ON TEmployeeCredentials (strEmployeeID)
 WHERE strEmployeeID IS NOT NULL;
 
+
 CREATE TABLE TMaintenanceWorkers
 (
 	 intMaintenanceWorkerID	INTEGER			NOT NULL
