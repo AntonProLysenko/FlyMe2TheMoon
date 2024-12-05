@@ -198,7 +198,7 @@
 --END
 --SELECT * FROM TPlaneTypes
 
-CREATE PROCEDURE uspFinAllPlanes
+CREATE PROCEDURE uspFindAllPlanes
 AS 
 BEGIN
 	SELECT intPlaneID, strPlaneType +'('+ strPlaneNumber +')' as planeName

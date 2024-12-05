@@ -24,7 +24,7 @@ Partial Class frmAdminAddFutureFlight
     Private Sub InitializeComponent()
         Me.dtpFlightDate = New System.Windows.Forms.DateTimePicker()
         Me.txtFlightNumber = New System.Windows.Forms.TextBox()
-        Me.dtpDepartureTme = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDepartureTime = New System.Windows.Forms.DateTimePicker()
         Me.dtpLandingTme = New System.Windows.Forms.DateTimePicker()
         Me.cmbFromAirport = New System.Windows.Forms.ComboBox()
         Me.cmbToAirport = New System.Windows.Forms.ComboBox()
@@ -59,13 +59,13 @@ Partial Class frmAdminAddFutureFlight
         Me.txtFlightNumber.Size = New System.Drawing.Size(730, 45)
         Me.txtFlightNumber.TabIndex = 1
         '
-        'dtpDepartureTme
+        'dtpDepartureTime
         '
-        Me.dtpDepartureTme.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.14286!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDepartureTme.Location = New System.Drawing.Point(457, 356)
-        Me.dtpDepartureTme.Name = "dtpDepartureTme"
-        Me.dtpDepartureTme.Size = New System.Drawing.Size(730, 45)
-        Me.dtpDepartureTme.TabIndex = 3
+        Me.dtpDepartureTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.14286!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDepartureTime.Location = New System.Drawing.Point(457, 356)
+        Me.dtpDepartureTime.Name = "dtpDepartureTime"
+        Me.dtpDepartureTime.Size = New System.Drawing.Size(730, 45)
+        Me.dtpDepartureTime.TabIndex = 3
         '
         'dtpLandingTme
         '
@@ -243,7 +243,7 @@ Partial Class frmAdminAddFutureFlight
         Me.Controls.Add(Me.cmbToAirport)
         Me.Controls.Add(Me.cmbFromAirport)
         Me.Controls.Add(Me.dtpLandingTme)
-        Me.Controls.Add(Me.dtpDepartureTme)
+        Me.Controls.Add(Me.dtpDepartureTime)
         Me.Controls.Add(Me.txtFlightNumber)
         Me.Controls.Add(Me.dtpFlightDate)
         Me.Name = "frmAdminAddFutureFlight"
@@ -256,7 +256,7 @@ Partial Class frmAdminAddFutureFlight
 
     Friend WithEvents dtpFlightDate As DateTimePicker
     Friend WithEvents txtFlightNumber As TextBox
-    Friend WithEvents dtpDepartureTme As DateTimePicker
+    Friend WithEvents dtpDepartureTime As DateTimePicker
     Friend WithEvents dtpLandingTme As DateTimePicker
     Friend WithEvents cmbFromAirport As ComboBox
     Friend WithEvents cmbToAirport As ComboBox

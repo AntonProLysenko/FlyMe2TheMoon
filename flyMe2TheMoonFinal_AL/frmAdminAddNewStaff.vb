@@ -137,55 +137,6 @@
         revealPassword(Timer1, 1, txtPassword)
     End Sub
 
-
-
-
-
-
-
-    'Private Function DetectNextPK()
-    '    Dim strSelectNextPK As String
-    '    Dim cmdSelectNextPk As New OleDb.OleDbCommand
-    '    Dim drNextPk As OleDb.OleDbDataReader
-    '    Dim intNextPrimaryKey As Integer
-
-
-    '    If OpenDatabaseConnectionSQLServer() = False Then
-    '        MessageBox.Show(Me, "Database connection error." & vbNewLine &
-    '                        "The application will now close.",
-    '                        Me.Text + " Error",
-    '                        MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '        Me.Close()
-
-    '    End If
-    '    If strManageRole = "Pilot" Then
-    '        strSelectNextPK = "SELECT MAX(intPilotID) + 1 AS intNextPrimaryKey FROM TPilots"
-    '    ElseIf strManageRole = "Attendant" Then
-    '        strSelectNextPK = "SELECT MAX(intAttendantID) + 1 AS intNextPrimaryKey FROM TAttendants"
-    '    End If
-
-    '    cmdSelectNextPk = New OleDb.OleDbCommand(strSelectNextPK, m_conAdministrator)
-    '    drNextPk = cmdSelectNextPk.ExecuteReader
-
-    '    drNextPk.Read()
-
-    '    If drNextPk.IsDBNull(0) = True Then
-    '        intNextPrimaryKey = 1
-    '    Else
-    '        intNextPrimaryKey = CInt(drNextPk("intNextPrimaryKey"))
-    '    End If
-
-    '    Return intNextPrimaryKey
-    'End Function
-
-    'Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-    '    Dim frmManageStaff As New frmAdminManageStaff
-    '    Me.Hide()
-    '    frmManageStaff.ShowDialog()
-    'End Sub
-
-
-
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Dim frmManageStaff As New frmAdminManageStaff
         Me.Hide()

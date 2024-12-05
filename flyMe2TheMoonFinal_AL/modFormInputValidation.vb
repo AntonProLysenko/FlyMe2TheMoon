@@ -188,7 +188,7 @@
         End If
     End Sub
 
-    Private Sub ValidateFutureDate(ByRef blnValid As Boolean, ByRef dtmDate As DateTime, dtpDatePicker As Object, strPurpose As String)
+    Public Sub ValidateFutureDate(ByRef blnValid As Boolean, ByRef dtmDate As DateTime, dtpDatePicker As Object, strPurpose As String)
         If dtpDatePicker.Value.Date >= DateTime.Now.Date Then
             dtmDate = dtpDatePicker.Value
             blnValid = True
