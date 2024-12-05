@@ -149,7 +149,7 @@
 
         If blnValid Then
             strExecuteInsert = "Execute uspAddNewFlight '" & intFlightID & "', ' " & dtmFlightDate.Date & "', '" & strFlightNumber & "', '" & dtmTimeofDeparture & "', '" & dtmTimeOfLanding & "', '" & intFromAirportID & "', '" & intToAirportID & "', ' " & intMilesFlown & "', '" & intPlaneID & "'"
-            MessageBox.Show(strExecuteInsert)
+            'MessageBox.Show(strExecuteInsert)
             CheckOpenDBConnection(Me)
 
             If ExecuteUltimateTransaction(strExecuteInsert, "Flight", "", "Insert") Then

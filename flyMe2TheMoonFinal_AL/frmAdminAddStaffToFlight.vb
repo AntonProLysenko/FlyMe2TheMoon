@@ -31,7 +31,7 @@
 
             'Selecting Future Flights
             strFlightsSelect = "SELECT TF.intFlightID, TF.dtmFlightDate,
-		                                FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
+		                                TF.strFlightNumber + ' ' +FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
 		                                CONVERT(VARCHAR, TF.dtmFlightDate, 101) + ' at '+ CONVERT(VARCHAR, TF.dtmTimeofDeparture, 108) as strFlightName
                                 FROM TFlights as  TF
                                 JOIN TAirports as FromAirport 

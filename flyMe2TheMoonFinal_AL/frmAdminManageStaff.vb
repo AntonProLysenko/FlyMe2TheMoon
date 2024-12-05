@@ -34,4 +34,10 @@
         Me.Hide()
         frmStaffAssign.ShowDialog()
     End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Dim frmAdminMenu As New frmAdminMenu
+        Me.Hide()
+        frmAdminMenu.ShowDialog()
+    End Sub
 End Class
