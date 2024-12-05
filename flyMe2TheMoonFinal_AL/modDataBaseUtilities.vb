@@ -94,11 +94,13 @@
         CloseDatabaseConnection()
 
         If intRowsAffected > 0 Then
+
             MessageBox.Show(strTransactionType & " successful! " & strRole & " " & strName & " has been " & strTransactionType.ToLower() & "ed")
+            Return True
 
         Else
             MessageBox.Show(strTransactionType & " failed")
-
+            Return False
         End If
     End Function
 

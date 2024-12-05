@@ -198,11 +198,20 @@
 --END
 --SELECT * FROM TPlaneTypes
 
+--CREATE PROCEDURE uspFindAllPlanes
+--AS 
+--BEGIN
+--	SELECT intPlaneID, strPlaneType +'('+ strPlaneNumber +')' as planeName
+--	FROM TPlanes
+--	JOIN TPlaneTypes
+--	ON TPlanes.intPlaneTypeID = TPlaneTypes.intPlaneTypeID
+--END
+
+
+
 CREATE PROCEDURE uspFindAllPlanes
 AS 
 BEGIN
-	SELECT intPlaneID, strPlaneType +'('+ strPlaneNumber +')' as planeName
-	FROM TPlanes
-	JOIN TPlaneTypes
-	ON TPlanes.intPlaneTypeID = TPlaneTypes.intPlaneTypeID
+	SELECT *
+	FROM TFlights
 END

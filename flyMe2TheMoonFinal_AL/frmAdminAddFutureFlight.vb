@@ -1,55 +1,50 @@
 ﻿Public Class frmAdminAddFutureFlight
-
     Private Sub frmAdminAddFutureFlight_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dtpFlightDate.MinDate = DateTime.Now.Date
+        dtpFlightDate.MaxDate = DateTime.Now.Date.AddYears(1)
         dtpDepartureTime.Format = DateTimePickerFormat.Custom
         dtpDepartureTime.CustomFormat = "HH:mm"
         dtpLandingTme.Format = DateTimePickerFormat.Custom
         dtpLandingTme.CustomFormat = "HH:mm"
 
+        dtpDepartureTime.MaxDate = DateTime.Now.Date.AddYears(1)
+        dtpLandingTme.MaxDate = DateTime.Now.Date.AddYears(2)
+
         Dim dtAirports As DataTable = New DataTable
         Dim dtFromAirports As DataTable = New DataTable
         Dim dtPlanes As DataTable = New DataTable
+        Dim dtFlights As DataTable = New DataTable
 
 
-        'Try
-        '    CheckOpenDBConnection(Me)
-        '    dtAirports = ExecuteSelectProdcedure("uspFindAllAirports")
-        '    dtFromAirports = dtAirports.Copy()
-        '    'Loadingg States results to a combobox
-        '    cmbFromAirport.ValueMember = "intAirportID"
-        '    cmbFromAirport.DisplayMember = "airportName"
-        '    cmbFromAirport.DataSource = dtFromAirports
-
-        '    'If cmbFromAirport.Items.Count > 0 Then
-        '    '    cmbFromAirport.SelectedIndex = 0
-        '    'End If
-
-        '    cmbToAirport.ValueMember = "intAirportID"
-        '    cmbToAirport.DisplayMember = "airportName"
-        '    cmbToAirport.DataSource = dtAirports
-
-        '    'If cmbFromAirport.Items.Count > 0 AndAlso cmbToAirport.Items.Count > 0 Then
-        '    '    cmbToAirport.SelectedIndex = 1
-        '    'End If
+        Try
+            CheckOpenDBConnection(Me)
+            dtAirports = ExecuteSelectProdcedure("uspFindAllAirports")
+            dtFromAirports = dtAirports.Copy()
+            'Loadingg States results to a combobox
+            cmbFromAirport.ValueMember = "intAirportID"
+            cmbFromAirport.DisplayMember = "airportName"
+            cmbFromAirport.DataSource = dtFromAirports
 
 
-        '    dtPlanes = ExecuteSelectProdcedure("uspFindAllPlanes")
-        '    cmbPlanes.ValueMember = "intPlaneID"
-        '    cmbPlanes.DisplayMember = "planeName"
-        '    cmbPlanes.DataSource = dtPlanes
-        '    CloseDatabaseConnection()
+            cmbToAirport.ValueMember = "intAirportID"
+            cmbToAirport.DisplayMember = "airportName"
+            cmbToAirport.DataSource = dtAirports
 
-        'Catch ex As Exception
-        '    MessageBox.Show(ex.Message)
-        'End Try
+
+            dtPlanes = ExecuteSelectProdcedure("uspFindAllPlanes")
+            cmbPlanes.ValueMember = "intPlaneID"
+            cmbPlanes.DisplayMember = "planeName"
+            cmbPlanes.DataSource = dtPlanes
+
+
+            CloseDatabaseConnection()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
-    Private Sub dtpFlightDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpFlightDate.ValueChanged
-        dtpDepartureTime.MaxDate = dtpFlightDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59)
-        dtpDepartureTime.Value = dtpFlightDate.Value
-        dtpDepartureTime.MinDate = dtpFlightDate.Value.Date
-    End Sub
+
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Dim intFlightID As Integer = 1
@@ -68,7 +63,6 @@
         ValidateFutureDate(blnValid, dtmFlightDate, dtpFlightDate, "Flight")
 
         If blnValid Then
-
             If dtpDepartureTime.Value.Date = dtpLandingTme.Value.Date AndAlso dtpDepartureTime.Value.Hour < dtpLandingTme.Value.Hour Then
                 blnValid = True
                 dtmTimeofDeparture = dtpDepartureTime.Value.Hour & ":" & dtpDepartureTime.Value.Minute
@@ -83,32 +77,132 @@
             End If
         End If
 
-        If blnValid Then
-            intFromAirportID = cmbFromAirport.SelectedValue
-            intToAirportID = cmbToAirport.SelectedValue
-            intPlaneID = cmbPlanes.SelectedValue
-            strFlightNumber = txtFlightNumber.Text
-            intMilesFlown = txtMiles.Text
 
+
+
+        If blnValid Then
+            If txtFlightNumber.Text.Length = 3 Then
+
+                If IsNumeric(txtFlightNumber.Text) Then
+                    strFlightNumber = txtFlightNumber.Text
+                    blnValid = True
+                Else
+                    MessageBox.Show("Flight Number has to be 3 digits long")
+                    blnValid = False
+                    txtFlightNumber.Focus()
+                End If
+            Else
+                MessageBox.Show("Flight Number has to be 3 digits long")
+                blnValid = False
+                txtFlightNumber.Focus()
+            End If
         End If
 
 
+
         If blnValid Then
-            strExecuteInsert = "Execute uspAddNewFlight '" & intFlightID & "', ' " & dtmFlightDate.Date & "', ' " & strFlightNumber & "', ' " & dtmTimeofDeparture & "', ' " & dtmTimeOfLanding & "', ' " & intFromAirportID & "', ' " & intToAirportID & "', ' " & intMilesFlown & "', ' " & intPlaneID & "'"
+            If Not isFlightExist(txtFlightNumber.Text) Then
+                strFlightNumber = txtFlightNumber.Text.Trim()
+                blnValid = True
+            Else
+                blnValid = False
+                txtFlightNumber.Focus()
+                MessageBox.Show("This Flight Already Exist!, Use Different Flight Number!")
+            End If
+        End If
+
+
+
+        If blnValid Then
+            If txtMiles.Text.Length >= 3 And txtMiles.Text.Length <= 5 Then
+
+                If Integer.TryParse(txtMiles.Text, intMilesFlown) Then
+                    blnValid = True
+                Else
+                    MessageBox.Show("Miles input has to be digits only")
+                    blnValid = False
+                    txtMiles.Focus()
+
+                End If
+            Else
+                MessageBox.Show("Invalid Miles input")
+                blnValid = False
+                txtMiles.Focus()
+            End If
+        End If
+
+
+
+        If blnValid Then
+            If cmbFromAirport.SelectedValue = cmbToAirport.SelectedValue Then
+                blnValid = False
+                MessageBox.Show("Arival And Departure Airports have to be different!")
+            Else
+                intFromAirportID = cmbFromAirport.SelectedValue
+                intToAirportID = cmbToAirport.SelectedValue
+                blnValid = True
+            End If
+            intPlaneID = cmbPlanes.SelectedValue
+        End If
+
+
+
+        If blnValid Then
+            strExecuteInsert = "Execute uspAddNewFlight '" & intFlightID & "', ' " & dtmFlightDate.Date & "', '" & strFlightNumber & "', '" & dtmTimeofDeparture & "', '" & dtmTimeOfLanding & "', '" & intFromAirportID & "', '" & intToAirportID & "', ' " & intMilesFlown & "', '" & intPlaneID & "'"
             MessageBox.Show(strExecuteInsert)
             CheckOpenDBConnection(Me)
-            ExecuteUltimateTransaction(strExecuteInsert, "Flight", "", "Insert")
+
+            If ExecuteUltimateTransaction(strExecuteInsert, "Flight", "", "Insert") Then
+                Dim frmAdminMenu As New frmAdminMenu
+                Me.Hide()
+                frmAdminMenu.ShowDialog()
+            End If
         End If
     End Sub
 
+    Private Function isFlightExist(strFlightNumber As String) As Boolean
+
+        Dim dtFlights As DataTable = New DataTable
+
+        Dim arrOfFlightNums() As String
+        Dim blnExists As Boolean = False
+
+        Try
+            CheckOpenDBConnection(Me)
+            dtFlights = ExecuteSelectProdcedure("uspFindAllFlights")
+
+            If dtFlights.Rows.Count > 0 Then
+
+                ReDim arrOfFlightNums(dtFlights.Rows.Count - 1)
+                For intIndex = 0 To dtFlights.Rows.Count - 1
+                    arrOfFlightNums(intIndex) = dtFlights.Rows(intIndex)("strFlightNumber")
+                Next
+
+                If arrOfFlightNums.Contains(strFlightNumber) Then
+                    blnExists = True
+                End If
+
+            End If
+
+            CloseDatabaseConnection()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+        Return blnExists
+    End Function
+
+
+    Private Sub dtpFlightDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpFlightDate.ValueChanged
+        dtpDepartureTime.MaxDate = dtpFlightDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59)
+        dtpDepartureTime.Value = dtpFlightDate.Value
+        dtpDepartureTime.MinDate = dtpFlightDate.Value.Date
+    End Sub
 
     Private Sub dtpDepartureTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpDepartureTime.ValueChanged
         'MessageBox.Show(dtpDepartureTime.MaxDate)
         dtpLandingTme.MinDate = dtpDepartureTime.Value.Date
         dtpLandingTme.MaxDate = dtpDepartureTime.MaxDate.AddDays(1)
     End Sub
-
-
 
     Dim blnUpdated As Boolean = False
     Private Sub dtpLandingTme_ValueChanged(sender As Object, e As EventArgs) Handles dtpLandingTme.ValueChanged
@@ -130,5 +224,40 @@
             End If
         End If
         blnUpdated = False
+    End Sub
+
+
+
+
+
+
+
+
+    Private Sub cmbFromAirport_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFromAirport.SelectedIndexChanged
+        If cmbFromAirport.SelectedIndex = cmbToAirport.SelectedIndex Then
+            If cmbToAirport.SelectedIndex + 1 >= cmbToAirport.Items.Count - 1 Then
+                cmbToAirport.SelectedIndex = 0
+            Else
+                cmbToAirport.SelectedIndex = cmbToAirport.SelectedIndex + 1
+            End If
+        End If
+    End Sub
+
+    Private Sub cmbToAirport_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbToAirport.SelectedIndexChanged
+        If cmbFromAirport.SelectedIndex = cmbToAirport.SelectedIndex Then
+
+            If cmbToAirport.SelectedIndex + 1 >= cmbToAirport.Items.Count - 1 Then
+
+                cmbToAirport.SelectedIndex = 0
+            Else
+                cmbToAirport.SelectedIndex = cmbToAirport.SelectedIndex + 1
+            End If
+        End If
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Dim frmAdminMenu As New frmAdminMenu
+        Me.Hide()
+        frmAdminMenu.ShowDialog()
     End Sub
 End Class
