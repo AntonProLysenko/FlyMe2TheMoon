@@ -74,36 +74,33 @@ Partial Class frmAdd_Passenger_To_Flight
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.lblPrice)
         Me.GroupBox1.Controls.Add(Me.rdbNotReserved)
         Me.GroupBox1.Controls.Add(Me.rdbReserved)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(345, 308)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(566, 203)
+        Me.GroupBox1.Size = New System.Drawing.Size(566, 143)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Price"
+        Me.GroupBox1.Text = "Seat Option"
         '
         'lblPrice
         '
         Me.lblPrice.AutoSize = True
-        Me.lblPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrice.Location = New System.Drawing.Point(444, 109)
+        Me.lblPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.85714!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrice.Location = New System.Drawing.Point(446, 454)
         Me.lblPrice.Name = "lblPrice"
-        Me.lblPrice.Size = New System.Drawing.Size(0, 32)
+        Me.lblPrice.Size = New System.Drawing.Size(0, 44)
         Me.lblPrice.TabIndex = 2
         '
         'rdbNotReserved
         '
         Me.rdbNotReserved.AutoSize = True
-        Me.rdbNotReserved.Checked = True
         Me.rdbNotReserved.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdbNotReserved.Location = New System.Drawing.Point(23, 148)
+        Me.rdbNotReserved.Location = New System.Drawing.Point(23, 90)
         Me.rdbNotReserved.Name = "rdbNotReserved"
         Me.rdbNotReserved.Size = New System.Drawing.Size(407, 36)
         Me.rdbNotReserved.TabIndex = 1
-        Me.rdbNotReserved.TabStop = True
         Me.rdbNotReserved.Text = "Designated Seat at Check In:"
         Me.rdbNotReserved.UseVisualStyleBackColor = True
         '
@@ -111,7 +108,7 @@ Partial Class frmAdd_Passenger_To_Flight
         '
         Me.rdbReserved.AutoSize = True
         Me.rdbReserved.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdbReserved.Location = New System.Drawing.Point(23, 54)
+        Me.rdbReserved.Location = New System.Drawing.Point(23, 38)
         Me.rdbReserved.Name = "rdbReserved"
         Me.rdbReserved.Size = New System.Drawing.Size(235, 36)
         Me.rdbReserved.TabIndex = 0
@@ -125,6 +122,7 @@ Partial Class frmAdd_Passenger_To_Flight
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1391, 628)
         Me.ControlBox = False
+        Me.Controls.Add(Me.lblPrice)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmbFlights)

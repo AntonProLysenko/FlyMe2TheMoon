@@ -180,6 +180,42 @@
         Return dtRecievedData
     End Function
 
+    Public Function ExecuteSelectProdcedure(strProdcedureName As String, strParamName As String, intParamValue As Integer, strParamName2 As String, intParamValue2 As Integer) As DataTable
+        Dim cmdSelect As OleDb.OleDbCommand
+        Dim objParam As OleDb.OleDbParameter
+        'Dim objParam2 As OleDb.OleDbParameter
+        Dim drSourceTable As OleDb.OleDbDataReader
+        Dim dtRecievedData As DataTable = New DataTable
+
+        Try
+
+            cmdSelect = New OleDb.OleDbCommand(strProdcedureName, m_conAdministrator)
+            cmdSelect.CommandType = CommandType.StoredProcedure
+
+            objParam = cmdSelect.Parameters.Add("strParamName", OleDb.OleDbType.Integer)
+            objParam.Direction = ParameterDirection.Input
+            objParam.Value = intParamValue
+
+            objParam = cmdSelect.Parameters.Add("strParamName2", OleDb.OleDbType.Integer)
+            objParam.Direction = ParameterDirection.Input
+            objParam.Value = intParamValue2
+
+            drSourceTable = cmdSelect.ExecuteReader
+
+            dtRecievedData.Load(drSourceTable)
+            drSourceTable.Close()
+
+            Return dtRecievedData
+
+            'If dtRecievedData.Rows.Count = 0 Then
+            '    MessageBox.Show("No rows returned from the stored procedure.")
+            'Else
+            '    MessageBox.Show("Data successfully retrieved.")
+            'End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Function
     Public Function ExecuteSelectNextPK(strTableName As String, strColumnName As String) As DataTable
         Dim cmdSelect As OleDb.OleDbCommand
         Dim objParam As OleDb.OleDbParameter

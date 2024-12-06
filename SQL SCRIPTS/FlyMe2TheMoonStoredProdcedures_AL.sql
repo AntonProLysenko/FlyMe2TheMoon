@@ -216,28 +216,43 @@
 --	FROM TFlights
 --END
 
+CREATE PROCEDURE upsFindDataForFlightPrice(@intFlightID as Integer, @intPassengerID as Integer)
+AS
+BEGIN
 
-SELECT(
-	SELECT intMilesFlown FROM TFlights
-	WHERE intFlightID = 1) AS intMilesFlown,
+	SELECT(
+		SELECT intMilesFlown FROM TFlights
+		WHERE intFlightID = @intFlightID) AS intMilesFlown,
 
-	(SELECT COUNT(intPassengerID)
-	From TFlightPassengers
-	WHERE intFlightID = 1) AS intTotalPassengers,
+		(SELECT COUNT(intPassengerID)
+		From TFlightPassengers
+		WHERE intFlightID = @intFlightID) AS intTotalPassengers,
 
 
-	(SELECT strPlaneType
-	FROM TFlights
-	JOIN TPlanes
-	ON TPlanes.intPlaneID = TFlights.intPlaneID
-	JOIN TPlaneTypes
-	ON TPlaneTypes.intPlaneTypeID = TPlanes.intPlaneTypeID
-	WHERE TFlights.intFlightID = 1) AS strPalneType,
+		(SELECT strPlaneType
+		FROM TFlights
+		JOIN TPlanes
+		ON TPlanes.intPlaneID = TFlights.intPlaneID
+		JOIN TPlaneTypes
+		ON TPlaneTypes.intPlaneTypeID = TPlanes.intPlaneTypeID
+		WHERE TFlights.intFlightID = @intFlightID) AS strPalneType,
 	
 	
-	(SELECT strAirportCode
-	FROM TFlights
-	JOIN TAirports
-	ON TFlights.intToAirportID = TAirports.intAirportID
-	WHERE TFlights.intFlightID = 1)
+		(SELECT strAirportCode
+		FROM TFlights
+		JOIN TAirports
+		ON TFlights.intToAirportID = TAirports.intAirportID
+		WHERE TFlights.intFlightID = @intFlightID) AS strToAirportCode,
+
+		(SELECT dtmDateOfBirth
+		FROM TPassengers
+		WHERE intPassengerID = @intPassengerID) AS dtmDateOFBirth,
+
+		(SELECT Count(intFlightID) as TotalFlights
+		FROM TFlightPassengers
+		WHERE intPassengerID = @intPassengerID) AS TotalFlights
+END
+
+EXECUTE upsFindDataForFlightPrice '1','1'
+
 

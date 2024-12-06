@@ -1,4 +1,7 @@
 ﻿Public Class frmAdd_Passenger_To_Flight
+    Dim dblDataLoaded As Boolean = False
+    Dim dblTotalPrice As Double
+
     Private Sub frmAdd_Passenger_To_Flight_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strSelect As String = ""
         Dim dtFlights As DataTable = New DataTable
@@ -8,14 +11,7 @@
         'Populating Flights on Load
         Try
 
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
+            CheckOpenDBConnection(Me)
 
             'cmbFlights.Items.Clear()
 
@@ -48,6 +44,7 @@
             If cmbFlights.Items.Count > 0 Then
                 cmbFlights.SelectedIndex = 0
             End If
+            dblDataLoaded = True
 
             CloseDatabaseConnection()
 
@@ -70,14 +67,13 @@
 
 
 
-        result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & "?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+        result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
         Select Case result
             Case DialogResult.Cancel
                 MessageBox.Show("Booking Canceled")
                 CloseDatabaseConnection()
-                Me.Hide()
-                frmPassengerMenu.ShowDialog()
+
             Case DialogResult.No
                 MessageBox.Show("Booking Canceled")
                 CloseDatabaseConnection()
@@ -89,7 +85,9 @@
 
 
                 'Opens DB Connection and detects next PK
+                CheckOpenDBConnection(Me)
                 intNextPrimaryKey = DetectNextPK()
+
                 intFlightID = cmbFlights.SelectedValue
 
 
@@ -136,24 +134,11 @@
 
 
 
-
-
     Private Function DetectNextPK() As Integer
         Dim strSelectNextPK As String
         Dim cmdSelectNextPk As New OleDb.OleDbCommand
         Dim drNextPk As OleDb.OleDbDataReader
         Dim intNextPrimaryKey As Integer
-
-
-        If OpenDatabaseConnectionSQLServer() = False Then
-            MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                            "The application will now close.",
-                            Me.Text + " Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Close()
-            frmPassengerMenu.ShowDialog()
-
-        End If
 
         strSelectNextPK = "SELECT max(intFlightPassengerID)+1 AS intNextPrimaryKey FROM TFlightPassengers"
 
@@ -239,9 +224,7 @@
         frmPassengerMenu.ShowDialog()
     End Sub
 
-    Private Sub cmbFlights_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFlights.SelectedIndexChanged
-        CalculateAndDisplayPrice()
-    End Sub
+
 
     Private Function CalculateAndDisplayPrice()
         Dim dblBasePrice As Double = 250
@@ -264,11 +247,11 @@
         Dim intPassengersOnFlight As Integer
         Dim strPlaneType As String
         Dim strAirportCode As String
-        Dim dtmDOB As Date
+        Dim dtmDOB As DateTime = DateTime.Now
         Dim intAge As Integer
         Dim intTotalFlights As Integer
 
-        Dim dtmToday As DateTime = DateTime.Now.Date
+        Dim dtmToday As DateTime = DateTime.Now
 
         Dim blnReservedSeat As Boolean = False
 
@@ -343,69 +326,59 @@
         Console.WriteLine(intTotalFlights & " Prev Flights : " & dblFinalCost)
 
 
-        lblPrice.Text = "$" & dblFinalCost
+        lblPrice.Text = "Final Price: " & dblFinalCost.ToString("$00.00")
     End Function
 
 
 
-    Private Sub GetNeededDataForTicketCost(ByRef intFlightMiles As Integer, ByRef intPassengersOnFlight As Integer, ByRef strPlaneType As String, ByRef strAirportCode As String, ByRef dtmDOB As Date, ByRef intTotalFlights As Integer)
+    Private Sub GetNeededDataForTicketCost(ByRef intFlightMiles As Integer, ByRef intPassengersOnFlight As Integer, ByRef strPlaneType As String, ByRef strAirportCode As String, ByRef dtmDOB As DateTime, ByRef intTotalFlights As Integer)
         Dim strSelect As String
+        Dim dtPriceData As DataTable = New DataTable
+        Dim strSelectExecuteStatement As String = "EXECUTE uspFindDataForFlightPrice " & "'" & cmbFlights.SelectedValue & "', '" & intCurrentPassengerID & "'"
+        If dblDataLoaded Then
 
-        Try
-            CheckOpenDBConnection(Me)
+            Try
+                CheckOpenDBConnection(Me)
 
-            'Get FlightMiles
-            strSelect = "SELECT intMilesFlown FROM TFlights
-                    WHERE intFlightID = " & cmbFlights.SelectedValue
-            intFlightMiles = GetDataTable(strSelect).Rows(0)("intMilesFlown")
+                dtPriceData = ExecuteSelectProdcedure("uspFindDataForFlightPrice", "@intFlightID", cmbFlights.SelectedValue, "@intPassengerID", intCurrentPassengerID)
 
-            'Get AmountOf Passengers On the Flight
-            strSelect = "SELECT COUNT(intPassengerID) as intTotalPassengers
-                        FROM TFlightPassengers
-                        WHERE intFlightID = " & cmbFlights.SelectedValue
+                For Each col As DataColumn In dtPriceData.Columns
+                    Console.WriteLine($"Column Name: {col.ColumnName}, Value: {dtPriceData.Rows(0)(col)}")
+                Next
 
-            intPassengersOnFlight = GetDataTable(strSelect).Rows(0)("intTotalPassengers")
+                intFlightMiles = dtPriceData.Rows(0)("intMilesFlown")
+                intPassengersOnFlight = dtPriceData.Rows(0)("intTotalPassengers")
+                strPlaneType = dtPriceData.Rows(0)("strPlaneType")
+                strAirportCode = dtPriceData.Rows(0)("strToAirportCode")
+                dtmDOB = dtPriceData.Rows(0)("dtmDateOFBirth")
+                intTotalFlights = dtPriceData.Rows(0)("TotalFlights")
 
-            strSelect = "SELECT strPlaneType
-                        FROM TFlights
-                        JOIN TPlanes
-                        ON TPlanes.intPlaneID = TFlights.intPlaneID
-                        JOIN TPlaneTypes
-                        ON TPlaneTypes.intPlaneTypeID = TPlanes.intPlaneTypeID
-                        WHERE TFlights.intFlightID = " & cmbFlights.SelectedValue
-
-            strPlaneType = GetDataTable(strSelect).Rows(0)("strPlaneType")
-
-            strSelect = "SELECT strAirportCode
-	                    FROM TFlights
-	                    JOIN TAirports
-	                    ON TFlights.intToAirportID = TAirports.intAirportID
-	                    WHERE TFlights.intFlightID = " & cmbFlights.SelectedValue
-            strAirportCode = GetDataTable(strSelect).Rows(0)("strAirportCode")
-
-
-            strSelect = "SELECT dtmDateOfBirth
-	                    FROM TPassengers
-	                    WHERE intPassengerID = " & intCurrentPassengerID
-            dtmDOB = GetDataTable(strSelect).Rows(0)("dtmDateOfBirth")
-
-
-            strSelect = "SELECT Count(intFlightID) as TotalFlights
-	                    FROM TFlightPassengers
-	                    WHERE intPassengerID = " & intCurrentPassengerID
-
-            intTotalFlights = GetDataTable(strSelect).Rows(0)("TotalFlights")
-
-
-            CloseDatabaseConnection()
-        Catch ex As Exception
-
-        End Try
+                CloseDatabaseConnection()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        End If
     End Sub
 
+
+    Private Sub cmbFlights_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFlights.SelectedIndexChanged
+        If dblDataLoaded Then
+            CalculateAndDisplayPrice()
+        End If
+    End Sub
 
 
     Private Sub rdbNotReserved_CheckedChanged(sender As Object, e As EventArgs) Handles rdbNotReserved.CheckedChanged
-        CalculateAndDisplayPrice()
+        If dblDataLoaded Then
+            CalculateAndDisplayPrice()
+        End If
     End Sub
+
+    Private Sub rdbReserved_CheckedChanged(sender As Object, e As EventArgs) Handles rdbReserved.CheckedChanged
+        If dblDataLoaded Then
+            CalculateAndDisplayPrice()
+        End If
+    End Sub
+
+
 End Class
