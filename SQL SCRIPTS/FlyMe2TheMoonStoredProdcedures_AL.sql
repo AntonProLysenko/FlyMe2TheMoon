@@ -209,9 +209,35 @@
 
 
 
-CREATE PROCEDURE uspFindAllPlanes
-AS 
-BEGIN
-	SELECT *
+--CREATE PROCEDURE uspFindAllFlights
+--AS 
+--BEGIN
+--	SELECT *
+--	FROM TFlights
+--END
+
+
+SELECT(
+	SELECT intMilesFlown FROM TFlights
+	WHERE intFlightID = 1) AS intMilesFlown,
+
+	(SELECT COUNT(intPassengerID)
+	From TFlightPassengers
+	WHERE intFlightID = 1) AS intTotalPassengers,
+
+
+	(SELECT strPlaneType
 	FROM TFlights
-END
+	JOIN TPlanes
+	ON TPlanes.intPlaneID = TFlights.intPlaneID
+	JOIN TPlaneTypes
+	ON TPlaneTypes.intPlaneTypeID = TPlanes.intPlaneTypeID
+	WHERE TFlights.intFlightID = 1) AS strPalneType,
+	
+	
+	(SELECT strAirportCode
+	FROM TFlights
+	JOIN TAirports
+	ON TFlights.intToAirportID = TAirports.intAirportID
+	WHERE TFlights.intFlightID = 1)
+

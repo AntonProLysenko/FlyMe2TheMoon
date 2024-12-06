@@ -26,14 +26,19 @@ Partial Class frmAdd_Passenger_To_Flight
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.cmbFlights = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblPrice = New System.Windows.Forms.Label()
+        Me.rdbNotReserved = New System.Windows.Forms.RadioButton()
+        Me.rdbReserved = New System.Windows.Forms.RadioButton()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSubmit
         '
         Me.btnSubmit.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(261, 384)
+        Me.btnSubmit.Location = New System.Drawing.Point(243, 517)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(253, 89)
+        Me.btnSubmit.Size = New System.Drawing.Size(232, 85)
         Me.btnSubmit.TabIndex = 0
         Me.btnSubmit.Text = "Submit"
         Me.btnSubmit.UseVisualStyleBackColor = True
@@ -41,9 +46,9 @@ Partial Class frmAdd_Passenger_To_Flight
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(910, 384)
+        Me.btnCancel.Location = New System.Drawing.Point(848, 517)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(253, 89)
+        Me.btnCancel.Size = New System.Drawing.Size(232, 85)
         Me.btnCancel.TabIndex = 1
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -52,37 +57,86 @@ Partial Class frmAdd_Passenger_To_Flight
         '
         Me.cmbFlights.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbFlights.FormattingEnabled = True
-        Me.cmbFlights.Location = New System.Drawing.Point(195, 253)
+        Me.cmbFlights.Location = New System.Drawing.Point(179, 243)
         Me.cmbFlights.Name = "cmbFlights"
-        Me.cmbFlights.Size = New System.Drawing.Size(1053, 45)
+        Me.cmbFlights.Size = New System.Drawing.Size(966, 40)
         Me.cmbFlights.TabIndex = 2
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(491, 142)
+        Me.Label1.Location = New System.Drawing.Point(444, 82)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(401, 55)
+        Me.Label1.Size = New System.Drawing.Size(351, 48)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Select Your Flight"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.lblPrice)
+        Me.GroupBox1.Controls.Add(Me.rdbNotReserved)
+        Me.GroupBox1.Controls.Add(Me.rdbReserved)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(345, 308)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(566, 203)
+        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Price"
+        '
+        'lblPrice
+        '
+        Me.lblPrice.AutoSize = True
+        Me.lblPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrice.Location = New System.Drawing.Point(444, 109)
+        Me.lblPrice.Name = "lblPrice"
+        Me.lblPrice.Size = New System.Drawing.Size(0, 32)
+        Me.lblPrice.TabIndex = 2
+        '
+        'rdbNotReserved
+        '
+        Me.rdbNotReserved.AutoSize = True
+        Me.rdbNotReserved.Checked = True
+        Me.rdbNotReserved.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdbNotReserved.Location = New System.Drawing.Point(23, 148)
+        Me.rdbNotReserved.Name = "rdbNotReserved"
+        Me.rdbNotReserved.Size = New System.Drawing.Size(407, 36)
+        Me.rdbNotReserved.TabIndex = 1
+        Me.rdbNotReserved.TabStop = True
+        Me.rdbNotReserved.Text = "Designated Seat at Check In:"
+        Me.rdbNotReserved.UseVisualStyleBackColor = True
+        '
+        'rdbReserved
+        '
+        Me.rdbReserved.AutoSize = True
+        Me.rdbReserved.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdbReserved.Location = New System.Drawing.Point(23, 54)
+        Me.rdbReserved.Name = "rdbReserved"
+        Me.rdbReserved.Size = New System.Drawing.Size(235, 36)
+        Me.rdbReserved.TabIndex = 0
+        Me.rdbReserved.Text = "Reserved Seat:"
+        Me.rdbReserved.UseVisualStyleBackColor = True
+        '
         'frmAdd_Passenger_To_Flight
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1491, 583)
+        Me.ClientSize = New System.Drawing.Size(1391, 628)
         Me.ControlBox = False
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmbFlights)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSubmit)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MinimumSize = New System.Drawing.Size(1517, 654)
+        Me.MinimumSize = New System.Drawing.Size(1393, 630)
         Me.Name = "frmAdd_Passenger_To_Flight"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Add To Flight"
+        Me.Text = " "
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -92,4 +146,8 @@ Partial Class frmAdd_Passenger_To_Flight
     Friend WithEvents btnCancel As Button
     Friend WithEvents cmbFlights As ComboBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents lblPrice As Label
+    Friend WithEvents rdbNotReserved As RadioButton
+    Friend WithEvents rdbReserved As RadioButton
 End Class

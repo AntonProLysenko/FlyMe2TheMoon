@@ -239,4 +239,173 @@
         frmPassengerMenu.ShowDialog()
     End Sub
 
+    Private Sub cmbFlights_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFlights.SelectedIndexChanged
+        CalculateAndDisplayPrice()
+    End Sub
+
+    Private Function CalculateAndDisplayPrice()
+        Dim dblBasePrice As Double = 250
+        Dim dblFarFlightFee As Double = 50
+        Dim dblHighDemandFee As Double = 100
+        Dim dblLowDemandDiscount As Double = 50
+        Dim dblReliablePlaneFee As Double = 35
+        Dim dblUnrelaiblePlaneDiscount As Double = 25
+        Dim dblMiamiFee As Double = 15
+        Dim dblReservedSeatFee = 125
+        Dim dblSeniorDiscount = 20 / 100
+        Dim dblChildDiscount = 65 / 100
+        Dim dblLowLoyaltyDiscount = 10 / 100
+        Dim dblHighLoyaltyDiscount = 20 / 100
+        Dim dblFinalCost As Double
+
+        Dim strSelect As String
+
+        Dim intFlightMiles As Integer
+        Dim intPassengersOnFlight As Integer
+        Dim strPlaneType As String
+        Dim strAirportCode As String
+        Dim dtmDOB As Date
+        Dim intAge As Integer
+        Dim intTotalFlights As Integer
+
+        Dim dtmToday As DateTime = DateTime.Now.Date
+
+        Dim blnReservedSeat As Boolean = False
+
+        dblFinalCost = dblBasePrice
+        Console.WriteLine("-----------------------------------")
+        Console.WriteLine("Initial: " & dblFinalCost)
+        GetNeededDataForTicketCost(intFlightMiles, intPassengersOnFlight, strPlaneType, strAirportCode, dtmDOB, intTotalFlights)
+
+
+
+
+        If rdbReserved.Checked Then
+            blnReservedSeat = True
+        End If
+
+        If intFlightMiles > 750 Then
+            dblFinalCost += dblFarFlightFee
+        End If
+        Console.WriteLine(intFlightMiles & " Miles: " & dblFinalCost)
+        If intPassengersOnFlight > 8 Then
+            dblFinalCost += dblHighDemandFee
+        ElseIf intPassengersOnFlight < 4 Then
+            dblFinalCost -= dblLowDemandDiscount
+        End If
+        Console.WriteLine(intPassengersOnFlight & " Demand: " & dblFinalCost)
+
+        If strPlaneType = "Boeing 747-8" Then
+            dblFinalCost -= dblUnrelaiblePlaneDiscount
+        ElseIf strPlaneType = "Airbus A350" Then
+            dblFinalCost += dblReliablePlaneFee
+        End If
+        Console.WriteLine(strPlaneType & " Plane: " & dblFinalCost)
+
+        If strAirportCode = "MIA" Then
+            dblFinalCost += dblMiamiFee
+        End If
+        Console.WriteLine(strAirportCode & " Airport: " & dblFinalCost)
+
+        If blnReservedSeat Then
+            dblFinalCost += dblReservedSeatFee
+        End If
+
+        Console.WriteLine(blnReservedSeat & " Reserved Seat: " & dblFinalCost)
+
+
+        Console.WriteLine(dtmDOB & " Date Of Birth")
+
+        intAge = dtmToday.Year - dtmDOB.Year
+
+        If dtmDOB.Month > dtmToday.Month Then
+            intAge -= 1
+        ElseIf dtmDOB.Month = dtmToday.Month And dtmDOB.Day > dtmToday.Day Then
+            intAge -= 1
+        End If
+
+
+
+        If intAge > 65 Then
+            dblFinalCost -= dblFinalCost * dblSeniorDiscount
+        ElseIf intAge < 5 Then
+            dblFinalCost -= dblFinalCost * dblChildDiscount
+        End If
+
+        Console.WriteLine(intAge & " Age Discount : " & dblFinalCost)
+
+
+        If intTotalFlights > 5 And intTotalFlights <= 10 Then
+            dblFinalCost = dblFinalCost * dblLowLoyaltyDiscount
+        ElseIf intTotalFlights > 10 Then
+            dblFinalCost = dblFinalCost * dblHighLoyaltyDiscount
+        End If
+        Console.WriteLine(intTotalFlights & " Prev Flights : " & dblFinalCost)
+
+
+        lblPrice.Text = "$" & dblFinalCost
+    End Function
+
+
+
+    Private Sub GetNeededDataForTicketCost(ByRef intFlightMiles As Integer, ByRef intPassengersOnFlight As Integer, ByRef strPlaneType As String, ByRef strAirportCode As String, ByRef dtmDOB As Date, ByRef intTotalFlights As Integer)
+        Dim strSelect As String
+
+        Try
+            CheckOpenDBConnection(Me)
+
+            'Get FlightMiles
+            strSelect = "SELECT intMilesFlown FROM TFlights
+                    WHERE intFlightID = " & cmbFlights.SelectedValue
+            intFlightMiles = GetDataTable(strSelect).Rows(0)("intMilesFlown")
+
+            'Get AmountOf Passengers On the Flight
+            strSelect = "SELECT COUNT(intPassengerID) as intTotalPassengers
+                        FROM TFlightPassengers
+                        WHERE intFlightID = " & cmbFlights.SelectedValue
+
+            intPassengersOnFlight = GetDataTable(strSelect).Rows(0)("intTotalPassengers")
+
+            strSelect = "SELECT strPlaneType
+                        FROM TFlights
+                        JOIN TPlanes
+                        ON TPlanes.intPlaneID = TFlights.intPlaneID
+                        JOIN TPlaneTypes
+                        ON TPlaneTypes.intPlaneTypeID = TPlanes.intPlaneTypeID
+                        WHERE TFlights.intFlightID = " & cmbFlights.SelectedValue
+
+            strPlaneType = GetDataTable(strSelect).Rows(0)("strPlaneType")
+
+            strSelect = "SELECT strAirportCode
+	                    FROM TFlights
+	                    JOIN TAirports
+	                    ON TFlights.intToAirportID = TAirports.intAirportID
+	                    WHERE TFlights.intFlightID = " & cmbFlights.SelectedValue
+            strAirportCode = GetDataTable(strSelect).Rows(0)("strAirportCode")
+
+
+            strSelect = "SELECT dtmDateOfBirth
+	                    FROM TPassengers
+	                    WHERE intPassengerID = " & intCurrentPassengerID
+            dtmDOB = GetDataTable(strSelect).Rows(0)("dtmDateOfBirth")
+
+
+            strSelect = "SELECT Count(intFlightID) as TotalFlights
+	                    FROM TFlightPassengers
+	                    WHERE intPassengerID = " & intCurrentPassengerID
+
+            intTotalFlights = GetDataTable(strSelect).Rows(0)("TotalFlights")
+
+
+            CloseDatabaseConnection()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+
+    Private Sub rdbNotReserved_CheckedChanged(sender As Object, e As EventArgs) Handles rdbNotReserved.CheckedChanged
+        CalculateAndDisplayPrice()
+    End Sub
 End Class

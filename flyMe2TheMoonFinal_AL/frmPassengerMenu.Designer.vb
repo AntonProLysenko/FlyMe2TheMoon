@@ -33,18 +33,18 @@ Partial Class frmPassengerMenu
         '
         Me.lblPassengerWelcome.AutoSize = True
         Me.lblPassengerWelcome.Font = New System.Drawing.Font("Modern No. 20", 22.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPassengerWelcome.Location = New System.Drawing.Point(369, 134)
+        Me.lblPassengerWelcome.Location = New System.Drawing.Point(338, 129)
         Me.lblPassengerWelcome.Name = "lblPassengerWelcome"
-        Me.lblPassengerWelcome.Size = New System.Drawing.Size(243, 60)
+        Me.lblPassengerWelcome.Size = New System.Drawing.Size(215, 53)
         Me.lblPassengerWelcome.TabIndex = 0
         Me.lblPassengerWelcome.Text = "Welcome"
         '
         'btnUpdatePassenger
         '
         Me.btnUpdatePassenger.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdatePassenger.Location = New System.Drawing.Point(30, 352)
+        Me.btnUpdatePassenger.Location = New System.Drawing.Point(28, 338)
         Me.btnUpdatePassenger.Name = "btnUpdatePassenger"
-        Me.btnUpdatePassenger.Size = New System.Drawing.Size(370, 78)
+        Me.btnUpdatePassenger.Size = New System.Drawing.Size(339, 75)
         Me.btnUpdatePassenger.TabIndex = 1
         Me.btnUpdatePassenger.Text = "Update My Information"
         Me.btnUpdatePassenger.UseVisualStyleBackColor = True
@@ -52,19 +52,19 @@ Partial Class frmPassengerMenu
         'btnAddFlight
         '
         Me.btnAddFlight.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddFlight.Location = New System.Drawing.Point(433, 352)
+        Me.btnAddFlight.Location = New System.Drawing.Point(397, 338)
         Me.btnAddFlight.Name = "btnAddFlight"
-        Me.btnAddFlight.Size = New System.Drawing.Size(280, 78)
+        Me.btnAddFlight.Size = New System.Drawing.Size(257, 75)
         Me.btnAddFlight.TabIndex = 2
-        Me.btnAddFlight.Text = "Add Flight"
+        Me.btnAddFlight.Text = "Book A Flight"
         Me.btnAddFlight.UseVisualStyleBackColor = True
         '
         'btnPastFlights
         '
         Me.btnPastFlights.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPastFlights.Location = New System.Drawing.Point(1143, 352)
+        Me.btnPastFlights.Location = New System.Drawing.Point(1048, 338)
         Me.btnPastFlights.Name = "btnPastFlights"
-        Me.btnPastFlights.Size = New System.Drawing.Size(319, 78)
+        Me.btnPastFlights.Size = New System.Drawing.Size(292, 75)
         Me.btnPastFlights.TabIndex = 3
         Me.btnPastFlights.Text = "Show Past Flights"
         Me.btnPastFlights.UseVisualStyleBackColor = True
@@ -72,25 +72,25 @@ Partial Class frmPassengerMenu
         'btnFutureFlights
         '
         Me.btnFutureFlights.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFutureFlights.Location = New System.Drawing.Point(743, 352)
+        Me.btnFutureFlights.Location = New System.Drawing.Point(681, 338)
         Me.btnFutureFlights.Name = "btnFutureFlights"
-        Me.btnFutureFlights.Size = New System.Drawing.Size(379, 78)
+        Me.btnFutureFlights.Size = New System.Drawing.Size(347, 75)
         Me.btnFutureFlights.TabIndex = 4
         Me.btnFutureFlights.Text = "Show Upcoming Flights"
         Me.btnFutureFlights.UseVisualStyleBackColor = True
         '
         'frmPassengerMenu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1512, 583)
+        Me.ClientSize = New System.Drawing.Size(1388, 566)
         Me.Controls.Add(Me.btnFutureFlights)
         Me.Controls.Add(Me.btnPastFlights)
         Me.Controls.Add(Me.btnAddFlight)
         Me.Controls.Add(Me.btnUpdatePassenger)
         Me.Controls.Add(Me.lblPassengerWelcome)
-        Me.MinimumSize = New System.Drawing.Size(1538, 654)
+        Me.MinimumSize = New System.Drawing.Size(1412, 630)
         Me.Name = "frmPassengerMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Passenger Menu"

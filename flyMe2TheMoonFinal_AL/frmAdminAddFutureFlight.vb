@@ -57,7 +57,7 @@
         Dim intMilesFlown As Integer
         Dim intPlaneID As Integer
 
-        Dim blnValid
+        Dim blnValid As Boolean
         Dim strExecuteInsert As String
 
         ValidateFutureDate(blnValid, dtmFlightDate, dtpFlightDate, "Flight")
@@ -160,6 +160,7 @@
         End If
     End Sub
 
+
     Private Function isFlightExist(strFlightNumber As String) As Boolean
 
         Dim dtFlights As DataTable = New DataTable
@@ -206,7 +207,6 @@
 
     Dim blnUpdated As Boolean = False
     Private Sub dtpLandingTme_ValueChanged(sender As Object, e As EventArgs) Handles dtpLandingTme.ValueChanged
-
 
         If blnUpdated Then Exit Sub
 
