@@ -155,6 +155,12 @@
     <Compile Include="frmPassengerMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPassengerSelectSeat.Designer.vb">
+      <DependentUpon>frmPassengerSelectSeat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPassengerSelectSeat.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPassengerVerification.Designer.vb">
       <DependentUpon>frmPassengerVerification.vb</DependentUpon>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPassengerMenu.resx">
       <DependentUpon>frmPassengerMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPassengerSelectSeat.resx">
+      <DependentUpon>frmPassengerSelectSeat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPassengerVerification.resx">
       <DependentUpon>frmPassengerVerification.vb</DependentUpon>

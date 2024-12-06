@@ -60,10 +60,6 @@
         Dim intFlightID As Integer
         Dim strSeatNumber As String
 
-        Dim strInsert As String
-        Dim strSelect As String
-        Dim cmdInsert As New OleDb.OleDbCommand
-        Dim intRowsAffected As Integer
 
 
 
@@ -90,48 +86,59 @@
 
                 intFlightID = cmbFlights.SelectedValue
 
+                If rdbReserved.Checked Then
 
-                strSeatNumber = GenerateSeatNumber()
-
-                strSelect = "SELECT intFlightID FROM TFlightPassengers WHERE intPassengerID =" & intCurrentPassengerID
-                If isOnFlight(strSelect, cmbFlights.SelectedValue) Then
-                    MessageBox.Show("You are already on this flight!")
-                    CloseDatabaseConnection()
                 Else
-                    Try
-                        strInsert = "INSERT INTO TFlightPassengers ( intFlightPassengerID, intFlightID, intPassengerID, strSeat )" &
-                            "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "' )"
+                    strSeatNumber = GenerateSeatNumber()
+                    AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
 
-                        'MessageBox.Show(strInsert)
-
-
-                        cmdInsert = New OleDb.OleDbCommand(strInsert, m_conAdministrator)
-
-
-                        intRowsAffected = cmdInsert.ExecuteNonQuery()
-
-
-                        If intRowsAffected > 0 Then
-                            If strSeatNumber.Contains("A") OrElse strSeatNumber.Contains("F") Then
-                                MessageBox.Show("We got you seated by the window")
-                            ElseIf strSeatNumber.Contains("C") OrElse strSeatNumber.Contains("D") Then
-                                MessageBox.Show("We got you seated by the asile")
-                            Else
-                                MessageBox.Show("We got you seated between two people")
-                            End If
-                        End If
-
-                        CloseDatabaseConnection()
-                        Close()
-                        frmPassengerMenu.ShowDialog()
-                    Catch ex As Exception
-                        MessageBox.Show(ex.Message)
-                    End Try
                 End If
+                CloseDatabaseConnection()
         End Select
     End Sub
 
+    Public Function AddPassengerToFlight(intNextPrimaryKey As Integer, intFlightID As Integer, strSeatNumber As String)
 
+        Dim strInsert As String
+        Dim strSelect As String
+        Dim cmdInsert As New OleDb.OleDbCommand
+        Dim intRowsAffected As Integer
+        strSelect = "SELECT intFlightID FROM TFlightPassengers WHERE intPassengerID =" & intCurrentPassengerID
+        If isOnFlight(strSelect, cmbFlights.SelectedValue) Then
+            MessageBox.Show("You are already on this flight!")
+            CloseDatabaseConnection()
+        Else
+            Try
+                strInsert = "INSERT INTO TFlightPassengers ( intFlightPassengerID, intFlightID, intPassengerID, strSeat )" &
+            "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "' )"
+
+                'MessageBox.Show(strInsert)
+
+
+                cmdInsert = New OleDb.OleDbCommand(strInsert, m_conAdministrator)
+
+
+                intRowsAffected = cmdInsert.ExecuteNonQuery()
+
+
+                If intRowsAffected > 0 Then
+                    If strSeatNumber.Contains("A") OrElse strSeatNumber.Contains("F") Then
+                        MessageBox.Show("We got you seated by the window")
+                    ElseIf strSeatNumber.Contains("C") OrElse strSeatNumber.Contains("D") Then
+                        MessageBox.Show("We got you seated by the asile")
+                    Else
+                        MessageBox.Show("We got you seated between two people")
+                    End If
+                End If
+
+                CloseDatabaseConnection()
+                Close()
+                frmPassengerMenu.ShowDialog()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        End If
+    End Function
 
 
     Private Function DetectNextPK() As Integer
@@ -173,10 +180,18 @@
         End If
 
 
-        randomNumber = randomSeat.Next(1, 26)
+        randomNumber = randomSeat.Next(1, 20)
         charRandomLetter = strSeats(randomSeat.Next(0, strSeats.Length))
+        'randomNumber = 24
+        'charRandomLetter = "B"
 
-        Return randomNumber & charRandomLetter
+
+        If isSeatAvailable(randomNumber & charRandomLetter, cmbFlights.SelectedValue) Then
+            Return randomNumber & charRandomLetter
+        Else
+            Return GenerateSeatNumber()
+        End If
+
 
     End Function
 
@@ -212,7 +227,46 @@
             Return blnOnFlight
 
         Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Function
 
+    Private Function isSeatAvailable(strDesiredSeat As String, intFlightID As Integer)
+        Dim cmdSelect As OleDb.OleDbCommand
+        Dim drSourceTable As OleDb.OleDbDataReader
+        Dim dtSeats As DataTable = New DataTable
+
+        Dim strSelect As String
+        Dim arrOfTakenSeats() As String
+        Dim blnAvailable As Boolean = True
+        strDesiredSeat = strDesiredSeat.ToLower()
+
+        strSelect = "SELECT strSeat FROM TFlightPassengers
+                    WHERE intFlightID = " & intFlightID
+        Try
+
+            'MessageBox.Show(strSelect)
+            cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
+            drSourceTable = cmdSelect.ExecuteReader
+            dtSeats.Load(drSourceTable)
+
+            If dtSeats.Rows.Count > 0 Then
+
+                ReDim arrOfTakenSeats(dtSeats.Rows.Count - 1)
+                For intIndex = 0 To dtSeats.Rows.Count - 1
+                    arrOfTakenSeats(intIndex) = dtSeats.Rows(intIndex)("strSeat").ToString().ToLower()
+                Next
+
+                If arrOfTakenSeats.Contains(strDesiredSeat) Then
+                    blnAvailable = False
+                End If
+
+            End If
+
+            Return blnAvailable
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
         End Try
     End Function
 
