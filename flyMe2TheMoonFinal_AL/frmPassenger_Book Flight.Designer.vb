@@ -38,7 +38,7 @@ Partial Class frmAdd_Passenger_To_Flight
         Me.btnSubmit.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSubmit.Location = New System.Drawing.Point(243, 517)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(232, 85)
+        Me.btnSubmit.Size = New System.Drawing.Size(360, 85)
         Me.btnSubmit.TabIndex = 0
         Me.btnSubmit.Text = "Submit"
         Me.btnSubmit.UseVisualStyleBackColor = True

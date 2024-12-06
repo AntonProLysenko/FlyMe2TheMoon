@@ -54,9 +54,9 @@ Partial Class frmPassengerSelectSeat
         Me.btnSubmit.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.14286!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSubmit.Location = New System.Drawing.Point(54, 357)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(220, 68)
+        Me.btnSubmit.Size = New System.Drawing.Size(286, 68)
         Me.btnSubmit.TabIndex = 2
-        Me.btnSubmit.Text = "Submit"
+        Me.btnSubmit.Text = "Book Flight"
         Me.btnSubmit.UseVisualStyleBackColor = True
         '
         'btnCancel

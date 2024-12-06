@@ -2,6 +2,8 @@
     Dim dblDataLoaded As Boolean = False
     Dim dblTotalPrice As Double
 
+    Public intGlobalFlightID As Integer
+
     Private Sub frmAdd_Passenger_To_Flight_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strSelect As String = ""
         Dim dtFlights As DataTable = New DataTable
@@ -45,7 +47,7 @@
                 cmbFlights.SelectedIndex = 0
             End If
             dblDataLoaded = True
-
+            intGlobalFlightID = cmbFlights.SelectedValue
             CloseDatabaseConnection()
 
         Catch ex As Exception
@@ -54,47 +56,73 @@
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+
+
+
         Dim result
         Dim frmPassengerMenu As New frmPassengerMenu
+        Dim frmPassengerSelectSeat As New frmPassengerSelectSeat(Me)
         Dim intNextPrimaryKey As Integer
         Dim intFlightID As Integer
         Dim strSeatNumber As String
 
 
 
+        intFlightID = cmbFlights.SelectedValue
+        CheckOpenDBConnection(Me)
+        If rdbReserved.Checked Then
+            intGlobalFlightID = cmbFlights.SelectedValue
+            frmPassengerSelectSeat.ShowDialog()
+            strSeatNumber = frmPassengerSelectSeat.strSelectedSeat
+            result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "Seat: " & strSeatNumber & " ?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
-        result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            Select Case result
+                Case DialogResult.Cancel
+                    MessageBox.Show("Booking Canceled")
+                    CloseDatabaseConnection()
 
-        Select Case result
-            Case DialogResult.Cancel
-                MessageBox.Show("Booking Canceled")
-                CloseDatabaseConnection()
+                Case DialogResult.No
+                    MessageBox.Show("Booking Canceled")
+                    CloseDatabaseConnection()
+                    Me.Hide()
+                    frmPassengerMenu.ShowDialog()
+                Case DialogResult.Yes
 
-            Case DialogResult.No
-                MessageBox.Show("Booking Canceled")
-                CloseDatabaseConnection()
-                Me.Hide()
-                frmPassengerMenu.ShowDialog()
-            Case DialogResult.Yes
-
-
-
-
-                'Opens DB Connection and detects next PK
-                CheckOpenDBConnection(Me)
-                intNextPrimaryKey = DetectNextPK()
-
-                intFlightID = cmbFlights.SelectedValue
-
-                If rdbReserved.Checked Then
-
-                Else
-                    strSeatNumber = GenerateSeatNumber()
+                    intNextPrimaryKey = DetectNextPK()
                     AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
+            End Select
+        Else
 
-                End If
-                CloseDatabaseConnection()
-        End Select
+            result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+
+            Select Case result
+                Case DialogResult.Cancel
+                    MessageBox.Show("Booking Canceled")
+                    CloseDatabaseConnection()
+
+                Case DialogResult.No
+                    MessageBox.Show("Booking Canceled")
+                    CloseDatabaseConnection()
+                    Me.Hide()
+                    frmPassengerMenu.ShowDialog()
+                Case DialogResult.Yes
+
+
+
+
+                    'Opens DB Connection and detects next PK
+                    'CheckOpenDBConnection(Me)
+                    intNextPrimaryKey = DetectNextPK()
+
+
+
+                    strSeatNumber = GenerateSeatNumber()
+                        AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
+
+
+                    CloseDatabaseConnection()
+            End Select
+        End If
     End Sub
 
     Public Function AddPassengerToFlight(intNextPrimaryKey As Integer, intFlightID As Integer, strSeatNumber As String)
@@ -182,8 +210,7 @@
 
         randomNumber = randomSeat.Next(1, 20)
         charRandomLetter = strSeats(randomSeat.Next(0, strSeats.Length))
-        'randomNumber = 24
-        'charRandomLetter = "B"
+
 
 
         If isSeatAvailable(randomNumber & charRandomLetter, cmbFlights.SelectedValue) Then
@@ -231,7 +258,7 @@
         End Try
     End Function
 
-    Private Function isSeatAvailable(strDesiredSeat As String, intFlightID As Integer)
+    Public Function isSeatAvailable(strDesiredSeat As String, intFlightID As Integer)
         Dim cmdSelect As OleDb.OleDbCommand
         Dim drSourceTable As OleDb.OleDbDataReader
         Dim dtSeats As DataTable = New DataTable
@@ -244,7 +271,7 @@
         strSelect = "SELECT strSeat FROM TFlightPassengers
                     WHERE intFlightID = " & intFlightID
         Try
-
+            MessageBox.Show(strSelect)
             'MessageBox.Show(strSelect)
             cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
             drSourceTable = cmdSelect.ExecuteReader
@@ -373,13 +400,13 @@
 
 
         If intTotalFlights > 5 And intTotalFlights <= 10 Then
-            dblFinalCost = dblFinalCost * dblLowLoyaltyDiscount
+            dblFinalCost -= dblFinalCost * dblLowLoyaltyDiscount
         ElseIf intTotalFlights > 10 Then
-            dblFinalCost = dblFinalCost * dblHighLoyaltyDiscount
+            dblFinalCost -= dblFinalCost * dblHighLoyaltyDiscount
         End If
         Console.WriteLine(intTotalFlights & " Prev Flights : " & dblFinalCost)
 
-
+        dblTotalPrice = dblFinalCost
         lblPrice.Text = "Final Price: " & dblFinalCost.ToString("$00.00")
     End Function
 
@@ -416,6 +443,7 @@
 
 
     Private Sub cmbFlights_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFlights.SelectedIndexChanged
+        intGlobalFlightID = cmbFlights.SelectedValue
         If dblDataLoaded Then
             CalculateAndDisplayPrice()
         End If
@@ -426,11 +454,23 @@
         If dblDataLoaded Then
             CalculateAndDisplayPrice()
         End If
+
+        If rdbNotReserved.Checked Then
+            btnSubmit.Text = "Book Flight"
+        ElseIf rdbReserved.Checked Then
+            btnSubmit.Text = "Select Seat"
+        End If
     End Sub
 
     Private Sub rdbReserved_CheckedChanged(sender As Object, e As EventArgs) Handles rdbReserved.CheckedChanged
         If dblDataLoaded Then
             CalculateAndDisplayPrice()
+        End If
+
+        If rdbNotReserved.Checked Then
+            btnSubmit.Text = "Book Flight"
+        ElseIf rdbReserved.Checked Then
+            btnSubmit.Text = "Select Seat"
         End If
     End Sub
 
