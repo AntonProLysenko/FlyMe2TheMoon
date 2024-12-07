@@ -12,14 +12,7 @@
 
         'Populating Flights on Load
         Try
-
             CheckOpenDBConnection(Me)
-
-            'cmbFlights.Items.Clear()
-
-
-
-
             'Selecting Future Flights
             strSelect = "SELECT TF.intFlightID, TF.dtmFlightDate,
 		                        FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
@@ -32,9 +25,8 @@
                         WHERE GETDATE() <= TF.dtmFlightDate
                         ORDER BY TF.dtmFlightDate"
 
-
-
             dtFlights = GetDataTable(strSelect)
+
 
             cmbFlights.ValueMember = "intFlightID"
             cmbFlights.DisplayMember = "strFlightName"
@@ -70,6 +62,7 @@
 
         intFlightID = cmbFlights.SelectedValue
         CheckOpenDBConnection(Me)
+
         If rdbReserved.Checked Then
             intGlobalFlightID = cmbFlights.SelectedValue
             frmPassengerSelectSeat.ShowDialog()
@@ -90,6 +83,7 @@
 
                     intNextPrimaryKey = DetectNextPK()
                     AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
+                    CloseDatabaseConnection()
             End Select
         Else
 
@@ -113,13 +107,8 @@
                     'Opens DB Connection and detects next PK
                     'CheckOpenDBConnection(Me)
                     intNextPrimaryKey = DetectNextPK()
-
-
-
                     strSeatNumber = GenerateSeatNumber()
-                        AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
-
-
+                    AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
                     CloseDatabaseConnection()
             End Select
         End If
@@ -457,8 +446,12 @@
 
         If rdbNotReserved.Checked Then
             btnSubmit.Text = "Book Flight"
+            lblNotReserved.Text = dblTotalPrice.ToString("$00.00")
+            lblReserved.Text = ""
         ElseIf rdbReserved.Checked Then
             btnSubmit.Text = "Select Seat"
+            lblNotReserved.Text = ""
+            lblReserved.Text = dblTotalPrice.ToString("$00.00")
         End If
     End Sub
 
@@ -469,8 +462,12 @@
 
         If rdbNotReserved.Checked Then
             btnSubmit.Text = "Book Flight"
+            lblNotReserved.Text = dblTotalPrice.ToString("$00.00")
+            lblReserved.Text = ""
         ElseIf rdbReserved.Checked Then
             btnSubmit.Text = "Select Seat"
+            lblNotReserved.Text = ""
+            lblReserved.Text = dblTotalPrice.ToString("$00.00")
         End If
     End Sub
 

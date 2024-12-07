@@ -27,9 +27,11 @@ Partial Class frmAdd_Passenger_To_Flight
         Me.cmbFlights = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblPrice = New System.Windows.Forms.Label()
         Me.rdbNotReserved = New System.Windows.Forms.RadioButton()
         Me.rdbReserved = New System.Windows.Forms.RadioButton()
+        Me.lblPrice = New System.Windows.Forms.Label()
+        Me.lblNotReserved = New System.Windows.Forms.Label()
+        Me.lblReserved = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,6 +76,8 @@ Partial Class frmAdd_Passenger_To_Flight
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblReserved)
+        Me.GroupBox1.Controls.Add(Me.lblNotReserved)
         Me.GroupBox1.Controls.Add(Me.rdbNotReserved)
         Me.GroupBox1.Controls.Add(Me.rdbReserved)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -83,15 +87,6 @@ Partial Class frmAdd_Passenger_To_Flight
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Seat Option"
-        '
-        'lblPrice
-        '
-        Me.lblPrice.AutoSize = True
-        Me.lblPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.85714!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrice.Location = New System.Drawing.Point(446, 454)
-        Me.lblPrice.Name = "lblPrice"
-        Me.lblPrice.Size = New System.Drawing.Size(0, 44)
-        Me.lblPrice.TabIndex = 2
         '
         'rdbNotReserved
         '
@@ -114,6 +109,31 @@ Partial Class frmAdd_Passenger_To_Flight
         Me.rdbReserved.TabIndex = 0
         Me.rdbReserved.Text = "Reserved Seat:"
         Me.rdbReserved.UseVisualStyleBackColor = True
+        '
+        'lblPrice
+        '
+        Me.lblPrice.AutoSize = True
+        Me.lblPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.85714!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrice.Location = New System.Drawing.Point(446, 454)
+        Me.lblPrice.Name = "lblPrice"
+        Me.lblPrice.Size = New System.Drawing.Size(0, 42)
+        Me.lblPrice.TabIndex = 2
+        '
+        'lblNotReserved
+        '
+        Me.lblNotReserved.AutoSize = True
+        Me.lblNotReserved.Location = New System.Drawing.Point(436, 92)
+        Me.lblNotReserved.Name = "lblNotReserved"
+        Me.lblNotReserved.Size = New System.Drawing.Size(0, 32)
+        Me.lblNotReserved.TabIndex = 5
+        '
+        'lblReserved
+        '
+        Me.lblReserved.AutoSize = True
+        Me.lblReserved.Location = New System.Drawing.Point(436, 40)
+        Me.lblReserved.Name = "lblReserved"
+        Me.lblReserved.Size = New System.Drawing.Size(0, 32)
+        Me.lblReserved.TabIndex = 6
         '
         'frmAdd_Passenger_To_Flight
         '
@@ -148,4 +168,6 @@ Partial Class frmAdd_Passenger_To_Flight
     Friend WithEvents lblPrice As Label
     Friend WithEvents rdbNotReserved As RadioButton
     Friend WithEvents rdbReserved As RadioButton
+    Friend WithEvents lblReserved As Label
+    Friend WithEvents lblNotReserved As Label
 End Class
