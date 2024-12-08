@@ -43,7 +43,7 @@ Partial Class frmPassengerVerification
         Me.btnNext.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(328, 73)
-        Me.btnNext.TabIndex = 1
+        Me.btnNext.TabIndex = 3
         Me.btnNext.Text = "Sign in"
         Me.btnNext.UseVisualStyleBackColor = True
         '
@@ -54,7 +54,7 @@ Partial Class frmPassengerVerification
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(328, 73)
-        Me.btnAdd.TabIndex = 2
+        Me.btnAdd.TabIndex = 4
         Me.btnAdd.Text = "Sign up"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
@@ -81,12 +81,12 @@ Partial Class frmPassengerVerification
         'btmShowPass
         '
         Me.btmShowPass.BackColor = System.Drawing.SystemColors.Control
-        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btmShowPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btmShowPass.Location = New System.Drawing.Point(588, 206)
         Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
         Me.btmShowPass.Name = "btmShowPass"
         Me.btmShowPass.Size = New System.Drawing.Size(65, 48)
-        Me.btmShowPass.TabIndex = 7
+        Me.btmShowPass.TabIndex = 2
         Me.btmShowPass.Text = "👀"
         Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.btmShowPass.UseVisualStyleBackColor = False
@@ -130,7 +130,7 @@ Partial Class frmPassengerVerification
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(272, 44)
-        Me.txtPassword.TabIndex = 3
+        Me.txtPassword.TabIndex = 1
         '
         'txtPassengerID
         '
@@ -139,7 +139,7 @@ Partial Class frmPassengerVerification
         Me.txtPassengerID.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassengerID.Name = "txtPassengerID"
         Me.txtPassengerID.Size = New System.Drawing.Size(272, 44)
-        Me.txtPassengerID.TabIndex = 2
+        Me.txtPassengerID.TabIndex = 0
         '
         'frmPassengerVerification
         '

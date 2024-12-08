@@ -2,6 +2,7 @@
 
     Private Sub frmPilotVerification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtPassword.PasswordChar = "*"
+        txtEmployeeID.Focus()
     End Sub
 
 

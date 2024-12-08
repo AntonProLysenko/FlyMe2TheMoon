@@ -96,6 +96,10 @@
     End Sub
 
     Private Sub frmPassengerVerification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'GroupBox1.TabStop = True
+        'Me.TabStop = True
+
+        txtPassengerID.Focus()
         txtPassword.PasswordChar = "*"
     End Sub
 

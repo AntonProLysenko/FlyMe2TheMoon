@@ -42,7 +42,7 @@ Partial Class frmStaffVerification
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(328, 73)
-        Me.Button1.TabIndex = 1
+        Me.Button1.TabIndex = 3
         Me.Button1.Text = "Sign in"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -73,7 +73,7 @@ Partial Class frmStaffVerification
         Me.btmShowPass.Margin = New System.Windows.Forms.Padding(0)
         Me.btmShowPass.Name = "btmShowPass"
         Me.btmShowPass.Size = New System.Drawing.Size(65, 48)
-        Me.btmShowPass.TabIndex = 7
+        Me.btmShowPass.TabIndex = 2
         Me.btmShowPass.Text = "👀"
         Me.btmShowPass.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.btmShowPass.UseVisualStyleBackColor = False
@@ -117,7 +117,7 @@ Partial Class frmStaffVerification
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(272, 44)
-        Me.txtPassword.TabIndex = 3
+        Me.txtPassword.TabIndex = 1
         '
         'txtEmployeeID
         '
@@ -126,7 +126,7 @@ Partial Class frmStaffVerification
         Me.txtEmployeeID.Margin = New System.Windows.Forms.Padding(2)
         Me.txtEmployeeID.Name = "txtEmployeeID"
         Me.txtEmployeeID.Size = New System.Drawing.Size(272, 44)
-        Me.txtEmployeeID.TabIndex = 2
+        Me.txtEmployeeID.TabIndex = 0
         '
         'frmStaffVerification
         '
