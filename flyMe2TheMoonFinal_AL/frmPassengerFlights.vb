@@ -70,19 +70,19 @@
 
             intCounter = 1
 
-            lstUpcomingFlights.Items.Add("=================================================" & strTitleState & "=================================================")
+            lstUpcomingFlights.Items.Add("==========================================================" & strTitleState & "==========================================================")
             lstUpcomingFlights.Items.Add("  ")
-            lstUpcomingFlights.Items.Add("#" & vbTab & "Departure Date" & vbTab & "Departure Time" & vbTab & "From" & vbTab & vbTab & "To" & vbTab & vbTab & "Seat" & vbTab & vbTab & "Arival Time" & vbTab & "Distance")
-            lstUpcomingFlights.Items.Add("===================================================================================================================")
+            lstUpcomingFlights.Items.Add("#" & vbTab & "Departure Date" & vbTab & "Departure Time" & vbTab & "From" & vbTab & vbTab & "To" & vbTab & vbTab & "Seat" & vbTab & vbTab & "Arival Time" & vbTab & "Distance" & vbTab & vbTab & "Ticket Cost")
+            lstUpcomingFlights.Items.Add("==================================================================================================================================")
 
 
             'Looping Thorough Data Table
             For Each row As DataRow In dtRecievedData.Rows
                 lstUpcomingFlights.Items.Add("  ")
                 lstUpcomingFlights.Items.Add(intCounter & vbTab & row.Item("dtmFlightDate") & vbTab & row.Item("dtmTimeofDeparture") & vbTab & vbTab & row.Item("strDepartureLocation") & vbTab &
-                                             row.Item("strArrivalLocation") & vbTab & row.Item("strSeat") & vbTab & vbTab & row.Item("dtmTimeOfLanding") & vbTab & vbTab & row.Item("intMilesFlown") & " mi")
+                                             row.Item("strArrivalLocation") & vbTab & row.Item("strSeat") & vbTab & vbTab & row.Item("dtmTimeOfLanding") & vbTab & vbTab & row.Item("intMilesFlown") & " mi" & vbTab & vbTab & "$" & row.Item("dblTicketPrice"))
 
-                lstUpcomingFlights.Items.Add("===================================================================================================================")
+                lstUpcomingFlights.Items.Add("==================================================================================================================================")
                 intTotalMiles += row.Item("intMilesFlown")
                 intCounter += 1
 
