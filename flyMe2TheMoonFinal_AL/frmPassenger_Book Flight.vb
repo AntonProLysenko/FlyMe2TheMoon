@@ -126,10 +126,10 @@
             CloseDatabaseConnection()
         Else
             Try
-                strInsert = "INSERT INTO TFlightPassengers ( intFlightPassengerID, intFlightID, intPassengerID, strSeat )" &
-            "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "' )"
+                strInsert = "INSERT INTO TFlightPassengers ( intFlightPassengerID, intFlightID, intPassengerID, strSeat, dblTicketPrice)" &
+            "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "', " & dblTotalPrice & ")"
 
-                'MessageBox.Show(strInsert)
+                MessageBox.Show(strInsert)
 
 
                 cmdInsert = New OleDb.OleDbCommand(strInsert, m_conAdministrator)
@@ -436,6 +436,20 @@
         If dblDataLoaded Then
             CalculateAndDisplayPrice()
         End If
+
+        If rdbNotReserved.Checked Then
+            btnSubmit.Text = "Book Flight"
+            lblNotReserved.Text = dblTotalPrice.ToString("$00.00")
+            lblReserved.Text = ""
+            lblPrice.Text = dblTotalPrice.ToString("$00.00")
+        ElseIf rdbReserved.Checked Then
+            btnSubmit.Text = "Select Seat"
+            lblNotReserved.Text = ""
+            lblReserved.Text = dblTotalPrice.ToString("$00.00")
+            lblPrice.Text = dblTotalPrice.ToString("$00.00")
+        Else
+            lblPrice.Text = ""
+        End If
     End Sub
 
 
@@ -448,10 +462,14 @@
             btnSubmit.Text = "Book Flight"
             lblNotReserved.Text = dblTotalPrice.ToString("$00.00")
             lblReserved.Text = ""
+            lblPrice.Text = dblTotalPrice.ToString("$00.00")
         ElseIf rdbReserved.Checked Then
             btnSubmit.Text = "Select Seat"
             lblNotReserved.Text = ""
             lblReserved.Text = dblTotalPrice.ToString("$00.00")
+            lblPrice.Text = dblTotalPrice.ToString("$00.00")
+        Else
+            lblPrice.Text = ""
         End If
     End Sub
 
@@ -464,10 +482,14 @@
             btnSubmit.Text = "Book Flight"
             lblNotReserved.Text = dblTotalPrice.ToString("$00.00")
             lblReserved.Text = ""
+            lblPrice.Text = dblTotalPrice.ToString("$00.00")
         ElseIf rdbReserved.Checked Then
             btnSubmit.Text = "Select Seat"
             lblNotReserved.Text = ""
             lblReserved.Text = dblTotalPrice.ToString("$00.00")
+            lblPrice.Text = dblTotalPrice.ToString("$00.00")
+        Else
+            lblPrice.Text = ""
         End If
     End Sub
 
