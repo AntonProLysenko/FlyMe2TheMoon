@@ -84,6 +84,7 @@
                     intNextPrimaryKey = DetectNextPK()
                     AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
                     CloseDatabaseConnection()
+
             End Select
         Else
 
@@ -110,6 +111,7 @@
                     strSeatNumber = GenerateSeatNumber()
                     AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
                     CloseDatabaseConnection()
+
             End Select
         End If
     End Sub
@@ -129,14 +131,9 @@
                 strInsert = "INSERT INTO TFlightPassengers ( intFlightPassengerID, intFlightID, intPassengerID, strSeat, dblTicketPrice)" &
             "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "', " & dblTotalPrice & ")"
 
-                MessageBox.Show(strInsert)
-
-
                 cmdInsert = New OleDb.OleDbCommand(strInsert, m_conAdministrator)
 
-
                 intRowsAffected = cmdInsert.ExecuteNonQuery()
-
 
                 If intRowsAffected > 0 Then
                     If strSeatNumber.Contains("A") OrElse strSeatNumber.Contains("F") Then
@@ -148,8 +145,8 @@
                     End If
                 End If
 
-                CloseDatabaseConnection()
-                Close()
+                'CloseDatabaseConnection()
+                Me.Hide()
                 frmPassengerMenu.ShowDialog()
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
@@ -260,7 +257,7 @@
         strSelect = "SELECT strSeat FROM TFlightPassengers
                     WHERE intFlightID = " & intFlightID
         Try
-            MessageBox.Show(strSelect)
+
             'MessageBox.Show(strSelect)
             cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
             drSourceTable = cmdSelect.ExecuteReader

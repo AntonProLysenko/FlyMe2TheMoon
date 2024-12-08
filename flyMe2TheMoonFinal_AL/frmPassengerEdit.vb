@@ -54,6 +54,7 @@
         Dim intLoginID As Integer
         Dim strPassword As String
         Dim dtmDateOfBirth As DateTime
+        Dim frmPassengerMenu As New frmPassengerMenu
 
         'Called With Module Reference for easier find
         Call modFormInputValidation.ValidatePassengerFormInput(blnValidInput, strFirstName, strLastName, strAddress, strCity, strState, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword,

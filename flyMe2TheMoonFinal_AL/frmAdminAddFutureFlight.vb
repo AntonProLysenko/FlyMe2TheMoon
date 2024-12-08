@@ -194,15 +194,38 @@
 
 
     Private Sub dtpFlightDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpFlightDate.ValueChanged
-        dtpDepartureTime.MaxDate = dtpFlightDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59)
-        dtpDepartureTime.Value = dtpFlightDate.Value
-        dtpDepartureTime.MinDate = dtpFlightDate.Value.Date
+        Dim newMinDate As Date = dtpFlightDate.Value.Date
+        Dim newMaxDate As Date = dtpFlightDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59)
+
+        ' Ensure MinDate is less than MaxDate before setting
+        If newMinDate <= dtpDepartureTime.MaxDate Then
+            dtpDepartureTime.MinDate = newMinDate
+            dtpDepartureTime.MaxDate = newMaxDate
+            dtpDepartureTime.Value = dtpDepartureTime.MinDate
+        Else
+            dtpDepartureTime.MaxDate = newMaxDate
+            dtpDepartureTime.MinDate = newMinDate
+            dtpDepartureTime.Value = dtpDepartureTime.MinDate
+        End If
+
     End Sub
 
     Private Sub dtpDepartureTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpDepartureTime.ValueChanged
         'MessageBox.Show(dtpDepartureTime.MaxDate)
-        dtpLandingTme.MinDate = dtpDepartureTime.Value.Date
-        dtpLandingTme.MaxDate = dtpDepartureTime.MaxDate.AddDays(1)
+
+        Dim newMinDate As Date = dtpDepartureTime.Value.Date
+        Dim newMaxDate As Date = dtpDepartureTime.MaxDate.AddDays(1)
+
+        If newMaxDate >= dtpLandingTme.MinDate Then
+            dtpLandingTme.MaxDate = newMaxDate
+            dtpLandingTme.MinDate = newMinDate
+            dtpLandingTme.Value = dtpLandingTme.MinDate
+        Else
+            dtpLandingTme.MinDate = dtpDepartureTime.Value.Date
+            dtpLandingTme.MaxDate = dtpDepartureTime.MaxDate.AddDays(1)
+            dtpLandingTme.Value = dtpLandingTme.MinDate
+        End If
+
     End Sub
 
     Dim blnUpdated As Boolean = False
