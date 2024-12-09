@@ -32,16 +32,20 @@ Partial Class frmWelcome
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(49, 536)
+        Me.ProgressBar1.Location = New System.Drawing.Point(23, 543)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(1141, 21)
+        Me.ProgressBar1.Size = New System.Drawing.Size(978, 18)
+        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar1.TabIndex = 0
         '
         'frmWelcome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1249, 586)
+        Me.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.BackgroundImage = Global.flyMe2TheMoon_AL.My.Resources.Resources._2
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(1013, 586)
         Me.ControlBox = False
         Me.Controls.Add(Me.ProgressBar1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
