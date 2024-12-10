@@ -61,32 +61,36 @@
 
 
         intFlightID = cmbFlights.SelectedValue
-        CheckOpenDBConnection(Me)
+
 
         If rdbReserved.Checked Then
             intGlobalFlightID = cmbFlights.SelectedValue
             frmPassengerSelectSeat.ShowDialog()
             strSeatNumber = frmPassengerSelectSeat.strSelectedSeat
-            result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "Seat: " & strSeatNumber & " ?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            If strSeatNumber = "" Then
+            Else
 
-            Select Case result
-                Case DialogResult.Cancel
-                    MessageBox.Show("Booking Canceled")
-                    CloseDatabaseConnection()
+                result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "Seat: " & strSeatNumber & " ?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
-                Case DialogResult.No
-                    MessageBox.Show("Booking Canceled")
-                    CloseDatabaseConnection()
-                    Me.Hide()
-                    frmPassengerMenu.ShowDialog()
-                    Me.Close()
-                Case DialogResult.Yes
+                Select Case result
+                    Case DialogResult.Cancel
+                        MessageBox.Show("Booking Canceled")
+                        CloseDatabaseConnection()
 
-                    intNextPrimaryKey = DetectNextPK()
-                    AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
-                    CloseDatabaseConnection()
+                    Case DialogResult.No
+                        MessageBox.Show("Booking Canceled")
+                        CloseDatabaseConnection()
+                        Me.Hide()
+                        frmPassengerMenu.ShowDialog()
+                        Me.Close()
+                    Case DialogResult.Yes
 
-            End Select
+                        intNextPrimaryKey = DetectNextPK()
+                        AddPassengerToFlight(intNextPrimaryKey, intFlightID, strSeatNumber)
+                        CloseDatabaseConnection()
+
+                End Select
+            End If
         Else
 
             result = MessageBox.Show("Are You Sure you Want To Book This Fligh " & cmbFlights.Text & " for " & dblTotalPrice.ToString("$00.00 ") & "?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
@@ -130,8 +134,9 @@
             CloseDatabaseConnection()
         Else
             Try
+                CheckOpenDBConnection(Me)
                 strInsert = "INSERT INTO TFlightPassengers ( intFlightPassengerID, intFlightID, intPassengerID, strSeat, dblTicketPrice)" &
-            "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "', " & dblTotalPrice & ")"
+                            "VALUES( " & intNextPrimaryKey & ", " & intFlightID & ", " & intCurrentPassengerID & ", '" & strSeatNumber & "', " & dblTotalPrice & ")"
 
                 cmdInsert = New OleDb.OleDbCommand(strInsert, m_conAdministrator)
 
@@ -147,12 +152,13 @@
                     End If
                 End If
 
-                'CloseDatabaseConnection()
+                CloseDatabaseConnection()
                 Me.Hide()
                 frmPassengerMenu.ShowDialog()
                 Me.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
+                CloseDatabaseConnection()
             End Try
         End If
     End Function
@@ -165,19 +171,24 @@
         Dim intNextPrimaryKey As Integer
 
         strSelectNextPK = "SELECT max(intFlightPassengerID)+1 AS intNextPrimaryKey FROM TFlightPassengers"
+        Try
+            CheckOpenDBConnection(Me)
+            cmdSelectNextPk = New OleDb.OleDbCommand(strSelectNextPK, m_conAdministrator)
+            drNextPk = cmdSelectNextPk.ExecuteReader
 
-        cmdSelectNextPk = New OleDb.OleDbCommand(strSelectNextPK, m_conAdministrator)
-        drNextPk = cmdSelectNextPk.ExecuteReader
+            drNextPk.Read()
 
-        drNextPk.Read()
-
-        If drNextPk.IsDBNull(0) = True Then
-            intNextPrimaryKey = 1
-        Else
-            intNextPrimaryKey = CInt(drNextPk("intNextPrimaryKey"))
-        End If
-
-        Return intNextPrimaryKey
+            If drNextPk.IsDBNull(0) = True Then
+                intNextPrimaryKey = 1
+            Else
+                intNextPrimaryKey = CInt(drNextPk("intNextPrimaryKey"))
+            End If
+            CloseDatabaseConnection()
+            Return intNextPrimaryKey
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            CloseDatabaseConnection()
+        End Try
     End Function
 
 
@@ -221,7 +232,7 @@
         Dim blnOnFlight As Boolean = False
 
         Try
-
+            CheckOpenDBConnection(Me)
             'MessageBox.Show(strSelect)
             cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
             drSourceTable = cmdSelect.ExecuteReader
@@ -239,11 +250,12 @@
                 End If
 
             End If
-
+            CloseDatabaseConnection()
             Return blnOnFlight
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+            CloseDatabaseConnection()
         End Try
     End Function
 
@@ -260,7 +272,7 @@
         strSelect = "SELECT strSeat FROM TFlightPassengers
                     WHERE intFlightID = " & intFlightID
         Try
-
+            CheckOpenDBConnection(Me)
             'MessageBox.Show(strSelect)
             cmdSelect = New OleDb.OleDbCommand(strSelect, m_conAdministrator)
             drSourceTable = cmdSelect.ExecuteReader
@@ -278,11 +290,12 @@
                 End If
 
             End If
-
+            CloseDatabaseConnection()
             Return blnAvailable
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+            CloseDatabaseConnection()
         End Try
     End Function
 
