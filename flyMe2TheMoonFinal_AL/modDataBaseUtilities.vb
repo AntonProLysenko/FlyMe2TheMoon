@@ -9,12 +9,16 @@
                                                             "Connect Timeout=200;" &
                                                             "Integrated Security=SSPI;"
 
-    Public Function OpenDatabaseConnectionSQLServer() As Boolean
+    Public Function OpenDatabaseConnectionSQLServer(formName As String) As Boolean
         Dim blnResult As Boolean = False
         Dim frmLoading As New frmLoading
+        Console.WriteLine(formName)
+        If Not formName = "frmWelcome" Then
+            frmLoading.Show()
+        End If
 
 
-        frmLoading.Show()
+
         Try
             m_conAdministrator = New OleDb.OleDbConnection
             m_conAdministrator.ConnectionString = m_strDatabaseConnectionStringSQLServer
@@ -24,7 +28,9 @@
         Catch ex As Exception
             MsgBox(ex.Message & vbNewLine & " Utils, openDb Func", vbCritical)
         End Try
-        frmLoading.Close()
+        If Not formName = "frmWelcome" Then
+            frmLoading.Close()
+        End If
 
 
         Return blnResult
@@ -59,7 +65,8 @@
 
 
     Public Function CheckOpenDBConnection(form As Object)
-        If OpenDatabaseConnectionSQLServer() = False Then
+        Console.WriteLine(form)
+        If OpenDatabaseConnectionSQLServer(form.Text) = False Then
 
             MessageBox.Show(form, "Database connection error." & vbNewLine &
                                 "The application will now close.",

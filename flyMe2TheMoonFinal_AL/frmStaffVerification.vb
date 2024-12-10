@@ -66,6 +66,7 @@
                             CloseDatabaseConnection()
                             Me.Hide()
                             frmAdminMenu.ShowDialog()
+                            Me.Close()
                         Else
                             Select Case dtEmployee.Rows(0)("strRole")
                                 Case "Pilot"
@@ -81,6 +82,7 @@
                             CloseDatabaseConnection()
                             Me.Hide()
                             frmStaffMenu.ShowDialog()
+                            Me.Close()
                         End If
                     Else
                         txtPassword.Focus()

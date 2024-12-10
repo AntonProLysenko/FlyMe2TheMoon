@@ -70,6 +70,7 @@
         If blnValidInput Then
             Me.Hide()
             frmPassengerMenu.ShowDialog()
+            Me.Close()
         End If
 
 
@@ -119,6 +120,7 @@
         Dim frmPassengerMenu As New frmPassengerMenu
         Me.Hide()
         frmPassengerMenu.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click

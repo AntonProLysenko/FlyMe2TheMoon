@@ -4,6 +4,7 @@
         strFlightsFormState = "Future"
         Me.Hide()
         frmStaffFlight.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btnPastFlights_Click(sender As Object, e As EventArgs) Handles btnPastFlights.Click
@@ -11,6 +12,7 @@
         strFlightsFormState = "Past"
         Me.Hide()
         frmStaffFlight.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub frmAttendantMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,5 +33,6 @@
         Dim frmEditForm As New frmStaffEdit
         Me.Hide()
         frmEditForm.ShowDialog()
+        Me.Close()
     End Sub
 End Class

@@ -1,10 +1,10 @@
 ﻿Module modInterfaceUtilities
 
     Public Sub revealPassword(timer As System.Windows.Forms.Timer, intTime As Integer, txtPassword As Object)
-        ' Declare countdown as a local variable
+        'Countdown is a var that sets timer length
         Dim countdown As Integer = intTime
 
-        ' Define a handler delegate
+        ' Define handler 
         Dim handler As EventHandler = Nothing
 
         ' Create the event handler logic

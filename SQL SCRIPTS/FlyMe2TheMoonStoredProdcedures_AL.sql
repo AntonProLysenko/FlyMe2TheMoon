@@ -252,8 +252,44 @@
 --		FROM TFlightPassengers
 --		WHERE intPassengerID = @intPassengerID) AS TotalFlights
 --END
-
+SELECT * FROM TEmployeeCredentials
+SELECT * FROM TFlights
 SELECT * FROM TFlightPassengers
-WHERE intFlightID = 7
 
 
+
+
+SELECT DISTINCT intPassengerLoginID, strPassengerPassword
+FROM TPassengers
+JOIN TFlightPassengers
+ON TPassengers.intPassengerID = TFlightPassengers.intPassengerID
+JOIN TFlights
+ON TFlights.intFlightID = TFlightPassengers.intFlightID
+WHERE TFlights.dtmFlightDate < GETDATE()
+
+
+SELECT *
+FROM TFlights
+WHERE dtmFlightDate < GETDATE()
+
+
+SELECT DISTINCT intEmployeeLoginID, strEmployeePassword, strRole, TFlights.dtmFlightDate, TFlights.intFlightID,TPilots.intPilotID
+FROM TEmployeeCredentials
+Join TPilots
+ON TEmployeeCredentials.strEmployeeID = TPilots.strEmployeeID
+JOIN TPilotFlights
+ON Tpilots.intPilotID = TPilotFlights.intPilotID
+JOIN TFlights
+ON TFlights.intFlightID = TPilotFlights.intFlightID
+WHERE TFlights.dtmFlightDate < GETDATE()
+
+
+SELECT DISTINCT intEmployeeLoginID, strEmployeePassword, strRole, TFlights.dtmFlightDate, TFlights.intFlightID,TAttendants.intAttendantID
+FROM TEmployeeCredentials
+Join TAttendants
+ON TEmployeeCredentials.strEmployeeID = TAttendants.strEmployeeID
+JOIN TAttendantFlights
+ON TAttendants.intAttendantID = TAttendantFlights.intAttendantID
+JOIN TFlights
+ON TFlights.intFlightID = TAttendantFlights.intFlightID
+WHERE TFlights.dtmFlightDate < GETDATE()

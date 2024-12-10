@@ -20,14 +20,7 @@
         'Populating Flights on Load
         Try
 
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
+            CheckOpenDBConnection(Me)
 
             'Selecting Future Flights
             strFlightsSelect = "SELECT TF.intFlightID, TF.dtmFlightDate,
@@ -131,6 +124,7 @@
                 Dim frmManageStaff As New frmAdminManageStaff
                 Me.Hide()
                 frmManageStaff.ShowDialog()
+                Me.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
@@ -146,15 +140,7 @@
         Dim intNextPrimaryKey As Integer
 
 
-        If OpenDatabaseConnectionSQLServer() = False Then
-            MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                            "The application will now close.",
-                            Me.Text + " Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Close()
-            frmPassengerMenu.ShowDialog()
-
-        End If
+        CheckOpenDBConnection(Me)
 
 
 
@@ -179,6 +165,7 @@
         Dim frmManageStaff As New frmAdminManageStaff
         Me.Hide()
         frmManageStaff.ShowDialog()
+        Me.Close()
     End Sub
 
 

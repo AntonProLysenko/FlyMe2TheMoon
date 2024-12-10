@@ -14,12 +14,14 @@
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Hide()
         frmBookFlight.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         If frmAdd_Passenger_To_Flight.isSeatAvailable(txtSeat.Text, intFlightID) Then
             strSelectedSeat = txtSeat.Text
             Me.Hide()
+            Me.Close()
 
         Else
             MessageBox.Show(txtSeat.Text & " Seat is already Taken!" & vbNewLine & "Try another one!")
@@ -27,4 +29,6 @@
             txtSeat.Focus()
         End If
     End Sub
+
+
 End Class

@@ -156,6 +156,7 @@
                 Dim frmAdminMenu As New frmAdminMenu
                 Me.Hide()
                 frmAdminMenu.ShowDialog()
+                Me.Close()
             End If
         End If
     End Sub
@@ -282,5 +283,6 @@
         Dim frmAdminMenu As New frmAdminMenu
         Me.Hide()
         frmAdminMenu.ShowDialog()
+        Me.Close()
     End Sub
 End Class

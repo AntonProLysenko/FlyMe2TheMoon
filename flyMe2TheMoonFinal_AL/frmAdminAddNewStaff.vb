@@ -5,16 +5,8 @@
         txtPassword.PasswordChar = "* "
         Try
             If strManageRole = "Pilot" Then
-                If OpenDatabaseConnectionSQLServer() = False Then
+                CheckOpenDBConnection(Me)
 
-
-                    MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                    Me.Close()
-                End If
 
                 Me.Text = "Add Pilot " & strCurrentUserName
                 btnAdd.Text = "Add Pilot"
@@ -98,14 +90,7 @@
             'Dim strInsert As String
             'intNextPrimaryKey = DetectNextPK()
 
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                "The application will now close.",
-                                Me.Text + " Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
+            CheckOpenDBConnection(Me)
 
             intNextPrimaryKey = 1
 
@@ -127,6 +112,7 @@
             Dim frmManageStaff As New frmAdminManageStaff
             Me.Hide()
             frmManageStaff.ShowDialog()
+            Me.Close()
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)

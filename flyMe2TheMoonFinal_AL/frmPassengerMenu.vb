@@ -13,12 +13,14 @@
         Dim frmEditPassenger As New frmPassengerEdit
         Me.Hide()
         frmEditPassenger.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btnAddFlight_Click(sender As Object, e As EventArgs) Handles btnAddFlight.Click
         Dim frmAddFlight As New frmAdd_Passenger_To_Flight
         Me.Hide()
         frmAddFlight.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btnFutureFlights_Click(sender As Object, e As EventArgs) Handles btnFutureFlights.Click
@@ -26,6 +28,7 @@
         Dim frmUpcomingFlights As New frmPassengerFlights
         Me.Hide()
         frmUpcomingFlights.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btnPastFlights_Click(sender As Object, e As EventArgs) Handles btnPastFlights.Click
@@ -33,5 +36,6 @@
         Dim frmUpcomingFlights As New frmPassengerFlights
         Me.Hide()
         frmUpcomingFlights.ShowDialog()
+        Me.Close()
     End Sub
 End Class

@@ -52,6 +52,7 @@
             If PushToDB(strFirstName, strLastName, strAddress, strCity, intStateID, strZip, strPhoneNum, strEmail, intLoginID, strPassword, dtmDateOfBirth) Then
                 Me.Hide()
                 frmPassengerVerification.ShowDialog()
+                Me.Close()
             End If
             'frmPassengerVerification.PopulateDropdown()
         End If
@@ -111,6 +112,7 @@
         Dim frmPassengerVerification As New frmPassengerVerification
         Me.Hide()
         frmPassengerVerification.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btmShowPass_Click(sender As Object, e As EventArgs) Handles btmShowPass.Click

@@ -33,15 +33,7 @@
 
 
         Try
-
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                            "The application will now close.",
-                Me.Text + " Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
+            CheckOpenDBConnection(Me)
 
 
 
@@ -117,5 +109,6 @@
         Dim frmPassengerMenu As New frmPassengerMenu
         Me.Hide()
         frmPassengerMenu.ShowDialog()
+        Me.Close()
     End Sub
 End Class

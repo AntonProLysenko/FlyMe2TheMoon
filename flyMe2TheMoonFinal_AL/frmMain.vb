@@ -2,7 +2,7 @@
 
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Close()
+        Me.Close()
     End Sub
 
     Private Sub btnPassenger_Click(sender As Object, e As EventArgs) Handles btnPassenger.Click
@@ -17,5 +17,9 @@
         frmStaffVerification.ShowDialog()
         strManageRole = ""
         strStaffRole = ""
+    End Sub
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

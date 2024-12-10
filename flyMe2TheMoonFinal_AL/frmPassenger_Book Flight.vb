@@ -79,6 +79,7 @@
                     CloseDatabaseConnection()
                     Me.Hide()
                     frmPassengerMenu.ShowDialog()
+                    Me.Close()
                 Case DialogResult.Yes
 
                     intNextPrimaryKey = DetectNextPK()
@@ -100,6 +101,7 @@
                     CloseDatabaseConnection()
                     Me.Hide()
                     frmPassengerMenu.ShowDialog()
+                    Me.Close()
                 Case DialogResult.Yes
 
 
@@ -148,6 +150,7 @@
                 'CloseDatabaseConnection()
                 Me.Hide()
                 frmPassengerMenu.ShowDialog()
+                Me.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
@@ -289,6 +292,7 @@
         CloseDatabaseConnection()
         Me.Hide()
         frmPassengerMenu.ShowDialog()
+        Me.Close()
     End Sub
 
 

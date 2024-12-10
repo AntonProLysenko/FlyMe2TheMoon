@@ -3,6 +3,7 @@
         Me.Hide()
         Dim frmAddNewPassenger As New frmPassengerAddNew
         frmAddNewPassenger.ShowDialog()
+        Me.Close()
     End Sub
 
 
@@ -64,6 +65,7 @@
                         CloseDatabaseConnection()
                         Me.Hide()
                         frmPassengerMenu.ShowDialog()
+                        Me.Close()
 
                     Else
                         txtPassword.Focus()

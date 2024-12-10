@@ -10,16 +10,7 @@
 
         txtPassword.PasswordChar = "*"
         Try
-            If OpenDatabaseConnectionSQLServer() = False Then
-
-
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                Me.Close()
-            End If
+            CheckOpenDBConnection(Me)
 
 
             If strStaffRole = "Pilot" Then
@@ -97,6 +88,7 @@
         Dim frmStaffMenu As New frmStaffMenu
         Me.Hide()
         frmStaffMenu.ShowDialog()
+        Me.Close()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -126,6 +118,7 @@
             UpdateRecord(strFirstName, strLastName, dtmDateOfTermination, strEmployeeID, intLoginID, strPassword)
             Me.Hide()
             frmStaffMenu.ShowDialog()
+            Me.Close()
 
         End If
 
@@ -138,14 +131,7 @@
         Dim strUpdateExecute As String
 
         Try
-            If OpenDatabaseConnectionSQLServer() = False Then
-                MessageBox.Show(Me, "Database connection error." & vbNewLine &
-                                    "The application will now close.",
-                                    Me.Text + " Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Me.Close()
-
-            End If
+            CheckOpenDBConnection(Me)
 
 
 
