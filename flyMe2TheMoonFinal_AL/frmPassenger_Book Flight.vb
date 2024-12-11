@@ -124,6 +124,8 @@
 
     Public Function AddPassengerToFlight(intNextPrimaryKey As Integer, intFlightID As Integer, strSeatNumber As String)
 
+        Dim frmPassengerMenu As New frmPassengerMenu
+
         Dim strInsert As String
         Dim strSelect As String
         Dim cmdInsert As New OleDb.OleDbCommand

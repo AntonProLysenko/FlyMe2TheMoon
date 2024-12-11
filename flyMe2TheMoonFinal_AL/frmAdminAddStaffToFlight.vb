@@ -110,7 +110,7 @@
 
         End If
 
-
+        CheckOpenDBConnection(Me)
 
         If frmAdd_Passenger_To_Flight.isOnFlight(strSelect, cmbFlights.SelectedValue) Then
             MessageBox.Show("This " & strManageRole & " is already on this flight!")
@@ -118,6 +118,7 @@
 
         Else
             Try
+                CheckOpenDBConnection(Me)
                 InsertData(strInsert)
                 CloseDatabaseConnection()
 
@@ -154,7 +155,7 @@
         Else
             intNextPrimaryKey = CInt(drNextPk("intNextPrimaryKey"))
         End If
-
+        CloseDatabaseConnection()
         Return intNextPrimaryKey
     End Function
 
