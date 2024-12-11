@@ -493,8 +493,8 @@ VALUES				 ( 1, 2, 1, 2 )
 
 
 
- SELECT * FROM TPilots
- SELECT * FROM TAttendants
+Select * FROM TEmployeeCredentials
+SELECT * FROM TPassengers
 
 
 
