@@ -100,4 +100,23 @@ ON TPilotRoles.intPilotRoleID = TPilots.intPilotRoleID
 SELECT intAttendantID, strFirstName + ' ' + strLastName as AttendantFullName
 FROM TAttendants
 
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
 SELECT * FROm TPASSENGERS
+
+
+
+SELECT * FROM TEmployeeCredentials
+
+
+SELECT TF.intFlightID, TF.dtmFlightDate,
+		                        FromAirport.strAirportCity + '(' + FromAirport.strAirportCode +')'+ ' - ' + ToAirport.strAirportCity+'('+ToAirport.strAirportCode +'): '  + 
+		                        CONVERT(VARCHAR, TF.dtmFlightDate, 101) + ' at '+ CONVERT(VARCHAR, TF.dtmTimeofDeparture, 108) as strFlightName
+                        FROM TFlights as  TF
+                        JOIN TAirports as FromAirport 
+	                        ON TF.intFromAirportID = FromAirport.intAirportID
+                        JOIN TAirports as ToAirport 
+	                        ON TF.intToAirportID = ToAirport.intAirportID
+                        WHERE GETDATE() <= TF.dtmFlightDate
+                        ORDER BY TF.dtmFlightDate
