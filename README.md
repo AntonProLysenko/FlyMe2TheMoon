@@ -1,7 +1,9 @@
 # FlyMe2TheMoon
 Flight management system Windows App. 
-Build with Visual Basic and Microsoft SQL Database.
+![App Logo](https://antonlys.com/assets/img/FlyMe2TheMoon.JPG)
 
+
+Build with Visual Basic and Microsoft SQL Database.
 
 Fly Me to the Moon is a VB.NET Windows Forms application designed as a comprehensive flight management system. This app simulates a real-world airline operation by providing tailored experiences for employees (admins, pilots, and attendants) and passengers. The app includes advanced role-based functionality, a dynamic ticket pricing algorithm, and a SQL database backend for robust data management.
 
